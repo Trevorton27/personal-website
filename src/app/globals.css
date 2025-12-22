@@ -13,12 +13,9 @@
     --foreground: 200 20% 95%;
   }
 
-  * {
-    @apply border-border;
-  }
-
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -26,7 +23,7 @@
 @layer components {
   /* Prose styles for markdown content */
   .prose {
-    @apply max-w-none text-foreground;
+    @apply max-w-none text-gray-900 dark:text-gray-100;
   }
 
   .prose h1 {
@@ -126,7 +123,7 @@
   }
 
   .input {
-    @apply w-full px-4 py-2 border border-gray-300 dark:border-storm-600 rounded-lg bg-white dark:bg-storm-800 text-foreground focus:outline-none focus:ring-2 focus:ring-lightning-glow focus:border-transparent;
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-storm-600 rounded-lg bg-white dark:bg-storm-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-lightning-glow focus:border-transparent;
   }
 
   .label {

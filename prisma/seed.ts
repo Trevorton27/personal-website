@@ -167,7 +167,6 @@ This series examines the beauty found in algorithmic generation and human curati
 Created using generative algorithms written in JavaScript, then refined by hand.`,
       category: 'Art',
       images: [],
-      links: null,
       techStack: ['p5.js', 'Canvas API', 'JavaScript'],
       featured: true,
       order: 2,
