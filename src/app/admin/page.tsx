@@ -35,7 +35,7 @@ export default async function AdminDashboard() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Welcome back! Here's an overview of your site.
+          Welcome back! Here's an overview of your site wudan.
         </p>
       </div>
 
