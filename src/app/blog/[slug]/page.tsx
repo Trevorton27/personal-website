@@ -70,7 +70,7 @@ export default async function BlogPostPage({
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <Header />
 
       <script
@@ -79,10 +79,10 @@ export default async function BlogPostPage({
       />
 
       <main className="flex-1">
-        <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-4xl">
+        <article className="mx-auto max-w-4xl px-6 py-12">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-lightning-glow hover:underline mb-8"
+            className="inline-flex items-center gap-2 text-[#d48a27] hover:text-[#b8751f] transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
@@ -94,7 +94,7 @@ export default async function BlogPostPage({
                 <Link
                   key={tag.id}
                   href={`/blog?tag=${tag.slug}`}
-                  className="text-xs px-3 py-1 bg-lightning-glow/10 text-lightning-glow rounded-full hover:bg-lightning-glow/20 transition-colors"
+                  className="text-xs px-3 py-1 bg-[#d48a27]/10 text-[#d48a27] rounded-full hover:bg-[#d48a27]/20 transition-colors"
                 >
                   {tag.name}
                 </Link>
@@ -106,28 +106,28 @@ export default async function BlogPostPage({
             </h1>
 
             {post.excerpt && (
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
                 {post.excerpt}
               </p>
             )}
 
             <div className="flex flex-wrap gap-6 text-sm text-gray-600 dark:text-gray-400">
               <div className="flex items-center gap-2">
-                <User className="w-4 h-4" />
+                <User className="w-4 h-4 text-[#d48a27]" />
                 {post.author.name}
               </div>
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4 text-[#8b5cf6] dark:text-[#a78bfa]" />
                 {formatDate(post.publishedAt!)}
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
+                <Clock className="w-4 h-4 text-[#d48a27]" />
                 {readingTime} min read
               </div>
             </div>
           </header>
 
-          <div className="prose dark:prose-invert max-w-none">
+          <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-a:text-[#d48a27] prose-a:no-underline hover:prose-a:underline prose-code:bg-black/5 dark:prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-black/5 dark:prose-pre:bg-white/5 prose-pre:border prose-pre:border-black/10 dark:prose-pre:border-white/10">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight, rehypeSanitize]}

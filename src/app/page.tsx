@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    // Check for saved preference or system preference
     const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setIsDark(saved === "dark" || (!saved && prefersDark));
+    if (saved) {
+      setIsDark(saved === "dark");
+    }
   }, []);
 
   useEffect(() => {
@@ -18,45 +18,43 @@ export default function HomePage() {
   }, [isDark]);
 
   return (
-    <main className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-      {/* Top Nav */}
-      <header className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-colors duration-300 ${
-        isDark
-          ? "border-white/10 bg-black/80"
-          : "border-black/5 bg-white/80"
+    <main className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-black text-slate-50" : "bg-white text-slate-900"}`}>
+      {/* Navigation - Simplified */}
+      <header className={`sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300 ${
+        isDark ? "bg-black/80" : "bg-white/80"
       }`}>
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="/" className="flex items-center gap-3 font-semibold tracking-tight">
-            <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl font-bold text-white bg-gradient-to-br from-[#d48a27] to-[#a66a1d] shadow-lg shadow-[#d48a27]/25`}>
-              TM
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+          <a href="/" className="flex items-center gap-3 font-medium">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
             </span>
-            <span className="text-lg">Trevor Mearns</span>
+            <span>Trevor Mearns</span>
           </a>
 
-          <nav className={`hidden items-center gap-1 text-sm md:flex`}>
-            {["About", "Skills", "Experience", "Portfolio", "Blog", "Contact"].map((item) => (
+          <nav className="hidden items-center gap-8 text-sm md:flex">
+            {["About", "Work", "Writing"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className={`px-4 py-2 rounded-lg transition-all duration-200 ${
-                  isDark
-                    ? "hover:bg-white/10 hover:text-[#d48a27]"
-                    : "hover:bg-black/5 hover:text-[#d48a27]"
+                className={`transition-colors duration-200 ${
+                  isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 {item}
               </a>
             ))}
+            <a href="/resume" className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}>
+              Resume
+            </a>
           </nav>
 
-          <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
+          <div className="flex items-center gap-4">
             <button
               onClick={() => setIsDark(!isDark)}
-              className={`p-2.5 rounded-xl transition-all duration-200 ${
-                isDark
-                  ? "bg-white/10 hover:bg-white/20 text-yellow-400"
-                  : "bg-black/5 hover:bg-black/10 text-gray-600"
+              className={`p-2 rounded-lg transition-colors duration-200 ${
+                isDark ? "hover:bg-white/10 text-slate-400" : "hover:bg-slate-100 text-slate-600"
               }`}
               aria-label="Toggle theme"
             >
@@ -71,524 +69,363 @@ export default function HomePage() {
               )}
             </button>
             <a
-              href="/resume"
-              className={`hidden rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 md:inline-flex ${
-                isDark
-                  ? "border border-white/20 hover:bg-white/10"
-                  : "border border-black/10 hover:bg-black/5"
-              }`}
-            >
-              Resume
-            </a>
-            <a
               href="#contact"
-              className="inline-flex rounded-xl bg-gradient-to-r from-[#d48a27] to-[#b8751f] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#d48a27]/30 transition-all duration-200 hover:shadow-[#d48a27]/50 hover:scale-105"
+              className="inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
             >
-              Let&apos;s talk
+              Get in touch
             </a>
           </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        {/* Background gradient */}
-        <div className={`absolute inset-0 transition-opacity duration-500 ${
-          isDark
-            ? "bg-gradient-to-br from-[#d48a27]/10 via-transparent to-black"
-            : "bg-gradient-to-br from-[#d48a27]/5 via-transparent to-white"
-        }`} />
-
-        <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-32">
-          <div className="grid items-center gap-12 md:grid-cols-12">
-            <div className="md:col-span-7">
-              <div className={`mb-6 inline-flex items-center gap-2.5 rounded-full px-4 py-2 text-sm font-medium ${
-                isDark
-                  ? "bg-[#d48a27]/20 text-[#d48a27] border border-[#d48a27]/30"
-                  : "bg-[#d48a27]/10 text-[#a66a1d] border border-[#d48a27]/20"
-              }`}>
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d48a27] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#d48a27]"></span>
-                </span>
-                Open to Cloud Support / Solutions / Full-Stack roles
-              </div>
-
-              <h1 className="text-4xl font-bold tracking-tight md:text-6xl md:leading-[1.1]">
-                Bilingual technical{" "}
-                <span className="bg-gradient-to-r from-[#d48a27] to-[#e9a84a] bg-clip-text text-transparent">
-                  problem-solver
-                </span>{" "}
-                bridging cloud, code, and customers.
-              </h1>
-
-              <p className={`mt-6 max-w-2xl text-lg leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                I help teams ship reliable software experiences by debugging complex systems, improving integrations,
-                and turning fuzzy requirements into working solutions—across English and Japanese.
-              </p>
-
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href="#portfolio"
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#d48a27] to-[#b8751f] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#d48a27]/30 transition-all duration-200 hover:shadow-[#d48a27]/50 hover:scale-105"
-                >
-                  View portfolio
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-                <a
-                  href="/resume"
-                  className={`inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 ${
-                    isDark
-                      ? "bg-white/10 hover:bg-white/20 border border-white/10"
-                      : "bg-black/5 hover:bg-black/10 border border-black/5"
-                  }`}
-                >
-                  Download resume
-                </a>
-              </div>
-
-              {/* Quick highlights */}
-              <div className="mt-14 grid gap-4 sm:grid-cols-2">
-                {[
-                  { title: "Support + Engineering", desc: "SaaS support, escalation handling, debugging, stakeholder comms." },
-                  { title: "Cloud & DevOps", desc: "AWS/Azure basics, Docker, CI/CD workflows, API integration." },
-                  { title: "Full-Stack Development", desc: "Next.js/React, Node, .NET/C#, PostgreSQL, Prisma." },
-                  { title: "Bilingual (EN/JP)", desc: "Communicate clearly with global teams and Japanese customers." },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className={`group rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] ${
-                      isDark
-                        ? "bg-white/5 border border-white/10 hover:border-[#d48a27]/50 hover:bg-[#d48a27]/10"
-                        : "bg-black/[0.02] border border-black/5 hover:border-[#d48a27]/50 hover:bg-[#d48a27]/5"
-                    }`}
-                  >
-                    <p className={`text-sm font-semibold transition-colors group-hover:text-[#d48a27]`}>{item.title}</p>
-                    <p className={`mt-1.5 text-sm ${isDark ? "text-gray-500" : "text-gray-600"}`}>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Hero card */}
-            <aside className="md:col-span-5">
-              <div className={`rounded-3xl p-6 shadow-2xl transition-all duration-300 ${
-                isDark
-                  ? "bg-gradient-to-br from-white/10 to-white/5 border border-white/10 shadow-[#d48a27]/10"
-                  : "bg-white border border-black/5 shadow-black/5"
-              }`}>
-                <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 overflow-hidden rounded-2xl bg-gradient-to-br from-[#d48a27] to-[#a66a1d] p-0.5">
-                    <img
-                      src="/profile.jpg"
-                      alt="Profile photo"
-                      className="h-full w-full rounded-[14px] object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"}`}>Trevor Mearns</p>
-                    <p className="font-semibold">Technical Support • Full-Stack • Educator</p>
-                    <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"}`}>Japan (UTC+9)</p>
-                  </div>
-                </div>
-
-                <div className="mt-6 space-y-3 text-sm">
-                  {[
-                    { label: "Primary focus", value: "Cloud Support" },
-                    { label: "Stack", value: "Next.js • TS • Postgres" },
-                    { label: "Languages", value: "EN • JP" },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-center justify-between rounded-xl p-4 ${
-                        isDark ? "bg-white/5" : "bg-black/[0.02]"
-                      }`}
-                    >
-                      <span className={isDark ? "text-gray-400" : "text-gray-500"}>{item.label}</span>
-                      <span className="font-medium">{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex gap-3">
-                  <a
-                    href="https://github.com/"
-                    className={`flex-1 rounded-xl px-4 py-3 text-center text-sm font-medium transition-all duration-200 ${
-                      isDark
-                        ? "bg-white/5 hover:bg-white/10 border border-white/10"
-                        : "bg-black/[0.02] hover:bg-black/5 border border-black/5"
-                    }`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/"
-                    className={`flex-1 rounded-xl px-4 py-3 text-center text-sm font-medium transition-all duration-200 ${
-                      isDark
-                        ? "bg-white/5 hover:bg-white/10 border border-white/10"
-                        : "bg-black/[0.02] hover:bg-black/5 border border-black/5"
-                    }`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                </div>
-              </div>
-            </aside>
+      {/* Hero - Cleaner, more editorial */}
+      <section className="mx-auto max-w-5xl px-6 pt-20 pb-32 md:pt-32 md:pb-40">
+        <div className="max-w-3xl">
+          {/* Status badge - subtle */}
+          <div className={`mb-8 inline-flex items-center gap-2 text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+            </span>
+            Open to Cloud Support & Solutions roles
           </div>
-        </div>
-      </section>
 
-      {/* About */}
-      <section id="about" className={`border-t transition-colors duration-300 ${
-        isDark ? "border-white/10 bg-white/[0.02]" : "border-black/5 bg-black/[0.01]"
-      }`}>
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <h2 className="text-3xl font-bold tracking-tight">About</h2>
-          <div className="mt-8 grid gap-10 md:grid-cols-12">
-            <div className="md:col-span-8">
-              <p className={`text-lg leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                I&apos;m a bilingual technical professional with a hybrid background in software development, cloud technologies,
-                and customer-facing technical support. I enjoy the messy middle: translating business needs into technical
-                reality, debugging complex systems, and helping customers succeed.
-              </p>
-              <p className={`mt-4 text-lg leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                I&apos;m especially strong at: clear communication, structured troubleshooting, and building practical tools
-                that reduce friction for users and internal teams.
-              </p>
-            </div>
-            <div className="md:col-span-4">
-              <div className={`rounded-2xl p-6 ${
-                isDark
-                  ? "bg-gradient-to-br from-[#d48a27]/20 to-transparent border border-[#d48a27]/20"
-                  : "bg-gradient-to-br from-[#d48a27]/10 to-transparent border border-[#d48a27]/10"
-              }`}>
-                <p className="text-sm font-semibold text-[#d48a27]">Current priorities</p>
-                <ul className={`mt-4 space-y-3 text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                  <li className="flex gap-2">
-                    <span className="text-[#d48a27]">→</span>
-                    Cloud support / solutions engineering roles
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#d48a27]">→</span>
-                    Building portfolio projects (Next.js + Postgres)
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#d48a27]">→</span>
-                    AWS certifications (SAA-C03, DOP-C02)
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+            Bilingual technical problem-solver bridging{" "}
+            <span className="text-accent">cloud, code, and customers</span>.
+          </h1>
 
-      {/* Skills */}
-      <section id="skills" className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="text-3xl font-bold tracking-tight">Skills</h2>
+          <p className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+            I help teams ship reliable software by debugging complex systems, improving integrations,
+            and turning fuzzy requirements into working solutions—across English and Japanese.
+          </p>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {[
-            { title: "Cloud & DevOps", skills: "AWS • Azure • Docker • CI/CD • GitHub • API integrations • Networking fundamentals" },
-            { title: "Development", skills: "Next.js • React • TypeScript • Node.js • .NET/C# • REST APIs • Testing" },
-            { title: "Data", skills: "PostgreSQL • Prisma • Entity Framework • MongoDB • Debugging queries & performance" },
-            { title: "Customer-facing engineering", skills: "Incident triage • Repro steps • Log analysis • Escalations • Clear docs • EN/JP communication" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className={`group rounded-2xl p-6 transition-all duration-300 hover:scale-[1.01] ${
-                isDark
-                  ? "bg-white/5 border border-white/10 hover:border-[#d48a27]/50"
-                  : "bg-black/[0.02] border border-black/5 hover:border-[#d48a27]/30"
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href="#work"
+              className="inline-flex items-center rounded-lg bg-accent px-5 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
+            >
+              View my work
+              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href="/resume"
+              className={`inline-flex items-center rounded-lg px-5 py-3 text-sm font-medium transition-colors duration-200 ${
+                isDark ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-slate-900"
               }`}
             >
-              <h3 className="font-semibold text-lg group-hover:text-[#d48a27] transition-colors">{item.title}</h3>
-              <p className={`mt-3 text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                {item.skills}
-              </p>
-            </div>
-          ))}
+              Download resume →
+            </a>
+          </div>
+        </div>
+
+        {/* Minimal identity block - right aligned on desktop */}
+        <div className={`mt-16 md:mt-20 flex flex-wrap gap-x-12 gap-y-4 text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+          <div>
+            <span className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Location</span>
+            <span className={isDark ? "text-slate-200" : "text-slate-800"}>Japan (UTC+9)</span>
+          </div>
+          <div>
+            <span className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Languages</span>
+            <span className={isDark ? "text-slate-200" : "text-slate-800"}>English, Japanese</span>
+          </div>
+          <div>
+            <span className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Focus</span>
+            <span className={isDark ? "text-slate-200" : "text-slate-800"}>Cloud Support, Full-Stack</span>
+          </div>
+          <div className="flex gap-4 items-end">
+            <a href="https://github.com/" target="_blank" rel="noreferrer" className={`transition-colors ${isDark ? "hover:text-white" : "hover:text-slate-900"}`}>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/trevor-mearns/" target="_blank" rel="noreferrer" className={`transition-colors ${isDark ? "hover:text-white" : "hover:text-slate-900"}`}>
+              LinkedIn
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Experience */}
-      <section id="experience" className={`border-t transition-colors duration-300 ${
-        isDark ? "border-white/10 bg-white/[0.02]" : "border-black/5 bg-black/[0.01]"
-      }`}>
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight">Experience</h2>
-              <p className={`mt-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>A snapshot—full details live in the resume.</p>
-            </div>
-            <a href="/resume" className="text-sm font-semibold text-[#d48a27] hover:underline">View resume →</a>
-          </div>
+      {/* Divider */}
+      <div className={`mx-auto max-w-5xl px-6`}>
+        <div className={`h-px ${isDark ? "bg-slate-800" : "bg-slate-200"}`} />
+      </div>
 
-          <div className="mt-10 grid gap-6">
+      {/* About - Typographic, no cards */}
+      <section id="about" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <div className="grid gap-16 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <h2 className={`text-sm font-medium tracking-wide uppercase mb-8 ${isDark ? "text-slate-500" : "text-slate-500"}`}>About</h2>
+            <p className={`text-xl md:text-2xl leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+              I&apos;m a bilingual technical professional with a hybrid background in software development,
+              cloud technologies, and customer-facing technical support.
+            </p>
+            <p className={`mt-6 text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              I enjoy the messy middle: translating business needs into technical reality, debugging complex systems,
+              and helping customers succeed. I&apos;m especially strong at clear communication, structured troubleshooting,
+              and building practical tools that reduce friction.
+            </p>
+          </div>
+          <div className="md:col-span-5">
+            <h3 className={`text-sm font-medium tracking-wide uppercase mb-6 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Current priorities</h3>
+            <ul className={`space-y-4 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              <li className="flex gap-3">
+                <span className="text-accent">→</span>
+                Cloud support / solutions engineering roles
+              </li>
+              <li className="flex gap-3">
+                <span className="text-secondary-light">→</span>
+                Building portfolio projects (Next.js + Postgres)
+              </li>
+              <li className="flex gap-3">
+                <span className="text-accent">→</span>
+                AWS certifications (SAA-C03, DOP-C02)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills - Typographic layout with dividers, no heavy cards */}
+      <section className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}>
+        <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+          <h2 className={`text-sm font-medium tracking-wide uppercase mb-12 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Skills</h2>
+
+          <div className="grid gap-12 md:grid-cols-2">
             {[
               {
-                title: "International Technical Support Associate",
-                company: "Alarm.com",
-                period: "Aug 2023 – Present",
-                points: [
-                  "Troubleshoot customer issues across web/mobile, networking, and device ecosystems.",
-                  "Create clear repro steps and work with engineering teams to drive resolution.",
-                  "Improve internal documentation to reduce time-to-resolution and repeat cases.",
-                ],
+                title: "Cloud & DevOps",
+                items: ["AWS", "Azure", "Docker", "CI/CD", "GitHub Actions", "API integrations", "Networking"]
               },
               {
-                title: "Technical Specialist",
-                company: "Bitrise",
-                period: "Previous",
-                points: [
-                  "Supported CI/CD pipelines and mobile build workflows in a fast-paced SaaS environment.",
-                  "Helped customers integrate tools and debug build, auth, and API-related issues.",
-                ],
+                title: "Development",
+                items: ["Next.js", "React", "TypeScript", "Node.js", ".NET/C#", "REST APIs", "Testing"]
               },
-            ].map((job, i) => (
-              <article
-                key={i}
-                className={`rounded-2xl p-6 transition-all duration-300 ${
-                  isDark
-                    ? "bg-white/5 border border-white/10"
-                    : "bg-white border border-black/5 shadow-sm"
-                }`}
-              >
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <h3 className="font-semibold text-lg">{job.title}</h3>
-                  <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"}`}>{job.company} • {job.period}</p>
-                </div>
-                <ul className={`mt-4 space-y-2 text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                  {job.points.map((point, j) => (
-                    <li key={j} className="flex gap-2">
-                      <span className="text-[#d48a27]">•</span>
-                      {point}
-                    </li>
+              {
+                title: "Data",
+                items: ["PostgreSQL", "Prisma", "Entity Framework", "MongoDB", "Query optimization"]
+              },
+              {
+                title: "Customer Engineering",
+                items: ["Incident triage", "Repro steps", "Log analysis", "Escalations", "Documentation", "EN/JP"]
+              },
+            ].map((group, i) => (
+              <div key={i} className={`pb-8 ${i < 2 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""} md:border-b-0`}>
+                <h3 className={`font-semibold mb-4 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{group.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((item, j) => (
+                    <span
+                      key={j}
+                      className={`text-sm px-3 py-1 rounded-full ${
+                        isDark ? "bg-slate-800 text-slate-300" : "bg-slate-100 text-slate-700"
+                      }`}
+                    >
+                      {item}
+                    </span>
                   ))}
-                </ul>
-              </article>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Portfolio */}
-      <section id="portfolio" className="mx-auto max-w-6xl px-6 py-20">
-        <div className="flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight">Portfolio</h2>
-            <p className={`mt-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-              Selected projects showing how I build and ship.
-            </p>
-          </div>
-          <a href="/projects" className="text-sm font-semibold text-[#d48a27] hover:underline">All projects →</a>
+      {/* Experience - Lighter, more whitespace */}
+      <section id="work" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <div className="flex items-end justify-between mb-12">
+          <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>Experience</h2>
+          <a href="/resume" className="text-sm text-accent hover:underline">Full resume →</a>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="space-y-12">
           {[
             {
-              title: "API Key Manager",
-              tech: "Next.js • TypeScript • Prisma • Postgres • Clerk",
-              desc: "Secure SaaS-style app for storing and rotating API keys with role-based access, audit-friendly UX, and Docker local dev.",
-              badge: "Featured",
-              featured: true,
+              title: "International Technical Support Associate",
+              company: "Alarm.com",
+              period: "Aug 2023 – Present",
+              points: [
+                "Troubleshoot customer issues across web/mobile, networking, and device ecosystems",
+                "Create clear repro steps and work with engineering teams to drive resolution",
+                "Improve internal documentation to reduce time-to-resolution and repeat cases",
+              ],
             },
             {
-              title: "AI Tutor LMS",
-              tech: "Next.js • Postgres • RAG • Role-based access",
-              desc: "Learning platform with admin/instructor/student roles, course content, student progress tracking, and AI-driven tutoring features.",
-              badge: "In progress",
-              featured: false,
+              title: "Technical Specialist",
+              company: "Bitrise",
+              period: "Previous",
+              points: [
+                "Supported CI/CD pipelines and mobile build workflows in a fast-paced SaaS environment",
+                "Helped customers integrate tools and debug build, auth, and API-related issues",
+              ],
             },
-          ].map((project, i) => (
-            <article
-              key={i}
-              className={`group rounded-2xl p-6 transition-all duration-300 hover:scale-[1.01] ${
-                isDark
-                  ? "bg-white/5 border border-white/10 hover:border-[#d48a27]/50"
-                  : "bg-white border border-black/5 hover:border-[#d48a27]/30 shadow-sm hover:shadow-lg"
-              }`}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-semibold text-lg group-hover:text-[#d48a27] transition-colors">{project.title}</h3>
-                  <p className={`mt-1 text-sm ${isDark ? "text-gray-500" : "text-gray-500"}`}>{project.tech}</p>
-                </div>
-                <span className={`rounded-full px-3 py-1 text-xs font-medium ${
-                  project.featured
-                    ? "bg-[#d48a27]/20 text-[#d48a27]"
-                    : isDark ? "bg-white/10 text-gray-400" : "bg-black/5 text-gray-500"
-                }`}>
-                  {project.badge}
-                </span>
+          ].map((job, i) => (
+            <article key={i} className={`pb-12 ${i < 1 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}>
+              <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+                <h3 className={`text-lg font-semibold ${isDark ? "text-slate-100" : "text-slate-900"}`}>{job.title}</h3>
+                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{job.company} · {job.period}</span>
               </div>
-              <p className={`mt-4 text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                {project.desc}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="https://github.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
-                    isDark
-                      ? "bg-white/5 hover:bg-white/10 border border-white/10"
-                      : "bg-black/[0.02] hover:bg-black/5 border border-black/5"
-                  }`}
-                >
-                  Code
-                </a>
-                {project.featured ? (
-                  <a
-                    href="#"
-                    className="rounded-xl bg-gradient-to-r from-[#d48a27] to-[#b8751f] px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-[#d48a27]/25 transition-all duration-200 hover:shadow-[#d48a27]/40"
-                  >
-                    Live demo
-                  </a>
-                ) : (
-                  <a
-                    href="#"
-                    className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
-                      isDark
-                        ? "bg-white/5 hover:bg-white/10 border border-white/10"
-                        : "bg-black/[0.02] hover:bg-black/5 border border-black/5"
-                    }`}
-                  >
-                    Case study
-                  </a>
-                )}
-              </div>
+              <ul className={`space-y-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                {job.points.map((point, j) => (
+                  <li key={j} className="flex gap-3">
+                    <span className={isDark ? "text-slate-600" : "text-slate-400"}>·</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>
       </section>
 
-      {/* Blog */}
-      <section id="blog" className={`border-t transition-colors duration-300 ${
-        isDark ? "border-white/10 bg-white/[0.02]" : "border-black/5 bg-black/[0.01]"
-      }`}>
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight">Blog</h2>
-              <p className={`mt-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                Short, practical writeups on debugging, cloud support patterns, and building full-stack systems.
-              </p>
-            </div>
-            <a href="/blog" className="text-sm font-semibold text-[#d48a27] hover:underline">All posts →</a>
+      {/* Portfolio - Softer cards */}
+      <section className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}>
+        <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+          <div className="flex items-end justify-between mb-12">
+            <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>Projects</h2>
+            <a href="/portfolio" className="text-sm text-accent hover:underline">All projects →</a>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2">
             {[
               {
-                date: "Feb 2026",
-                read: "6 min read",
-                title: "A Troubleshooting Playbook for Cloud Support Engineers",
-                desc: "A repeatable approach to incident triage: scoping, reproducing, isolating layers, and writing crisp escalations.",
-                slug: "troubleshooting-playbook",
+                title: "API Key Manager",
+                tech: "Next.js · TypeScript · Prisma · Postgres",
+                desc: "Secure SaaS-style app for storing and rotating API keys with role-based access and audit-friendly UX.",
+                featured: true,
               },
               {
-                date: "Jan 2026",
-                read: "4 min read",
-                title: "Debugging API Issues Like a Scientist",
-                desc: "Hypotheses, controlled tests, logs, and the art of not gaslighting yourself with assumptions.",
-                slug: "api-debugging",
+                title: "AI Tutor LMS",
+                tech: "Next.js · Postgres · RAG · Role-based access",
+                desc: "Learning platform with admin/instructor/student roles, course content, and AI-driven tutoring.",
+                featured: false,
               },
-              {
-                date: "Dec 2025",
-                read: "5 min read",
-                title: "Vercel + Postgres: What I Wish I Knew Earlier",
-                desc: "Practical gotchas around env vars, migrations, connection pooling, and predictable deploys.",
-                slug: "vercel-postgres",
-              },
-            ].map((post, i) => (
+            ].map((project, i) => (
               <article
                 key={i}
-                className={`group rounded-2xl p-6 transition-all duration-300 hover:scale-[1.01] ${
+                className={`group p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
                   isDark
-                    ? "bg-white/5 border border-white/10 hover:border-[#d48a27]/50"
-                    : "bg-white border border-black/5 hover:border-[#d48a27]/30 shadow-sm"
+                    ? "bg-slate-800/50 hover:bg-slate-800"
+                    : "bg-white shadow-soft hover:shadow-soft-lg"
                 }`}
               >
-                <p className={`text-xs ${isDark ? "text-gray-500" : "text-gray-400"}`}>{post.date} • {post.read}</p>
-                <h3 className="mt-3 font-semibold leading-snug group-hover:text-[#d48a27] transition-colors">
-                  <a href={`/blog/${post.slug}`}>
-                    {post.title}
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <h3 className={`font-semibold text-lg group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                    {project.title}
+                  </h3>
+                  {project.featured && (
+                    <span className="text-xs font-medium px-2 py-1 rounded bg-accent/10 text-accent">
+                      Featured
+                    </span>
+                  )}
+                </div>
+                <p className={`text-sm mb-3 ${isDark ? "text-slate-500" : "text-slate-500"}`}>{project.tech}</p>
+                <p className={`text-sm leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>{project.desc}</p>
+                <div className="mt-6 flex gap-4">
+                  <a href="https://github.com/" target="_blank" rel="noreferrer" className={`text-sm font-medium transition-colors ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}>
+                    Code →
                   </a>
-                </h3>
-                <p className={`mt-3 text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                  {post.desc}
-                </p>
-                <a href={`/blog/${post.slug}`} className="mt-4 inline-flex text-sm font-semibold text-[#d48a27] hover:underline">
-                  Read more →
-                </a>
+                  {project.featured && (
+                    <a href="#" className="text-sm font-medium text-accent hover:underline">
+                      Live demo →
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
-        <div className={`rounded-3xl p-8 md:p-12 ${
-          isDark
-            ? "bg-gradient-to-br from-[#d48a27]/20 via-[#d48a27]/10 to-transparent border border-[#d48a27]/20"
-            : "bg-gradient-to-br from-[#d48a27]/10 via-[#d48a27]/5 to-transparent border border-[#d48a27]/10"
-        }`}>
-          <div className="grid gap-10 md:grid-cols-12 md:items-center">
-            <div className="md:col-span-7">
-              <h2 className="text-3xl font-bold tracking-tight">Let&apos;s work together</h2>
-              <p className={`mt-4 text-lg leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-                Best way to reach me is email. If you include a job description or role goals, I&apos;ll reply with how I&apos;d
-                approach the first 30–60–90 days.
-              </p>
-            </div>
-            <div className="md:col-span-5">
-              <div className="flex flex-col gap-3">
-                <a
-                  href="mailto:you@example.com"
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#d48a27] to-[#b8751f] px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-[#d48a27]/30 transition-all duration-200 hover:shadow-[#d48a27]/50 hover:scale-105"
-                >
-                  Email me
-                </a>
-                <a
-                  href="https://www.linkedin.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-flex items-center justify-center rounded-xl px-6 py-4 text-sm font-semibold transition-all duration-200 ${
-                    isDark
-                      ? "bg-white/10 hover:bg-white/20 border border-white/10"
-                      : "bg-black/5 hover:bg-black/10 border border-black/5"
-                  }`}
-                >
-                  LinkedIn
-                </a>
+      {/* Blog - Editorial list style */}
+      <section id="writing" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <div className="flex items-end justify-between mb-12">
+          <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>Writing</h2>
+          <a href="/blog" className="text-sm text-accent hover:underline">All posts →</a>
+        </div>
+
+        <div className="space-y-8">
+          {[
+            {
+              date: "Feb 2026",
+              read: "6 min",
+              title: "A Troubleshooting Playbook for Cloud Support Engineers",
+              desc: "A repeatable approach to incident triage: scoping, reproducing, isolating layers, and writing crisp escalations.",
+              slug: "troubleshooting-playbook",
+            },
+            {
+              date: "Jan 2026",
+              read: "4 min",
+              title: "Debugging API Issues Like a Scientist",
+              desc: "Hypotheses, controlled tests, logs, and the art of not gaslighting yourself with assumptions.",
+              slug: "api-debugging",
+            },
+            {
+              date: "Dec 2025",
+              read: "5 min",
+              title: "Vercel + Postgres: What I Wish I Knew Earlier",
+              desc: "Practical gotchas around env vars, migrations, connection pooling, and predictable deploys.",
+              slug: "vercel-postgres",
+            },
+          ].map((post, i) => (
+            <article
+              key={i}
+              className={`group pb-8 ${i < 2 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}
+            >
+              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2">
+                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{post.date}</span>
+                <span className={`text-sm ${isDark ? "text-slate-600" : "text-slate-400"}`}>·</span>
+                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{post.read} read</span>
               </div>
-              <p className={`mt-4 text-center text-sm ${isDark ? "text-gray-500" : "text-gray-500"}`}>
-                Based in Japan (UTC+9) • English / 日本語
-              </p>
+              <h3 className={`text-lg font-semibold mb-2 group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h3>
+              <p className={`leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>{post.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact - Calmer, focused */}
+      <section id="contact" className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}>
+        <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Let&apos;s work together</h2>
+            <p className={`text-lg leading-relaxed mb-8 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              The best way to reach me is email. If you include a job description or role goals,
+              I&apos;ll reply with how I&apos;d approach the first 30–60–90 days.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="/contact"
+                className="inline-flex items-center rounded-lg bg-accent px-5 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
+              >
+                Send me a message
+              </a>
+              <a
+                href="https://www.linkedin.com/in/trevor-mearns/"
+                target="_blank"
+                rel="noreferrer"
+                className={`text-sm font-medium transition-colors ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
+              >
+                LinkedIn →
+              </a>
             </div>
+            <p className={`mt-6 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+              Based in Japan (UTC+9) · English / 日本語
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className={`border-t transition-colors duration-300 ${
-        isDark ? "border-white/10" : "border-black/5"
-      }`}>
-        <div className={`mx-auto max-w-6xl px-6 py-10 text-sm ${isDark ? "text-gray-500" : "text-gray-500"}`}>
+      {/* Footer - Minimal */}
+      <footer className={`border-t ${isDark ? "border-slate-800" : "border-slate-200"}`}>
+        <div className={`mx-auto max-w-5xl px-6 py-8 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} Trevor Mearns</p>
             <div className="flex flex-wrap gap-6">
-              <a href="/privacy" className="hover:text-[#d48a27] transition-colors">Privacy</a>
-              <a href="/blog" className="hover:text-[#d48a27] transition-colors">Blog</a>
-              <a href="/projects" className="hover:text-[#d48a27] transition-colors">Projects</a>
+              <a href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Blog</a>
+              <a href="/portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Projects</a>
+              <a href="/privacy" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Privacy</a>
             </div>
           </div>
         </div>

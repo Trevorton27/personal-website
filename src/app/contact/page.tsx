@@ -3,9 +3,13 @@
 import { useState } from 'react';
 import { Header } from '@/components/public/Header';
 import { Footer } from '@/components/public/Footer';
+import { useTheme } from '@/components/ThemeProvider';
 import { Mail, Send } from 'lucide-react';
 
 export default function ContactPage() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -52,20 +56,22 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={`min-h-screen flex flex-col transition-colors duration-300 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
       <Header />
 
-      <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="flex-1 mx-auto max-w-6xl px-6 py-12">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <Mail className="w-16 h-16 mx-auto mb-4 text-lightning-glow" />
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4 ${isDark ? "bg-gradient-to-br from-[#d48a27] via-[#c97b22] to-[#8b5cf6] shadow-lg shadow-[#8b5cf6]/25" : "bg-gradient-to-br from-[#d48a27] via-[#c97b22] to-[#4B5563] shadow-lg shadow-[#4B5563]/25"}`}>
+              <Mail className="w-8 h-8 text-white" />
+            </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">Get in Touch</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className={`text-xl ${isDark ? "text-gray-400" : "text-gray-600"}`}>
               Have a question or want to work together? Drop me a message!
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="card">
+          <form onSubmit={handleSubmit} className={`rounded-2xl p-6 ${isDark ? "bg-white/5 border border-white/10" : "bg-white border border-black/5 shadow-lg"}`}>
             {/* Honeypot field - hidden from users */}
             <input
               type="text"
@@ -79,7 +85,7 @@ export default function ContactPage() {
 
             <div className="space-y-6">
               <div>
-                <label htmlFor="name" className="label">
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Name
                 </label>
                 <input
@@ -88,13 +94,17 @@ export default function ContactPage() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="input"
+                  className={`w-full px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#d48a27] ${
+                    isDark
+                      ? "bg-white/5 border border-white/10 text-white placeholder-gray-500"
+                      : "bg-white border border-black/10 text-black placeholder-gray-400"
+                  }`}
                   disabled={status === 'submitting'}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="label">
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
                   Email
                 </label>
                 <input
@@ -103,13 +113,17 @@ export default function ContactPage() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="input"
+                  className={`w-full px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#d48a27] ${
+                    isDark
+                      ? "bg-white/5 border border-white/10 text-white placeholder-gray-500"
+                      : "bg-white border border-black/10 text-black placeholder-gray-400"
+                  }`}
                   disabled={status === 'submitting'}
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="label">
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
                   Message
                 </label>
                 <textarea
@@ -118,19 +132,23 @@ export default function ContactPage() {
                   rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="input resize-none"
+                  className={`w-full px-4 py-3 rounded-xl resize-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#d48a27] ${
+                    isDark
+                      ? "bg-white/5 border border-white/10 text-white placeholder-gray-500"
+                      : "bg-white border border-black/10 text-black placeholder-gray-400"
+                  }`}
                   disabled={status === 'submitting'}
                 />
               </div>
 
               {status === 'error' && (
-                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400">
+                <div className={`p-4 rounded-xl ${isDark ? "bg-red-500/10 border border-red-500/20 text-red-400" : "bg-red-50 border border-red-200 text-red-700"}`}>
                   {errorMessage}
                 </div>
               )}
 
               {status === 'success' && (
-                <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-700 dark:text-green-400">
+                <div className={`p-4 rounded-xl ${isDark ? "bg-green-500/10 border border-green-500/20 text-green-400" : "bg-green-50 border border-green-200 text-green-700"}`}>
                   Thanks for your message! I'll get back to you soon.
                 </div>
               )}
@@ -138,7 +156,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#d48a27] to-[#b8751f] px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-[#d48a27]/30 transition-all duration-200 hover:shadow-[#d48a27]/50 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {status === 'submitting' ? (
                   'Sending...'

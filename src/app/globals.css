@@ -4,46 +4,80 @@
 
 @layer base {
   :root {
-    --background: 250 100% 97%;
-    --foreground: 140 20% 15%;
+    /* Primary accent: Orange - for CTAs and key emphasis only */
+    --accent-primary: 212 138 39; /* #d48a27 */
+    --accent-primary-hover: 184 117 31; /* #b8751f */
+
+    /* Secondary accent: Slate blue - for metadata, dates, subtle info */
+    --accent-secondary: 100 116 139; /* #64748b (slate-500) */
+    --accent-secondary-light: 148 163 184; /* #94a3b8 (slate-400) */
+
+    /* Light theme surfaces */
+    --bg: 255 255 255;
+    --bg-subtle: 248 250 252; /* slate-50 */
+    --surface: 255 255 255;
+    --border: 226 232 240; /* slate-200 */
+    --border-subtle: 241 245 249; /* slate-100 */
+    --text: 15 23 42; /* slate-900 */
+    --text-secondary: 71 85 105; /* slate-600 */
+    --text-muted: 148 163 184; /* slate-400 */
   }
 
   .dark {
-    --background: 220 60% 5%;
-    --foreground: 200 20% 95%;
+    /* Dark theme surfaces */
+    --bg: 0 0 0;
+    --bg-subtle: 15 23 42; /* slate-900 */
+    --surface: 30 41 59; /* slate-800 */
+    --border: 51 65 85; /* slate-700 */
+    --border-subtle: 30 41 59; /* slate-800 */
+    --text: 248 250 252; /* slate-50 */
+    --text-secondary: 148 163 184; /* slate-400 */
+    --text-muted: 100 116 139; /* slate-500 */
+
+    /* Secondary accent in dark mode - slightly lighter */
+    --accent-secondary: 148 163 184; /* slate-400 */
+    --accent-secondary-light: 203 213 225; /* slate-300 */
   }
 
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Focus ring utility */
+  *:focus-visible {
+    outline: 2px solid rgb(var(--accent-primary));
+    outline-offset: 2px;
   }
 }
 
 @layer components {
   /* Prose styles for markdown content */
   .prose {
-    @apply max-w-none text-gray-900 dark:text-gray-100;
+    @apply max-w-none;
+    color: rgb(var(--text));
   }
 
   .prose h1 {
-    @apply text-4xl font-bold mt-8 mb-4;
+    @apply text-4xl font-bold mt-8 mb-4 tracking-tight;
   }
 
   .prose h2 {
-    @apply text-3xl font-bold mt-6 mb-3;
+    @apply text-3xl font-semibold mt-6 mb-3 tracking-tight;
   }
 
   .prose h3 {
-    @apply text-2xl font-bold mt-4 mb-2;
+    @apply text-2xl font-semibold mt-4 mb-2;
   }
 
   .prose p {
-    @apply mb-4 leading-7;
+    @apply mb-4 leading-relaxed;
   }
 
   .prose a {
-    @apply text-lightning-glow dark:text-lightning underline underline-offset-2 hover:no-underline;
+    color: rgb(var(--accent-primary));
+    @apply underline underline-offset-2 hover:no-underline;
   }
 
   .prose ul,
@@ -64,11 +98,13 @@
   }
 
   .prose code {
-    @apply bg-gray-100 dark:bg-storm-800 px-1.5 py-0.5 rounded text-sm font-mono;
+    @apply px-1.5 py-0.5 rounded text-sm font-mono;
+    background-color: rgb(var(--bg-subtle));
   }
 
   .prose pre {
-    @apply bg-gray-100 dark:bg-storm-800 p-4 rounded-lg overflow-x-auto mb-4;
+    @apply p-4 rounded-lg overflow-x-auto mb-4;
+    background-color: rgb(var(--bg-subtle));
   }
 
   .prose pre code {
@@ -76,7 +112,8 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-lightning-glow pl-4 italic my-4;
+    @apply pl-4 italic my-4;
+    border-left: 3px solid rgb(var(--accent-primary));
   }
 
   .prose img {
@@ -85,48 +122,91 @@
 }
 
 @layer utilities {
-  .glow-text {
-    text-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+  /* Subtle divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--border)) 20%,
+      rgb(var(--border)) 80%,
+      transparent
+    );
   }
 
-  .nav-link {
-    @apply relative px-4 py-2 text-sm font-medium transition-colors hover:text-lightning-glow;
+  /* Soft surface - no border, subtle background */
+  .soft-surface {
+    background-color: rgb(var(--bg-subtle) / 0.5);
+    @apply transition-all duration-200;
   }
 
-  .nav-link::after {
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-lightning-glow transform scale-x-0 transition-transform;
-    content: '';
+  .soft-surface:hover {
+    background-color: rgb(var(--bg-subtle));
   }
 
-  .nav-link.active::after {
-    @apply scale-x-100;
-  }
-
-  .btn {
-    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
-  }
-
+  /* Primary button */
   .btn-primary {
-    @apply bg-lightning-glow text-white hover:bg-lightning-bright focus:ring-lightning-glow;
+    background: linear-gradient(135deg, rgb(var(--accent-primary)), rgb(var(--accent-primary-hover)));
+    @apply text-white font-semibold rounded-xl px-6 py-3 transition-all duration-200;
+    @apply hover:scale-[1.02] hover:shadow-lg;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    --tw-ring-color: rgb(var(--accent-primary));
+    --tw-shadow: 0 10px 30px -10px rgb(var(--accent-primary) / 0.4);
   }
 
-  .btn-secondary {
-    @apply bg-gray-200 dark:bg-storm-700 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-storm-600;
+  .btn-primary:hover {
+    --tw-shadow: 0 15px 40px -10px rgb(var(--accent-primary) / 0.5);
   }
 
-  .card {
-    @apply bg-white dark:bg-storm-800 rounded-xl shadow-lg dark:shadow-glow-sm p-6 transition-all duration-200;
+  /* Ghost button */
+  .btn-ghost {
+    @apply font-medium rounded-xl px-6 py-3 transition-all duration-200;
+    @apply hover:bg-black/5 dark:hover:bg-white/5;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
-  .card:hover {
-    @apply shadow-xl dark:shadow-glow-md transform -translate-y-1;
+  /* Text link with accent */
+  .link-accent {
+    color: rgb(var(--accent-secondary));
+    @apply font-medium transition-colors duration-200;
   }
 
+  .link-accent:hover {
+    color: rgb(var(--accent-primary));
+  }
+
+  /* Card with subtle shadow (no border) */
+  .card-soft {
+    background-color: rgb(var(--surface));
+    @apply rounded-2xl p-6 transition-all duration-300;
+    box-shadow: 0 1px 3px rgb(var(--border) / 0.1);
+  }
+
+  .card-soft:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 4px 12px rgb(var(--border) / 0.15);
+  }
+
+  /* Input styles */
   .input {
-    @apply w-full px-4 py-2 border border-gray-300 dark:border-storm-600 rounded-lg bg-white dark:bg-storm-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-lightning-glow focus:border-transparent;
+    @apply w-full px-4 py-3 rounded-xl transition-all duration-200;
+    @apply focus:outline-none focus:ring-2;
+    --tw-ring-color: rgb(var(--accent-primary));
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--border));
+  }
+
+  .input:focus {
+    border-color: rgb(var(--accent-primary));
   }
 
   .label {
     @apply block text-sm font-medium mb-2;
+    color: rgb(var(--text-secondary));
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-24 md:py-32;
   }
 }

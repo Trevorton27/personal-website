@@ -32,13 +32,13 @@ export default async function PortfolioPage({
   const uniqueCategories = [...new Set(categories.map((c) => c.category))];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <Header />
 
-      <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="flex-1 mx-auto max-w-6xl px-6 py-12">
         <div className="mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">Portfolio</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             A collection of my creative work and projects.
           </p>
         </div>
@@ -47,10 +47,10 @@ export default async function PortfolioPage({
         <div className="flex flex-wrap gap-2 mb-8">
           <Link
             href="/portfolio"
-            className={`px-4 py-2 rounded-lg text-sm transition-colors ${
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
               !category
-                ? 'bg-lightning-glow text-white'
-                : 'bg-gray-100 dark:bg-storm-800 hover:bg-gray-200 dark:hover:bg-storm-700'
+                ? 'bg-gradient-to-r from-[#d48a27] to-[#b8751f] text-white shadow-lg shadow-[#d48a27]/25'
+                : 'bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/10'
             }`}
           >
             All
@@ -59,10 +59,10 @@ export default async function PortfolioPage({
             <Link
               key={cat}
               href={`/portfolio?category=${cat}`}
-              className={`px-4 py-2 rounded-lg text-sm transition-colors ${
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 category === cat
-                  ? 'bg-lightning-glow text-white'
-                  : 'bg-gray-100 dark:bg-storm-800 hover:bg-gray-200 dark:hover:bg-storm-700'
+                  ? 'bg-gradient-to-r from-[#d48a27] to-[#b8751f] text-white shadow-lg shadow-[#d48a27]/25'
+                  : 'bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/10'
               }`}
             >
               {cat}
@@ -71,15 +71,19 @@ export default async function PortfolioPage({
         </div>
 
         {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item) => (
-            <Link key={item.id} href={`/portfolio/${item.slug}`} className="card">
-              <div className="aspect-video bg-gradient-to-br from-lightning-glow to-storm-600 rounded-lg mb-4 flex items-center justify-center">
+            <Link
+              key={item.id}
+              href={`/portfolio/${item.slug}`}
+              className="group rounded-2xl p-6 bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 hover:border-[#d48a27]/50 shadow-sm dark:shadow-none hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
+            >
+              <div className="aspect-video bg-gradient-to-br from-[#d48a27] to-[#8b5cf6] rounded-xl mb-4 flex items-center justify-center">
                 <span className="text-white text-4xl font-bold opacity-50">
                   {item.title[0]}
                 </span>
               </div>
-              <h2 className="text-xl font-bold mb-2 group-hover:text-lightning-glow transition-colors">
+              <h2 className="text-xl font-bold mb-2 group-hover:text-[#d48a27] transition-colors">
                 {item.title}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
@@ -89,7 +93,7 @@ export default async function PortfolioPage({
                 {item.techStack.slice(0, 4).map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs px-2 py-1 bg-gray-100 dark:bg-storm-700 rounded"
+                    className="text-xs px-2 py-1 bg-black/5 dark:bg-white/10 rounded-lg"
                   >
                     {tech}
                   </span>
