@@ -27,8 +27,8 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 font-medium">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <span className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${isDark ? "bg-black border border-slate-700" : "bg-black"}`}>
+              <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
             </span>

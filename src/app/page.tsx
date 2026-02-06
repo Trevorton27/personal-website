@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function HomePage() {
   const [isDark, setIsDark] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -18,15 +20,25 @@ export default function HomePage() {
   }, [isDark]);
 
   return (
-    <main className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-black text-slate-50" : "bg-white text-slate-900"}`}>
+    <main
+      className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-black text-slate-50" : "bg-white text-slate-900"}`}
+    >
       {/* Navigation - Simplified */}
-      <header className={`sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300 ${
-        isDark ? "bg-black/80" : "bg-white/80"
-      }`}>
+      <header
+        className={`sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300 ${
+          isDark ? "bg-black/80" : "bg-white/80"
+        }`}
+      >
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <a href="/" className="flex items-center gap-3 font-medium">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <span
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${isDark ? "bg-black border border-slate-700" : "bg-black"}`}
+            >
+              <svg
+                className="w-10 h-10 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
             </span>
@@ -34,19 +46,40 @@ export default function HomePage() {
           </a>
 
           <nav className="hidden items-center gap-8 text-sm md:flex">
-            {["About", "Work", "Writing"].map((item) => (
+            {["About", "Work", "Portfolio", "Writing"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 className={`transition-colors duration-200 ${
-                  isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                  isDark
+                    ? "text-slate-400 hover:text-white"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 {item}
               </a>
             ))}
-            <a href="/resume" className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}>
+            <a
+              href="/resume"
+              className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
+            >
               Resume
+            </a>
+            <a
+              href="https://github.com/trevmearns"
+              target="_blank"
+              rel="noreferrer"
+              className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/trevor-mearns/"
+              target="_blank"
+              rel="noreferrer"
+              className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
+            >
+              LinkedIn
             </a>
           </nav>
 
@@ -54,40 +87,140 @@ export default function HomePage() {
             <button
               onClick={() => setIsDark(!isDark)}
               className={`p-2 rounded-lg transition-colors duration-200 ${
-                isDark ? "hover:bg-white/10 text-slate-400" : "hover:bg-slate-100 text-slate-600"
+                isDark
+                  ? "hover:bg-white/10 text-slate-400"
+                  : "hover:bg-slate-100 text-slate-600"
               }`}
               aria-label="Toggle theme"
             >
               {isDark ? (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               ) : (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                 </svg>
               )}
             </button>
             <a
               href="#contact"
-              className="inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
+              className="hidden sm:inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
             >
               Get in touch
             </a>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
+                isDark
+                  ? "hover:bg-white/10 text-slate-400"
+                  : "hover:bg-slate-100 text-slate-600"
+              }`}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div
+            className={`md:hidden py-4 border-t ${isDark ? "border-slate-800" : "border-slate-200"}`}
+          >
+            <div className="space-y-1 px-6">
+              {["About", "Work", "Portfolio", "Writing"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                    isDark
+                      ? "text-slate-400 hover:text-white hover:bg-white/5"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              ))}
+              <a
+                href="/resume"
+                className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                  isDark
+                    ? "text-slate-400 hover:text-white hover:bg-white/5"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Resume
+              </a>
+              <a
+                href="https://github.com/trevmearns"
+                target="_blank"
+                rel="noreferrer"
+                className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                  isDark
+                    ? "text-slate-400 hover:text-white hover:bg-white/5"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/trevor-mearns/"
+                target="_blank"
+                rel="noreferrer"
+                className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                  isDark
+                    ? "text-slate-400 hover:text-white hover:bg-white/5"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                LinkedIn
+              </a>
+              <a
+                href="#contact"
+                className="block mt-3 rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-white shadow-accent"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Get in touch
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero - Cleaner, more editorial */}
       <section className="mx-auto max-w-5xl px-6 pt-20 pb-32 md:pt-32 md:pb-40">
         <div className="max-w-3xl">
           {/* Status badge - subtle */}
-          <div className={`mb-8 inline-flex items-center gap-2 text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+          <div
+            className={`mb-8 inline-flex items-center gap-2 text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
             </span>
-            Open to Cloud Support & Solutions roles
+            Open to Cloud/SAAS Support & Solutions roles
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
@@ -95,9 +228,28 @@ export default function HomePage() {
             <span className="text-accent">cloud, code, and customers</span>.
           </h1>
 
-          <p className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-            I help teams ship reliable software by debugging complex systems, improving integrations,
-            and turning fuzzy requirements into working solutions—across English and Japanese.
+          <p
+            className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
+          >
+            I help teams ship reliable software and maintain platform integrity
+            while making sure customers know they are heard and cared for.
+            Whether its debugging complex systems, improving integrations,
+            handling that ticket or meeting you wish you didn't have to or
+            turning fuzzy requirements into working solutions—across English and
+            Japanese, I am here to help.
+          </p>
+          <p
+            className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
+          >
+            I also have a great sense of empathy and humor (if I do say so
+            myself) and an openness to learning which I think makes me pretty
+            fun to work with.
+          </p>
+
+          <p
+            className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
+          >
+            Check out mine works and philosphy below.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -106,14 +258,26 @@ export default function HomePage() {
               className="inline-flex items-center rounded-lg bg-accent px-5 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
             >
               View my work
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg
+                className="ml-2 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </a>
             <a
               href="/resume"
               className={`inline-flex items-center rounded-lg px-5 py-3 text-sm font-medium transition-colors duration-200 ${
-                isDark ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-slate-900"
+                isDark
+                  ? "text-slate-300 hover:text-white"
+                  : "text-slate-700 hover:text-slate-900"
               }`}
             >
               Download resume →
@@ -121,27 +285,39 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Minimal identity block - right aligned on desktop */}
-        <div className={`mt-16 md:mt-20 flex flex-wrap gap-x-12 gap-y-4 text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+        {/* Minimal identity block */}
+        <div
+          className={`mt-16 md:mt-20 flex flex-wrap gap-x-12 gap-y-4 text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}
+        >
           <div>
-            <span className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Location</span>
-            <span className={isDark ? "text-slate-200" : "text-slate-800"}>Japan (UTC+9)</span>
+            <span
+              className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
+              Location
+            </span>
+            <span className={isDark ? "text-slate-200" : "text-slate-800"}>
+              Japan (UTC+9)
+            </span>
           </div>
           <div>
-            <span className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Languages</span>
-            <span className={isDark ? "text-slate-200" : "text-slate-800"}>English, Japanese</span>
+            <span
+              className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
+              Languages
+            </span>
+            <span className={isDark ? "text-slate-200" : "text-slate-800"}>
+              English, Japanese
+            </span>
           </div>
           <div>
-            <span className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Focus</span>
-            <span className={isDark ? "text-slate-200" : "text-slate-800"}>Cloud Support, Full-Stack</span>
-          </div>
-          <div className="flex gap-4 items-end">
-            <a href="https://github.com/" target="_blank" rel="noreferrer" className={`transition-colors ${isDark ? "hover:text-white" : "hover:text-slate-900"}`}>
-              GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/trevor-mearns/" target="_blank" rel="noreferrer" className={`transition-colors ${isDark ? "hover:text-white" : "hover:text-slate-900"}`}>
-              LinkedIn
-            </a>
+            <span
+              className={`block mb-1 ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
+              Focus
+            </span>
+            <span className={isDark ? "text-slate-200" : "text-slate-800"}>
+              Cloud Support, Full-Stack
+            </span>
           </div>
         </div>
       </section>
@@ -151,81 +327,73 @@ export default function HomePage() {
         <div className={`h-px ${isDark ? "bg-slate-800" : "bg-slate-200"}`} />
       </div>
 
-      {/* About - Typographic, no cards */}
+      {/* About - Photo and bio */}
       <section id="about" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-        <div className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-7">
-            <h2 className={`text-sm font-medium tracking-wide uppercase mb-8 ${isDark ? "text-slate-500" : "text-slate-500"}`}>About</h2>
-            <p className={`text-xl md:text-2xl leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-              I&apos;m a bilingual technical professional with a hybrid background in software development,
-              cloud technologies, and customer-facing technical support.
-            </p>
-            <p className={`mt-6 text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-              I enjoy the messy middle: translating business needs into technical reality, debugging complex systems,
-              and helping customers succeed. I&apos;m especially strong at clear communication, structured troubleshooting,
-              and building practical tools that reduce friction.
-            </p>
-          </div>
-          <div className="md:col-span-5">
-            <h3 className={`text-sm font-medium tracking-wide uppercase mb-6 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Current priorities</h3>
-            <ul className={`space-y-4 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-              <li className="flex gap-3">
-                <span className="text-accent">→</span>
-                Cloud support / solutions engineering roles
-              </li>
-              <li className="flex gap-3">
-                <span className="text-secondary-light">→</span>
-                Building portfolio projects (Next.js + Postgres)
-              </li>
-              <li className="flex gap-3">
-                <span className="text-accent">→</span>
-                AWS certifications (SAA-C03, DOP-C02)
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills - Typographic layout with dividers, no heavy cards */}
-      <section className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}>
-        <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-          <h2 className={`text-sm font-medium tracking-wide uppercase mb-12 ${isDark ? "text-slate-500" : "text-slate-500"}`}>Skills</h2>
-
-          <div className="grid gap-12 md:grid-cols-2">
-            {[
-              {
-                title: "Cloud & DevOps",
-                items: ["AWS", "Azure", "Docker", "CI/CD", "GitHub Actions", "API integrations", "Networking"]
-              },
-              {
-                title: "Development",
-                items: ["Next.js", "React", "TypeScript", "Node.js", ".NET/C#", "REST APIs", "Testing"]
-              },
-              {
-                title: "Data",
-                items: ["PostgreSQL", "Prisma", "Entity Framework", "MongoDB", "Query optimization"]
-              },
-              {
-                title: "Customer Engineering",
-                items: ["Incident triage", "Repro steps", "Log analysis", "Escalations", "Documentation", "EN/JP"]
-              },
-            ].map((group, i) => (
-              <div key={i} className={`pb-8 ${i < 2 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""} md:border-b-0`}>
-                <h3 className={`font-semibold mb-4 ${isDark ? "text-slate-200" : "text-slate-800"}`}>{group.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((item, j) => (
-                    <span
-                      key={j}
-                      className={`text-sm px-3 py-1 rounded-full ${
-                        isDark ? "bg-slate-800 text-slate-300" : "bg-slate-100 text-slate-700"
-                      }`}
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
+        <div className="grid gap-12 md:gap-16 md:grid-cols-12 items-center">
+          {/* Photo placeholder - Left column */}
+          <div className="md:col-span-5 md:mt-10">
+            <div
+              className={`aspect-[4/5] rounded-2xl flex items-center justify-center ${
+                isDark
+                  ? "bg-slate-800/50 border border-slate-700"
+                  : "bg-slate-100 border border-slate-200"
+              }`}
+            >
+              <div className="text-center">
+                <svg
+                  className={`w-16 h-16 mx-auto mb-4 ${isDark ? "text-slate-600" : "text-slate-400"}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+                  Photo
+                </span>
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* About content - Right column */}
+          <div className="md:col-span-7">
+            <h2
+              className={`text-sm font-medium tracking-wide uppercase mb-8 ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
+              About
+            </h2>
+            <p
+              className={`text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
+            >
+              I was born in Seattle Washington in the United States and have
+              lived in Japan since 2007. I started my journey abroad in
+              education. After a few years working for someone else, I started
+              my own business and managed it for 6.5 years.
+            </p>
+            <p
+              className={`mt-6 text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
+            >
+              As all ex-pats know, time invested in one country does not always
+              equal returns back home. So, I decided to sell my school and
+              transition into software development and technical support. I find
+              the intersection of the requisite hard, technical skills and soft
+              people skills to be an excellent fit for my personality and
+              background.
+            </p>
+            <p
+              className={`mt-6 text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
+            >
+              I&apos;ve always loved learning and helping people and this industry
+              has no shortage of opportunities to do both. It also allows me to
+              remain an ex-patriot of the United States, a country I still love
+              dearly, while staying connected to my culture, my language and the
+              wider world.
+            </p>
           </div>
         </div>
       </section>
@@ -233,8 +401,14 @@ export default function HomePage() {
       {/* Experience - Lighter, more whitespace */}
       <section id="work" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
         <div className="flex items-end justify-between mb-12">
-          <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>Experience</h2>
-          <a href="/resume" className="text-sm text-accent hover:underline">Full resume →</a>
+          <h2
+            className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}
+          >
+            Experience
+          </h2>
+          <a href="/resume" className="text-sm text-accent hover:underline">
+            Full resume →
+          </a>
         </div>
 
         <div className="space-y-12">
@@ -244,30 +418,67 @@ export default function HomePage() {
               company: "Alarm.com",
               period: "Aug 2023 – Present",
               points: [
-                "Troubleshoot customer issues across web/mobile, networking, and device ecosystems",
-                "Create clear repro steps and work with engineering teams to drive resolution",
-                "Improve internal documentation to reduce time-to-resolution and repeat cases",
+                "Lead technical meetings for Japanese stakeholders with real-time troubleshooting in English and Japanese",
+                "Onboarded Japan's largest security company to the cloud platform, ensuring secure integrations and compliance",
+                "Facilitate communication between C-level executives and partners on security objectives",
               ],
             },
             {
               title: "Technical Specialist",
               company: "Bitrise",
-              period: "Previous",
+              period: "Jul 2022 – Jun 2023",
               points: [
-                "Supported CI/CD pipelines and mobile build workflows in a fast-paced SaaS environment",
-                "Helped customers integrate tools and debug build, auth, and API-related issues",
+                "Provided pre/post-sales support for enterprise clients on DevOps pipelines, API connectivity, and cloud integration",
+                "Collaborated with global team to resolve technical issues, focusing on APAC/Japan region",
+                "Developed comprehensive documentation to streamline support processes and promote secure practices",
+              ],
+            },
+            {
+              title: "Full Stack Engineer & Programming Instructor",
+              company: "Software Development Mastermind",
+              period: "Oct 2019 – Jun 2022",
+              points: [
+                "Created Q&A documentation to optimize issue resolution time and improve client satisfaction",
+                "Conducted security-focused code reviews to enhance code quality and performance",
+                "Mentored students on secure project development, leading weekly sessions on JavaScript, React, and C#",
+              ],
+            },
+            {
+              title: "Founder & Head Manager",
+              company: "M City English 英語教室",
+              period: "Sep 2014 – Oct 2019",
+              points: [
+                "Managed all aspects of operations including administration, customer service, and sales",
+                "Led customer engagement through teaching, demonstrations, and responsive communication",
               ],
             },
           ].map((job, i) => (
-            <article key={i} className={`pb-12 ${i < 1 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}>
+            <article
+              key={i}
+              className={`pb-12 ${i < 3 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}
+            >
               <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
-                <h3 className={`text-lg font-semibold ${isDark ? "text-slate-100" : "text-slate-900"}`}>{job.title}</h3>
-                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{job.company} · {job.period}</span>
+                <h3
+                  className={`text-lg font-semibold ${isDark ? "text-slate-100" : "text-slate-900"}`}
+                >
+                  {job.title}
+                </h3>
+                <span
+                  className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
+                >
+                  {job.company} · {job.period}
+                </span>
               </div>
-              <ul className={`space-y-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              <ul
+                className={`space-y-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}
+              >
                 {job.points.map((point, j) => (
                   <li key={j} className="flex gap-3">
-                    <span className={isDark ? "text-slate-600" : "text-slate-400"}>·</span>
+                    <span
+                      className={isDark ? "text-slate-600" : "text-slate-400"}
+                    >
+                      ·
+                    </span>
                     {point}
                   </li>
                 ))}
@@ -277,58 +488,168 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Portfolio - Softer cards */}
-      <section className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}>
+      {/* Portfolio - Grid with screenshots */}
+      <section
+        id="portfolio"
+        className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}
+      >
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-          <div className="flex items-end justify-between mb-12">
-            <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>Projects</h2>
-            <a href="/portfolio" className="text-sm text-accent hover:underline">All projects →</a>
+          <div className="mb-12">
+            <h2
+              className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
+              Portfolio
+            </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
             {[
               {
                 title: "API Key Manager",
-                tech: "Next.js · TypeScript · Prisma · Postgres",
-                desc: "Secure SaaS-style app for storing and rotating API keys with role-based access and audit-friendly UX.",
+                desc: "Secure SaaS-style app for storing and rotating API keys with role-based access, audit logs, and team collaboration features.",
+                tech: [
+                  "Next.js",
+                  "TypeScript",
+                  "Prisma",
+                  "PostgreSQL",
+                  "Tailwind CSS",
+                ],
+                github: "https://github.com/trevmearns/api-key-manager",
+                demo: "https://api-key-manager.vercel.app",
                 featured: true,
+                gradient: "from-amber-500/20 to-orange-600/20",
               },
               {
                 title: "AI Tutor LMS",
-                tech: "Next.js · Postgres · RAG · Role-based access",
-                desc: "Learning platform with admin/instructor/student roles, course content, and AI-driven tutoring.",
+                desc: "Learning management platform with admin/instructor/student roles, course content management, and AI-driven tutoring using RAG.",
+                tech: ["Next.js", "PostgreSQL", "OpenAI", "RAG", "Auth.js"],
+                github: "https://github.com/trevmearns/ai-tutor-lms",
+                demo: null,
                 featured: false,
+                gradient: "from-blue-500/20 to-indigo-600/20",
+              },
+              {
+                title: "Cloud Monitor Dashboard",
+                desc: "Real-time monitoring dashboard for AWS resources with cost tracking, alerts, and usage analytics across multiple accounts.",
+                tech: ["React", "AWS SDK", "Chart.js", "Node.js", "DynamoDB"],
+                github: "https://github.com/trevmearns/cloud-monitor",
+                demo: null,
+                featured: false,
+                gradient: "from-emerald-500/20 to-teal-600/20",
+              },
+              {
+                title: "Bilingual Docs Generator",
+                desc: "CLI tool that generates synchronized English/Japanese documentation from code comments and markdown templates.",
+                tech: ["Node.js", "TypeScript", "OpenAI API", "Markdown"],
+                github: "https://github.com/trevmearns/bilingual-docs",
+                demo: null,
+                featured: false,
+                gradient: "from-purple-500/20 to-pink-600/20",
               },
             ].map((project, i) => (
               <article
                 key={i}
-                className={`group p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+                className={`group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
                   isDark
                     ? "bg-slate-800/50 hover:bg-slate-800"
                     : "bg-white shadow-soft hover:shadow-soft-lg"
                 }`}
               >
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <h3 className={`font-semibold text-lg group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}>
-                    {project.title}
-                  </h3>
+                {/* Screenshot placeholder */}
+                <div
+                  className={`relative h-48 bg-gradient-to-br ${project.gradient} ${isDark ? "opacity-80" : "opacity-60"}`}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div
+                      className={`w-3/4 h-3/4 rounded-lg ${isDark ? "bg-slate-900/50" : "bg-white/50"} backdrop-blur-sm border ${isDark ? "border-slate-700" : "border-slate-200"} flex items-center justify-center`}
+                    >
+                      <span
+                        className={`text-sm ${isDark ? "text-slate-400" : "text-slate-500"}`}
+                      >
+                        Screenshot
+                      </span>
+                    </div>
+                  </div>
                   {project.featured && (
-                    <span className="text-xs font-medium px-2 py-1 rounded bg-accent/10 text-accent">
+                    <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">
                       Featured
                     </span>
                   )}
                 </div>
-                <p className={`text-sm mb-3 ${isDark ? "text-slate-500" : "text-slate-500"}`}>{project.tech}</p>
-                <p className={`text-sm leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>{project.desc}</p>
-                <div className="mt-6 flex gap-4">
-                  <a href="https://github.com/" target="_blank" rel="noreferrer" className={`text-sm font-medium transition-colors ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}>
-                    Code →
-                  </a>
-                  {project.featured && (
-                    <a href="#" className="text-sm font-medium text-accent hover:underline">
-                      Live demo →
+
+                <div className="p-6">
+                  <h3
+                    className={`font-semibold text-lg mb-2 group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}
+                  >
+                    {project.title}
+                  </h3>
+                  <p
+                    className={`text-sm leading-relaxed mb-4 ${isDark ? "text-slate-400" : "text-slate-600"}`}
+                  >
+                    {project.desc}
+                  </p>
+
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((item, j) => (
+                      <span
+                        key={j}
+                        className={`text-xs px-2 py-1 rounded-full ${
+                          isDark
+                            ? "bg-slate-700 text-slate-300"
+                            : "bg-slate-100 text-slate-600"
+                        }`}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex gap-4 pt-2 border-t ${isDark ? 'border-slate-700' : 'border-slate-100'}">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`text-sm font-medium transition-colors flex items-center gap-1 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Code
                     </a>
-                  )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm font-medium text-accent hover:underline flex items-center gap-1"
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                        Live Demo
+                      </a>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}
@@ -339,8 +660,14 @@ export default function HomePage() {
       {/* Blog - Editorial list style */}
       <section id="writing" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
         <div className="flex items-end justify-between mb-12">
-          <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>Writing</h2>
-          <a href="/blog" className="text-sm text-accent hover:underline">All posts →</a>
+          <h2
+            className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}
+          >
+            Writing
+          </h2>
+          <a href="/blog" className="text-sm text-accent hover:underline">
+            All posts →
+          </a>
         </div>
 
         <div className="space-y-8">
@@ -372,27 +699,53 @@ export default function HomePage() {
               className={`group pb-8 ${i < 2 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}
             >
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2">
-                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{post.date}</span>
-                <span className={`text-sm ${isDark ? "text-slate-600" : "text-slate-400"}`}>·</span>
-                <span className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{post.read} read</span>
+                <span
+                  className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
+                >
+                  {post.date}
+                </span>
+                <span
+                  className={`text-sm ${isDark ? "text-slate-600" : "text-slate-400"}`}
+                >
+                  ·
+                </span>
+                <span
+                  className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
+                >
+                  {post.read} read
+                </span>
               </div>
-              <h3 className={`text-lg font-semibold mb-2 group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+              <h3
+                className={`text-lg font-semibold mb-2 group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}
+              >
                 <a href={`/blog/${post.slug}`}>{post.title}</a>
               </h3>
-              <p className={`leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>{post.desc}</p>
+              <p
+                className={`leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
+              >
+                {post.desc}
+              </p>
             </article>
           ))}
         </div>
       </section>
 
       {/* Contact - Calmer, focused */}
-      <section id="contact" className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}>
+      <section
+        id="contact"
+        className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}
+      >
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Let&apos;s work together</h2>
-            <p className={`text-lg leading-relaxed mb-8 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-              The best way to reach me is email. If you include a job description or role goals,
-              I&apos;ll reply with how I&apos;d approach the first 30–60–90 days.
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+              Let&apos;s work together
+            </h2>
+            <p
+              className={`text-lg leading-relaxed mb-8 ${isDark ? "text-slate-400" : "text-slate-600"}`}
+            >
+              The best way to reach me is email. If you include a job
+              description or role goals, I&apos;ll reply with how I&apos;d
+              approach the first 30–60–90 days.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a
@@ -410,7 +763,9 @@ export default function HomePage() {
                 LinkedIn →
               </a>
             </div>
-            <p className={`mt-6 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+            <p
+              className={`mt-6 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
               Based in Japan (UTC+9) · English / 日本語
             </p>
           </div>
@@ -418,14 +773,33 @@ export default function HomePage() {
       </section>
 
       {/* Footer - Minimal */}
-      <footer className={`border-t ${isDark ? "border-slate-800" : "border-slate-200"}`}>
-        <div className={`mx-auto max-w-5xl px-6 py-8 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+      <footer
+        className={`border-t ${isDark ? "border-slate-800" : "border-slate-200"}`}
+      >
+        <div
+          className={`mx-auto max-w-5xl px-6 py-8 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
+        >
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} Trevor Mearns</p>
             <div className="flex flex-wrap gap-6">
-              <a href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Blog</a>
-              <a href="/portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Projects</a>
-              <a href="/privacy" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Privacy</a>
+              <a
+                href="#writing"
+                className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}
+              >
+                Blog
+              </a>
+              <a
+                href="#portfolio"
+                className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}
+              >
+                Projects
+              </a>
+              <a
+                href="/privacy"
+                className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}
+              >
+                Privacy
+              </a>
             </div>
           </div>
         </div>
