@@ -1,22 +1,23 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useTheme } from '../ThemeProvider';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export function Header() {
-  const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isDark = theme === 'dark';
 
   const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/#about', label: 'About' },
+    { href: '/#work', label: 'Work' },
+    { href: '/#portfolio', label: 'Portfolio' },
+    { href: '/#writing', label: 'Writing' },
+    { href: '/resume', label: 'Resume' },
+    { href: 'https://github.com/trevormearns', label: 'GitHub', external: true },
+    { href: 'https://linkedin.com/in/trevormearns', label: 'LinkedIn', external: true },
   ];
 
   return (
@@ -27,7 +28,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 font-medium">
-            <span className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${isDark ? "bg-black border border-slate-700" : "bg-black"}`}>
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-black">
               <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
@@ -38,26 +39,34 @@ export function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`transition-colors duration-200 ${
-                  pathname === item.href
-                    ? "text-accent"
-                    : isDark
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`transition-colors duration-200 ${
+                    isDark
                       ? "text-slate-400 hover:text-white"
                       : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                {item.label}
-              </Link>
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`transition-colors duration-200 ${
+                    isDark
+                      ? "text-slate-400 hover:text-white"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
-            <Link
-              href="/resume"
-              className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
-            >
-              Resume
-            </Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -82,7 +91,7 @@ export function Header() {
 
             {/* CTA Button */}
             <Link
-              href="/contact"
+              href="/#contact"
               className="hidden sm:inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
             >
               Get in touch
@@ -110,32 +119,38 @@ export function Header() {
           <div className={`md:hidden py-4 border-t ${isDark ? "border-slate-800" : "border-slate-200"}`}>
             <div className="space-y-1">
               {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
-                    pathname === item.href
-                      ? "text-accent"
-                      : isDark
+                item.external ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                      isDark
                         ? "text-slate-400 hover:text-white hover:bg-white/5"
                         : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                      isDark
+                        ? "text-slate-400 hover:text-white hover:bg-white/5"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
               <Link
-                href="/resume"
-                className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
-                  isDark ? "text-slate-400 hover:text-white hover:bg-white/5" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Resume
-              </Link>
-              <Link
-                href="/contact"
+                href="/#contact"
                 className="block mt-3 rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-white shadow-accent"
                 onClick={() => setMobileMenuOpen(false)}
               >

@@ -1,11 +1,51 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Send } from "lucide-react";
+import { WritingSection } from "@/components/WritingSection";
 
 export default function HomePage() {
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Contact form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    honeypot: '',
+  });
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.honeypot) return;
+
+    setFormStatus('submitting');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Failed to send message');
+
+      setFormStatus('success');
+      setFormData({ name: '', email: '', message: '', honeypot: '' });
+    } catch (error: unknown) {
+      setFormStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+    }
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -32,7 +72,7 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <a href="/" className="flex items-center gap-3 font-medium">
             <span
-              className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${isDark ? "bg-black border border-slate-700" : "bg-black"}`}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-black"
             >
               <svg
                 className="w-10 h-10 text-white"
@@ -66,7 +106,7 @@ export default function HomePage() {
               Resume
             </a>
             <a
-              href="https://github.com/trevmearns"
+              href="https://github.com/Trevorton27"
               target="_blank"
               rel="noreferrer"
               className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
@@ -233,10 +273,6 @@ export default function HomePage() {
           >
             I help teams ship reliable software and maintain platform integrity
             while making sure customers know they are heard and cared for.
-            Whether its debugging complex systems, improving integrations,
-            handling that ticket or meeting you wish you didn't have to or
-            turning fuzzy requirements into working solutions—across English and
-            Japanese, I am here to help.
           </p>
           <p
             className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
@@ -658,116 +694,147 @@ export default function HomePage() {
       </section>
 
       {/* Blog - Editorial list style */}
-      <section id="writing" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-        <div className="flex items-end justify-between mb-12">
-          <h2
-            className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}
-          >
-            Writing
-          </h2>
-          <a href="/blog" className="text-sm text-accent hover:underline">
-            All posts →
-          </a>
-        </div>
+      <WritingSection isDark={isDark} />
 
-        <div className="space-y-8">
-          {[
-            {
-              date: "Feb 2026",
-              read: "6 min",
-              title: "A Troubleshooting Playbook for Cloud Support Engineers",
-              desc: "A repeatable approach to incident triage: scoping, reproducing, isolating layers, and writing crisp escalations.",
-              slug: "troubleshooting-playbook",
-            },
-            {
-              date: "Jan 2026",
-              read: "4 min",
-              title: "Debugging API Issues Like a Scientist",
-              desc: "Hypotheses, controlled tests, logs, and the art of not gaslighting yourself with assumptions.",
-              slug: "api-debugging",
-            },
-            {
-              date: "Dec 2025",
-              read: "5 min",
-              title: "Vercel + Postgres: What I Wish I Knew Earlier",
-              desc: "Practical gotchas around env vars, migrations, connection pooling, and predictable deploys.",
-              slug: "vercel-postgres",
-            },
-          ].map((post, i) => (
-            <article
-              key={i}
-              className={`group pb-8 ${i < 2 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}
-            >
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-2">
-                <span
-                  className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
-                >
-                  {post.date}
-                </span>
-                <span
-                  className={`text-sm ${isDark ? "text-slate-600" : "text-slate-400"}`}
-                >
-                  ·
-                </span>
-                <span
-                  className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
-                >
-                  {post.read} read
-                </span>
-              </div>
-              <h3
-                className={`text-lg font-semibold mb-2 group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}
-              >
-                <a href={`/blog/${post.slug}`}>{post.title}</a>
-              </h3>
-              <p
-                className={`leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
-              >
-                {post.desc}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact - Calmer, focused */}
+      {/* Contact - Form */}
       <section
         id="contact"
         className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}
       >
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-              Let&apos;s work together
-            </h2>
-            <p
-              className={`text-lg leading-relaxed mb-8 ${isDark ? "text-slate-400" : "text-slate-600"}`}
-            >
-              The best way to reach me is email. If you include a job
-              description or role goals, I&apos;ll reply with how I&apos;d
-              approach the first 30–60–90 days.
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="/contact"
-                className="inline-flex items-center rounded-lg bg-accent px-5 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+                Get in Touch
+              </h2>
+              <p
+                className={`text-lg ${isDark ? "text-slate-400" : "text-slate-600"}`}
               >
-                Send me a message
-              </a>
+                Have a question or want to work together? Drop me a message!
+              </p>
+              <p
+                className={`mt-2 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
+              >
+                Based in Japan (UTC+9) · English / 日本語
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className={`rounded-2xl p-6 md:p-8 ${
+                isDark
+                  ? "bg-slate-800/50 border border-slate-700"
+                  : "bg-white border border-slate-200 shadow-soft"
+              }`}
+            >
+              {/* Honeypot field */}
+              <input
+                type="text"
+                name="website"
+                value={formData.honeypot}
+                onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                style={{ display: 'none' }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              <div className="space-y-6">
+                <div>
+                  <label htmlFor="name" className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
+                      isDark
+                        ? "bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500"
+                        : "bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400"
+                    }`}
+                    disabled={formStatus === 'submitting'}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
+                      isDark
+                        ? "bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500"
+                        : "bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400"
+                    }`}
+                    disabled={formStatus === 'submitting'}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-xl resize-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
+                      isDark
+                        ? "bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500"
+                        : "bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400"
+                    }`}
+                    disabled={formStatus === 'submitting'}
+                  />
+                </div>
+
+                {formStatus === 'error' && (
+                  <div className={`p-4 rounded-xl ${isDark ? "bg-red-500/10 border border-red-500/20 text-red-400" : "bg-red-50 border border-red-200 text-red-700"}`}>
+                    {errorMessage}
+                  </div>
+                )}
+
+                {formStatus === 'success' && (
+                  <div className={`p-4 rounded-xl ${isDark ? "bg-green-500/10 border border-green-500/20 text-green-400" : "bg-green-50 border border-green-200 text-green-700"}`}>
+                    Thanks for your message! I&apos;ll get back to you soon.
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={formStatus === 'submitting'}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-sm font-semibold text-white shadow-accent transition-all duration-200 hover:bg-accent-hover hover:shadow-accent-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  {formStatus === 'submitting' ? (
+                    'Sending...'
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      Send Message
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+
+            <div className="mt-8 text-center">
               <a
                 href="https://www.linkedin.com/in/trevor-mearns/"
                 target="_blank"
                 rel="noreferrer"
                 className={`text-sm font-medium transition-colors ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
               >
-                LinkedIn →
+                Or connect on LinkedIn →
               </a>
             </div>
-            <p
-              className={`mt-6 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
-            >
-              Based in Japan (UTC+9) · English / 日本語
-            </p>
           </div>
         </div>
       </section>

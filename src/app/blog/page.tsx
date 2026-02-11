@@ -1,162 +1,154 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Header } from '@/components/public/Header';
 import { Footer } from '@/components/public/Footer';
-import prisma from '@/lib/prisma';
-import { formatDate, getReadingTime } from '@/lib/utils';
-import { Search } from 'lucide-react';
+import {
+  getPosts,
+  getFeaturedImageUrl,
+  getFeaturedImageAlt,
+  formatWPDate,
+  getReadingTime,
+  stripHtml,
+  decodeHtmlEntities,
+} from '@/lib/wordpress';
 
 export const metadata = {
   title: 'Blog',
-  description: 'Thoughts on art, code, and everything in between.',
+  description: 'Thoughts on technology, support engineering, and life in Japan.',
 };
 
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string; tag?: string; page?: string }>;
+  searchParams: Promise<{ page?: string }>;
 }) {
   const params = await searchParams;
-  const search = params.search || '';
-  const tagSlug = params.tag;
-  const page = parseInt(params.page || '1');
-  const perPage = 12;
+  const page = Math.max(1, parseInt(params.page || '1', 10));
+  const perPage = 10;
 
-  const where: any = { status: 'PUBLISHED' };
+  const { posts, total, totalPages } = await getPosts({ page, perPage });
 
-  if (search) {
-    where.OR = [
-      { title: { contains: search, mode: 'insensitive' } },
-      { excerpt: { contains: search, mode: 'insensitive' } },
-    ];
-  }
-
-  if (tagSlug) {
-    where.tags = { some: { slug: tagSlug } };
-  }
-
-  const [posts, total, tags] = await Promise.all([
-    prisma.blogPost.findMany({
-      where,
-      orderBy: { publishedAt: 'desc' },
-      skip: (page - 1) * perPage,
-      take: perPage,
-      include: { author: true, tags: true },
-    }),
-    prisma.blogPost.count({ where }),
-    prisma.tag.findMany({
-      orderBy: { name: 'asc' },
-    }),
-  ]);
-
-  const totalPages = Math.ceil(total / perPage);
+  // Clamp page to valid range
+  const currentPage = Math.min(page, Math.max(1, totalPages));
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <Header />
 
-      <main className="flex-1 mx-auto max-w-6xl px-6 py-12">
-        <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Blog</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Thoughts on art, code, and everything in between.
+      <main className="flex-1 mx-auto max-w-4xl px-6 py-12 md:py-20">
+        {/* Header */}
+        <div className="mb-12 md:mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Blog
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+            Thoughts on technology, support engineering, and life in Japan.
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="mb-8 space-y-4">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <form action="/blog" method="get">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search posts..."
-                defaultValue={search}
-                className="w-full pl-12 pr-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-black dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#d48a27] transition-all duration-200"
-              />
-            </form>
+        {/* Posts */}
+        {posts.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-500 dark:text-gray-400 text-lg">
+              No posts found.
+            </p>
           </div>
+        ) : (
+          <div className="space-y-10">
+            {posts.map((post) => {
+              const featuredImage = getFeaturedImageUrl(post);
+              const excerpt = stripHtml(post.excerpt.rendered);
+              const readingTime = getReadingTime(post.content.rendered);
 
-          <div className="flex flex-wrap gap-2">
-            <Link
-              href="/blog"
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                !tagSlug
-                  ? 'bg-gradient-to-r from-[#d48a27] to-[#b8751f] text-white shadow-lg shadow-[#d48a27]/25'
-                  : 'bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/10'
-              }`}
-            >
-              All
-            </Link>
-            {tags.map((tag) => (
-              <Link
-                key={tag.id}
-                href={`/blog?tag=${tag.slug}`}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  tagSlug === tag.slug
-                    ? 'bg-gradient-to-r from-[#d48a27] to-[#b8751f] text-white shadow-lg shadow-[#d48a27]/25'
-                    : 'bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/10'
-                }`}
-              >
-                {tag.name}
-              </Link>
-            ))}
+              return (
+                <article
+                  key={post.id}
+                  className="group"
+                >
+                  <Link href={`/blog/${post.slug}`} className="block">
+                    {/* Featured Image */}
+                    {featuredImage && (
+                      <div className="relative aspect-[2/1] mb-5 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
+                        <Image
+                          src={featuredImage}
+                          alt={getFeaturedImageAlt(post)}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 800px"
+                        />
+                      </div>
+                    )}
+
+                    {/* Meta */}
+                    <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      <time dateTime={post.date}>
+                        {formatWPDate(post.date)}
+                      </time>
+                      <span className="text-gray-300 dark:text-gray-600">·</span>
+                      <span>{readingTime} min read</span>
+                    </div>
+
+                    {/* Title */}
+                    <h2 className="text-2xl font-semibold mb-3 group-hover:text-accent transition-colors">
+                      {decodeHtmlEntities(post.title.rendered)}
+                    </h2>
+
+                    {/* Excerpt */}
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">
+                      {decodeHtmlEntities(excerpt)}
+                    </p>
+
+                    {/* Read more */}
+                    <span className="inline-block mt-4 text-accent font-medium group-hover:underline">
+                      Read more →
+                    </span>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
-        </div>
-
-        {/* Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {posts.map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.slug}`}
-              className="group rounded-2xl p-6 bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 hover:border-[#8b5cf6]/50 dark:hover:border-[#8b5cf6]/50 shadow-sm dark:shadow-none hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
-            >
-              {post.coverImage && (
-                <div className="aspect-video bg-gradient-to-br from-[#d48a27] to-[#8b5cf6] rounded-xl mb-4" />
-              )}
-              <div className="flex flex-wrap gap-2 mb-3">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className="text-xs px-2 py-1 bg-[#d48a27]/10 text-[#d48a27] rounded-lg"
-                  >
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
-              <h2 className="text-xl font-bold mb-2 group-hover:text-[#8b5cf6] dark:group-hover:text-[#a78bfa] transition-colors">
-                {post.title}
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
-              <div className="text-xs text-gray-500 dark:text-[#a78bfa]">
-                {formatDate(post.publishedAt!)} • {getReadingTime(post.content)} min read
-              </div>
-            </Link>
-          ))}
-        </div>
+        )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center gap-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <nav className="mt-16 flex items-center justify-center gap-4">
+            {currentPage > 1 ? (
               <Link
-                key={p}
-                href={`/blog?page=${p}${tagSlug ? `&tag=${tagSlug}` : ''}${
-                  search ? `&search=${search}` : ''
-                }`}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  p === page
-                    ? 'bg-gradient-to-r from-[#d48a27] to-[#b8751f] text-white shadow-lg shadow-[#d48a27]/25'
-                    : 'bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/5 dark:border-white/10'
-                }`}
+                href={`/blog?page=${currentPage - 1}`}
+                className="px-5 py-2.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors font-medium"
               >
-                {p}
+                ← Previous
               </Link>
-            ))}
-          </div>
+            ) : (
+              <span className="px-5 py-2.5 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-600 cursor-not-allowed font-medium">
+                ← Previous
+              </span>
+            )}
+
+            <span className="text-gray-600 dark:text-gray-400 text-sm">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            {currentPage < totalPages ? (
+              <Link
+                href={`/blog?page=${currentPage + 1}`}
+                className="px-5 py-2.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors font-medium"
+              >
+                Next →
+              </Link>
+            ) : (
+              <span className="px-5 py-2.5 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-600 cursor-not-allowed font-medium">
+                Next →
+              </span>
+            )}
+          </nav>
+        )}
+
+        {/* Post count */}
+        {total > 0 && (
+          <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-500">
+            {total} {total === 1 ? 'post' : 'posts'} total
+          </p>
         )}
       </main>
 
