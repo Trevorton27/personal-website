@@ -1,0 +1,76 @@
+[
+  {
+    "slug": "signal-works-lms",
+    "title": "Signal Works LMS",
+    "description": "A modern, AI-powered Learning Management System with adaptive assessment and intelligent tutoring capabilities.",
+    "category": "AI LMS",
+    "githubUrl": "https://github.com/Trevorton27/signal-works-lms",
+    "demoUrl": null,
+    "techStack": [
+      "TypeScript",
+      "JavaScript",
+      "Shell",
+      "CSS",
+      "@clerk/nextjs",
+      "Prisma"
+    ],
+    "featured": false,
+    "image": "/portfolio/signal-works-lms.svg",
+    "lastUpdated": "2025-12-10T02:41:26Z"
+  },
+  {
+    "slug": "aict-main",
+    "title": "AICT",
+    "description": "An intelligent, adaptive web-based coding tutor powered by Claude AI",
+    "category": "AI/Automation",
+    "githubUrl": "https://github.com/Trevorton27/aict-main",
+    "demoUrl": null,
+    "techStack": [
+      "TypeScript",
+      "HTML",
+      "JavaScript",
+      "Shell",
+      "Python",
+      "CSS"
+    ],
+    "featured": false,
+    "image": "/portfolio/aict-main.svg",
+    "lastUpdated": "2025-11-30T01:07:12Z"
+  },
+  {
+    "slug": "voice-app",
+    "title": "Voice App",
+    "description": "A modern, AI-powered voice interaction web app built with Next.js and TypeScript. It enables real-time voice-to-text transcription and intelligent conversational responses through seamless integration with OpenAI APIs.",
+    "category": "Voice Apps",
+    "githubUrl": "https://github.com/Trevorton27/voice-app",
+    "demoUrl": "https://voice-app-orpin.vercel.app",
+    "techStack": [
+      "TypeScript",
+      "JavaScript",
+      "CSS",
+      "@elevenlabs/elevenlabs-js",
+      "@elevenlabs/react",
+      "@google-cloud/storage"
+    ],
+    "featured": false,
+    "image": "/portfolio/voice-app.svg",
+    "lastUpdated": "2025-10-21T08:45:32Z"
+  },
+  {
+    "slug": "ai-support-engineer-integration",
+    "title": "AI Support Engineer Integration",
+    "description": "AI Support Engineer Copilot — a SaaS foundation built with Next.js, Clerk, Prisma, and Tailwind CSS.",
+    "category": "Integrations",
+    "githubUrl": "https://github.com/Trevorton27/ai-support-engineer-integration",
+    "demoUrl": "https://ai-support-engineer-integration.vercel.app",
+    "techStack": [
+      "Next.js",
+      "Prisma",
+      "Tailwind CSS",
+      "Clerk"
+    ],
+    "featured": false,
+    "image": "/portfolio/ai-support-engineer-integration.svg",
+    "lastUpdated": "2026-02-13T03:45:46Z"
+  }
+]

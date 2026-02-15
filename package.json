@@ -12,6 +12,7 @@
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
     "seed": "tsx prisma/seed.ts",
+    "sync:portfolio": "node scripts/sync-portfolio.mjs",
     "postinstall": "prisma generate"
   },
   "dependencies": {
