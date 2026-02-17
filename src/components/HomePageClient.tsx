@@ -281,14 +281,7 @@ export function HomePageClient({ projects }: HomePageClientProps) {
             I help teams ship reliable software and maintain platform integrity
             while making sure customers know they are heard and cared for.
           </p>
-          <p
-            className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
-          >
-            I also have a great sense of empathy and humor (if I do say so
-            myself) and an openness to learning which I think makes me pretty
-            fun to work with.
-          </p>
-
+          
           <p
             className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
           >
