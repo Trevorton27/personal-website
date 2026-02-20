@@ -246,7 +246,7 @@ export function HomePageClient({ projects }: HomePageClientProps) {
           <p
             className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
           >
-            Check out mine works and philosphy below.
+            Scroll down to know mine works and philosphy.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -352,7 +352,7 @@ export function HomePageClient({ projects }: HomePageClientProps) {
             >
               I was born in Seattle Washington in the United States and have
               lived in Japan since 2007. I started my journey abroad in
-              education. After a few years working for someone else, I started
+              education where I worked with an amazing cross-section of humanity. After a few years working for someone else, I started
               my own business and managed it for 6.5 years.
             </p>
             <p
@@ -360,19 +360,14 @@ export function HomePageClient({ projects }: HomePageClientProps) {
             >
               As all ex-pats know, time invested in one country does not always
               equal returns back home. So, I decided to sell my school and
-              transition into software development and technical support. I find
-              the intersection of the requisite hard, technical skills and soft
-              people skills to be an excellent fit for my personality and
-              background.
+              transition into software development and support engineering; a field that is unbound geographically. I find
+              the balance of the hard and soft skills necessary to bridge the gap between the human and the compute infrastructure to be where I do my best work.
+         
             </p>
             <p
               className={`mt-6 text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
             >
-              I&apos;ve always loved learning and helping people and this industry
-              has no shortage of opportunities to do both. It also allows me to
-              remain an ex-patriot of the United States, a country I still love
-              dearly, while staying connected to my culture, my language and the
-              wider world.
+         Other interests include being outdoors, mastering difficult things, learning more about how it all works and spending time with good people.
             </p>
           </div>
         </div>
