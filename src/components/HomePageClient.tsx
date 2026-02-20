@@ -3,7 +3,7 @@
 import Image from "next/image";
 import headshot from "@/images/trevorMearnsHeadShot.png";
 import { useState, useEffect } from "react";
-import { Menu, X, Send } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { WritingSection } from "@/components/WritingSection";
 import type { PortfolioProject } from "@/lib/portfolio";
 
@@ -14,45 +14,6 @@ type HomePageClientProps = {
 export function HomePageClient({ projects }: HomePageClientProps) {
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Contact form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    honeypot: '',
-  });
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.honeypot) return;
-
-    setFormStatus('submitting');
-    setErrorMessage('');
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Failed to send message');
-
-      setFormStatus('success');
-      setFormData({ name: '', email: '', message: '', honeypot: '' });
-    } catch (error: unknown) {
-      setFormStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
-    }
-  };
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -662,145 +623,42 @@ export function HomePageClient({ projects }: HomePageClientProps) {
       {/* Blog - Editorial list style */}
       <WritingSection isDark={isDark} />
 
-      {/* Contact - Form */}
+      {/* Contact - LinkedIn CTA */}
       <section
         id="contact"
         className={`${isDark ? "bg-slate-900/50" : "bg-slate-50/50"}`}
       >
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                Get in Touch
-              </h2>
-              <p
-                className={`text-lg ${isDark ? "text-slate-400" : "text-slate-600"}`}
-              >
-                Have a question or want to work together? Drop me a message!
-              </p>
-              <p
-                className={`mt-2 text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}
-              >
-                Based in Japan (UTC+9) · English / 日本語
-              </p>
-            </div>
-
-            <form
-              onSubmit={handleSubmit}
-              className={`rounded-2xl p-6 md:p-8 ${
-                isDark
-                  ? "bg-slate-800/50 border border-slate-700"
-                  : "bg-white border border-slate-200 shadow-soft"
-              }`}
+          <div className="max-w-2xl mx-auto text-center">
+            <h2
+              className={`text-sm font-medium tracking-wide uppercase mb-8 ${isDark ? "text-slate-500" : "text-slate-500"}`}
             >
-              {/* Honeypot field */}
-              <input
-                type="text"
-                name="website"
-                value={formData.honeypot}
-                onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
-                style={{ display: 'none' }}
-                tabIndex={-1}
-                autoComplete="off"
-              />
-
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="name" className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
-                      isDark
-                        ? "bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500"
-                        : "bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400"
-                    }`}
-                    disabled={formStatus === 'submitting'}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
-                      isDark
-                        ? "bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500"
-                        : "bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400"
-                    }`}
-                    disabled={formStatus === 'submitting'}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-xl resize-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent ${
-                      isDark
-                        ? "bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500"
-                        : "bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400"
-                    }`}
-                    disabled={formStatus === 'submitting'}
-                  />
-                </div>
-
-                {formStatus === 'error' && (
-                  <div className={`p-4 rounded-xl ${isDark ? "bg-red-500/10 border border-red-500/20 text-red-400" : "bg-red-50 border border-red-200 text-red-700"}`}>
-                    {errorMessage}
-                  </div>
-                )}
-
-                {formStatus === 'success' && (
-                  <div className={`p-4 rounded-xl ${isDark ? "bg-green-500/10 border border-green-500/20 text-green-400" : "bg-green-50 border border-green-200 text-green-700"}`}>
-                    Thanks for your message! I&apos;ll get back to you soon.
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={formStatus === 'submitting'}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-sm font-semibold text-white shadow-accent transition-all duration-200 hover:bg-accent-hover hover:shadow-accent-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {formStatus === 'submitting' ? (
-                    'Sending...'
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-
-            <div className="mt-8 text-center">
-              <a
-                href="https://www.linkedin.com/in/trevor-mearns/"
-                target="_blank"
-                rel="noreferrer"
-                className={`text-sm font-medium transition-colors ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
-              >
-                Or connect on LinkedIn →
-              </a>
-            </div>
+              Contact
+            </h2>
+            <h3 className={`text-3xl md:text-4xl font-bold tracking-tight mb-4 ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+              Get in Touch
+            </h3>
+            <p
+              className={`text-lg mb-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}
+            >
+              Have a question or want to work together?
+            </p>
+            <p
+              className={`text-sm mb-10 ${isDark ? "text-slate-500" : "text-slate-500"}`}
+            >
+              Based in Japan (UTC+9) · English / 日本語
+            </p>
+            <a
+              href="https://www.linkedin.com/in/trevor-mearns/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 rounded-xl bg-accent px-8 py-4 text-sm font-semibold text-white shadow-accent transition-all duration-200 hover:bg-accent-hover hover:shadow-accent-lg hover:scale-[1.02]"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              Connect on LinkedIn
+            </a>
           </div>
         </div>
       </section>
