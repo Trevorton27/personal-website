@@ -246,7 +246,7 @@ export function HomePageClient({ projects }: HomePageClientProps) {
           <p
             className={`mt-8 text-lg md:text-xl leading-relaxed max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
           >
-            Scroll down to know mine works and philosphy.
+            Scroll down to know mine works and philosophy.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
