@@ -5,6 +5,7 @@ export type PortfolioProject = {
   slug: string;
   title: string;
   description: string;
+  highlights?: string[];
   category: string;
   githubUrl: string;
   demoUrl: string | null;

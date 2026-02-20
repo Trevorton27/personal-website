@@ -570,12 +570,25 @@ export function HomePageClient({ projects }: HomePageClientProps) {
                     {project.title}
                   </h3>
                   <p
-                    className={`text-sm leading-relaxed mb-4 ${
+                    className={`text-sm leading-relaxed mb-3 ${
                       isDark ? "text-slate-400" : "text-slate-600"
                     }`}
                   >
                     {project.description}
                   </p>
+
+                  {project.highlights && project.highlights.length > 0 && (
+                    <ul className={`text-sm leading-relaxed mb-4 space-y-1 ${
+                      isDark ? "text-slate-400" : "text-slate-600"
+                    }`}>
+                      {project.highlights.map((highlight, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
 
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.techStack.map((tech) => (

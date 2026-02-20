@@ -1,46 +1,12 @@
 [
   {
-    "slug": "signal-works-lms",
-    "title": "Signal Works LMS",
-    "description": "A modern, AI-powered Learning Management System with adaptive assessment and intelligent tutoring capabilities.",
-    "category": "AI LMS",
-    "githubUrl": "https://github.com/Trevorton27/signal-works-lms",
-    "demoUrl": null,
-    "techStack": [
-      "TypeScript",
-      "JavaScript",
-      "Shell",
-      "CSS",
-      "@clerk/nextjs",
-      "Prisma"
-    ],
-    "featured": false,
-    "image": "/portfolio/signal-works-lms.svg",
-    "lastUpdated": "2025-12-10T02:41:26Z"
-  },
-  {
-    "slug": "aict-main",
-    "title": "AICT",
-    "description": "An intelligent, adaptive web-based coding tutor powered by Claude AI",
-    "category": "AI/Automation",
-    "githubUrl": "https://github.com/Trevorton27/aict-main",
-    "demoUrl": null,
-    "techStack": [
-      "TypeScript",
-      "HTML",
-      "JavaScript",
-      "Shell",
-      "Python",
-      "CSS"
-    ],
-    "featured": false,
-    "image": "/portfolio/aict-main.svg",
-    "lastUpdated": "2025-11-30T01:07:12Z"
-  },
-  {
     "slug": "voice-app",
-    "title": "Voice App",
-    "description": "A modern, AI-powered voice interaction web app built with Next.js and TypeScript. It enables real-time voice-to-text transcription and intelligent conversational responses through seamless integration with OpenAI APIs.",
+    "title": "Voice-App — Voice-Driven LLM Interaction Layer",
+    "description": "Real-time voice interface for conversational AI using ElevenLabs TTS and continuous speech recognition.",
+    "highlights": [
+      "Real-time voice interface for conversational AI using ElevenLabs TTS and continuous speech recognition.",
+      "Demonstrates event-driven audio streaming, multilingual prompts, and AI-assisted UX design and TTS/STT/TTV."
+    ],
     "category": "Voice Apps",
     "githubUrl": "https://github.com/Trevorton27/voice-app",
     "demoUrl": "https://voice-app-orpin.vercel.app",
@@ -52,25 +18,75 @@
       "@elevenlabs/react",
       "@google-cloud/storage"
     ],
-    "featured": false,
+    "featured": true,
     "image": "/portfolio/voice-app.svg",
     "lastUpdated": "2025-10-21T08:45:32Z"
   },
   {
-    "slug": "ai-support-engineer-integration",
-    "title": "AI Support Engineer Integration",
-    "description": "AI Support Engineer Copilot — a SaaS foundation built with Next.js, Clerk, Prisma, and Tailwind CSS.",
-    "category": "Integrations",
-    "githubUrl": "https://github.com/Trevorton27/ai-support-engineer-integration",
-    "demoUrl": "https://ai-support-engineer-integration.vercel.app",
+    "slug": "aict-main",
+    "title": "AI Coding Tutor — Interactive AI-Powered Coding Challenge System",
+    "description": "Adaptive coding tutor that uses Claude API to provide guided debugging, explanations, and contextual assistance.",
+    "highlights": [
+      "Adaptive coding tutor that uses Claude API to provide guided debugging, explanations, and contextual assistance.",
+      "Features modular challenge workflows, scoring, and a chat interface driven by code-aware reasoning."
+    ],
+    "category": "AI/Automation",
+    "githubUrl": "https://github.com/Trevorton27/aict-main",
+    "demoUrl": "https://aict-main-web.vercel.app",
+    "techStack": [
+      "TypeScript",
+      "HTML",
+      "JavaScript",
+      "Shell",
+      "Python",
+      "CSS"
+    ],
+    "featured": true,
+    "image": "/portfolio/aict-main.svg",
+    "lastUpdated": "2025-11-30T01:07:12Z"
+  },
+  {
+    "slug": "tokuWebDev",
+    "title": "TokuWebDev LMS — Full-Stack LMS with AI Roadmaps",
+    "description": "Full-stack LMS that uses Claude and HuggingFace models to generate personalized learning roadmaps and tasks.",
+    "highlights": [
+      "Full-stack LMS that uses Claude and HuggingFace models to generate personalized learning roadmaps and tasks.",
+      "Includes course management, progress tracking, and AI-assisted review in a modular scalable architecture."
+    ],
+    "category": "AI LMS",
+    "githubUrl": "https://github.com/Trevorton27/tokuWebDev",
+    "demoUrl": "https://toku-web-dev-lms.vercel.app",
+    "techStack": [
+      "TypeScript",
+      "JavaScript",
+      "Shell",
+      "CSS",
+      "@clerk/nextjs",
+      "Prisma"
+    ],
+    "featured": true,
+    "image": "/portfolio/signal-works-lms.svg",
+    "lastUpdated": "2025-12-10T02:41:26Z"
+  },
+  {
+    "slug": "ai-flashcard-app",
+    "title": "AI Flashcard App — Adaptive AI Study & Memory Reinforcement",
+    "description": "AI-powered flashcard system that generates study content dynamically and reinforces retention with spaced repetition.",
+    "highlights": [
+      "AI-powered flashcard system that generates study content dynamically and reinforces retention with spaced repetition.",
+      "Supports multilingual learning and showcases AI-driven personalization and modern full-stack design."
+    ],
+    "category": "AI/Education",
+    "githubUrl": "https://github.com/Trevorton27/ai-flashcard-app",
+    "demoUrl": "https://ai-flashcard-app-ten.vercel.app",
     "techStack": [
       "Next.js",
-      "Prisma",
+      "TypeScript",
       "Tailwind CSS",
-      "Clerk"
+      "AI/ML"
     ],
-    "featured": false,
-    "image": "/portfolio/ai-support-engineer-integration.svg",
+    "featured": true,
+    "image": "/portfolio/ai-flashcard-app.svg",
     "lastUpdated": "2026-02-13T03:45:46Z"
   }
 ]

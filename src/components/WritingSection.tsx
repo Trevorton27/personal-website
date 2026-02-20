@@ -58,7 +58,7 @@ export function WritingSection({ isDark }: { isDark: boolean }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const WP_BASE_URL = process.env.NEXT_PUBLIC_WP_BASE_URL || 'https://trevormearns.com';
+    const WP_BASE_URL = process.env.NEXT_PUBLIC_WP_BASE_URL || 'https://trevorsblog.trevormearns.com';
 
     fetch(`${WP_BASE_URL}/wp-json/wp/v2/posts?per_page=3&_embed=1`)
       .then((res) => res.json())

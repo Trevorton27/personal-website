@@ -40,7 +40,7 @@ export interface WPPostsResponse {
 // Configuration
 // ============================================================================
 
-const WP_BASE_URL = process.env.WP_BASE_URL || 'https://trevormearns.com';
+const WP_BASE_URL = process.env.WP_BASE_URL || 'https://trevorsblog.trevormearns.com';
 const WP_API_URL = `${WP_BASE_URL}/wp-json/wp/v2`;
 
 const DEFAULT_REVALIDATE = 3600; // 1 hour
