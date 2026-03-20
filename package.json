@@ -20,6 +20,7 @@
     "@types/sanitize-html": "^2.16.0",
     "@upstash/ratelimit": "^2.0.3",
     "@upstash/redis": "^1.34.3",
+    "@vercel/analytics": "^2.0.1",
     "argon2": "^0.41.1",
     "clsx": "^2.1.1",
     "csrf": "^3.1.0",
