@@ -5,13 +5,15 @@ import headshot from "@/images/trevorMearnsHeadShot.png";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { WritingSection } from "@/components/WritingSection";
+import type { WritingSectionPost } from "@/components/WritingSection";
 import type { PortfolioProject } from "@/lib/portfolio";
 
 type HomePageClientProps = {
   projects: PortfolioProject[];
+  recentPosts?: WritingSectionPost[];
 };
 
-export function HomePageClient({ projects }: HomePageClientProps) {
+export function HomePageClient({ projects, recentPosts = [] }: HomePageClientProps) {
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -616,7 +618,7 @@ export function HomePageClient({ projects }: HomePageClientProps) {
       </section>
 
       {/* Blog - Editorial list style */}
-      <WritingSection isDark={isDark} />
+      <WritingSection isDark={isDark} posts={recentPosts} />
 
       {/* Contact - LinkedIn CTA */}
       <section

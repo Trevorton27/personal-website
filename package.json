@@ -13,6 +13,7 @@
     "prisma:studio": "prisma studio",
     "seed": "tsx prisma/seed.ts",
     "sync:portfolio": "node scripts/sync-portfolio.mjs",
+    "import:wp-posts": "tsx scripts/import-wp-posts.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {

@@ -6,21 +6,21 @@ import { Footer } from '@/components/public/Footer';
 import {
   getPostBySlug,
   getAllPostSlugs,
-  getFeaturedImageUrl,
-  getFeaturedImageAlt,
-  getAuthorName,
-  formatWPDate,
+  formatPostDate,
   getReadingTime,
-  sanitizeContent,
-  decodeHtmlEntities,
-} from '@/lib/wordpress';
+  stripHtml,
+} from '@/lib/blog';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import type { Metadata } from 'next';
 
 // Generate static paths for all posts
 export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await getAllPostSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 // Generate metadata for SEO
@@ -30,31 +30,36 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+
+  let post;
+  try {
+    post = await getPostBySlug(slug);
+  } catch {
+    return { title: 'Blog Unavailable' };
+  }
 
   if (!post) {
     return { title: 'Post Not Found' };
   }
 
-  const title = decodeHtmlEntities(post.title.rendered);
-  const featuredImage = getFeaturedImageUrl(post);
+  const excerpt = post.excerpt ? stripHtml(post.excerpt).slice(0, 160) : '';
 
   return {
-    title,
-    description: decodeHtmlEntities(post.excerpt.rendered).slice(0, 160),
+    title: post.title,
+    description: excerpt,
     openGraph: {
-      title,
-      description: decodeHtmlEntities(post.excerpt.rendered).slice(0, 160),
+      title: post.title,
+      description: excerpt,
       type: 'article',
-      publishedTime: post.date,
-      authors: [getAuthorName(post)],
-      images: featuredImage ? [featuredImage] : undefined,
+      publishedTime: post.publishedAt?.toISOString(),
+      authors: [post.author.name || 'Trevor Mearns'],
+      images: post.coverImage ? [post.coverImage] : undefined,
     },
     twitter: {
-      card: featuredImage ? 'summary_large_image' : 'summary',
-      title,
-      description: decodeHtmlEntities(post.excerpt.rendered).slice(0, 160),
-      images: featuredImage ? [featuredImage] : undefined,
+      card: post.coverImage ? 'summary_large_image' : 'summary',
+      title: post.title,
+      description: excerpt,
+      images: post.coverImage ? [post.coverImage] : undefined,
     },
   };
 }
@@ -65,30 +70,55 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+
+  let post;
+  try {
+    post = await getPostBySlug(slug);
+  } catch {
+    return (
+      <div className="min-h-screen flex flex-col bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+        <Header />
+        <main className="flex-1 mx-auto max-w-3xl px-6 py-12 md:py-20">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-accent hover:underline mb-8 text-sm font-medium"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Blog
+          </Link>
+          <div className="text-center py-16">
+            <p className="text-red-600 dark:text-red-400 text-lg mb-2">
+              Unable to load this post.
+            </p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              The blog is temporarily unavailable. Please try again later.
+            </p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!post) {
     notFound();
   }
 
-  const title = decodeHtmlEntities(post.title.rendered);
-  const authorName = getAuthorName(post);
-  const featuredImage = getFeaturedImageUrl(post);
-  const readingTime = getReadingTime(post.content.rendered);
-  const sanitizedContent = sanitizeContent(post.content.rendered);
+  const authorName = post.author.name || 'Trevor Mearns';
+  const readingTime = getReadingTime(post.content);
 
   // JSON-LD structured data
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: title,
-    description: decodeHtmlEntities(post.excerpt.rendered),
+    headline: post.title,
+    description: post.excerpt ? stripHtml(post.excerpt) : '',
     author: {
       '@type': 'Person',
       name: authorName,
     },
-    datePublished: post.date,
-    image: featuredImage || undefined,
+    datePublished: post.publishedAt?.toISOString(),
+    image: post.coverImage || undefined,
   };
 
   return (
@@ -114,7 +144,7 @@ export default async function BlogPostPage({
           {/* Header */}
           <header className="mb-10">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight">
-              {title}
+              {post.title}
             </h1>
 
             {/* Meta */}
@@ -123,10 +153,14 @@ export default async function BlogPostPage({
                 <User className="w-4 h-4 text-accent" />
                 <span>{authorName}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                <time dateTime={post.date}>{formatWPDate(post.date)}</time>
-              </div>
+              {post.publishedAt && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                  <time dateTime={post.publishedAt.toISOString()}>
+                    {formatPostDate(post.publishedAt)}
+                  </time>
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                 <span>{readingTime} min read</span>
@@ -135,11 +169,11 @@ export default async function BlogPostPage({
           </header>
 
           {/* Featured Image */}
-          {featuredImage && (
+          {post.coverImage && (
             <div className="relative aspect-[16/9] mb-10 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
               <Image
-                src={featuredImage}
-                alt={getFeaturedImageAlt(post)}
+                src={post.coverImage}
+                alt={post.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 768px"
@@ -161,7 +195,7 @@ export default async function BlogPostPage({
               prose-blockquote:border-l-accent prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:not-italic
               prose-img:rounded-xl
               prose-li:text-gray-700 dark:prose-li:text-gray-300"
-            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {/* Footer */}

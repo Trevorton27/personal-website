@@ -4,13 +4,10 @@ import { Header } from '@/components/public/Header';
 import { Footer } from '@/components/public/Footer';
 import {
   getPosts,
-  getFeaturedImageUrl,
-  getFeaturedImageAlt,
-  formatWPDate,
+  formatPostDate,
   getReadingTime,
   stripHtml,
-  decodeHtmlEntities,
-} from '@/lib/wordpress';
+} from '@/lib/blog';
 
 export const metadata = {
   title: 'Blog',
@@ -26,7 +23,19 @@ export default async function BlogPage({
   const page = Math.max(1, parseInt(params.page || '1', 10));
   const perPage = 10;
 
-  const { posts, total, totalPages } = await getPosts({ page, perPage });
+  let posts: Awaited<ReturnType<typeof getPosts>>['posts'] = [];
+  let total = 0;
+  let totalPages = 0;
+  let error: string | null = null;
+
+  try {
+    const result = await getPosts({ page, perPage });
+    posts = result.posts;
+    total = result.total;
+    totalPages = result.totalPages;
+  } catch (e) {
+    error = e instanceof Error ? e.message : 'Failed to load blog posts';
+  }
 
   // Clamp page to valid range
   const currentPage = Math.min(page, Math.max(1, totalPages));
@@ -47,7 +56,16 @@ export default async function BlogPage({
         </div>
 
         {/* Posts */}
-        {posts.length === 0 ? (
+        {error ? (
+          <div className="text-center py-16">
+            <p className="text-red-600 dark:text-red-400 text-lg mb-2">
+              Unable to load blog posts.
+            </p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              The blog is temporarily unavailable. Please try again later.
+            </p>
+          </div>
+        ) : posts.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500 dark:text-gray-400 text-lg">
               No posts found.
@@ -56,9 +74,8 @@ export default async function BlogPage({
         ) : (
           <div className="space-y-10">
             {posts.map((post) => {
-              const featuredImage = getFeaturedImageUrl(post);
-              const excerpt = stripHtml(post.excerpt.rendered);
-              const readingTime = getReadingTime(post.content.rendered);
+              const excerpt = post.excerpt ? stripHtml(post.excerpt) : '';
+              const readingTime = getReadingTime(post.content);
 
               return (
                 <article
@@ -67,11 +84,11 @@ export default async function BlogPage({
                 >
                   <Link href={`/blog/${post.slug}`} className="block">
                     {/* Featured Image */}
-                    {featuredImage && (
+                    {post.coverImage && (
                       <div className="relative aspect-[2/1] mb-5 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
                         <Image
-                          src={featuredImage}
-                          alt={getFeaturedImageAlt(post)}
+                          src={post.coverImage}
+                          alt={post.title}
                           fill
                           className="object-cover transition-transform duration-300 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, 800px"
@@ -81,22 +98,26 @@ export default async function BlogPage({
 
                     {/* Meta */}
                     <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                      <time dateTime={post.date}>
-                        {formatWPDate(post.date)}
-                      </time>
+                      {post.publishedAt && (
+                        <time dateTime={post.publishedAt.toISOString()}>
+                          {formatPostDate(post.publishedAt)}
+                        </time>
+                      )}
                       <span className="text-gray-300 dark:text-gray-600">·</span>
                       <span>{readingTime} min read</span>
                     </div>
 
                     {/* Title */}
                     <h2 className="text-2xl font-semibold mb-3 group-hover:text-accent transition-colors">
-                      {decodeHtmlEntities(post.title.rendered)}
+                      {post.title}
                     </h2>
 
                     {/* Excerpt */}
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">
-                      {decodeHtmlEntities(excerpt)}
-                    </p>
+                    {excerpt && (
+                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">
+                        {excerpt}
+                      </p>
+                    )}
 
                     {/* Read more */}
                     <span className="inline-block mt-4 text-accent font-medium group-hover:underline">
