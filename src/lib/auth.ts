@@ -1,4 +1,4 @@
-import * as argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import prisma from './prisma';
 
 export async function verifyPassword(
@@ -6,14 +6,14 @@ export async function verifyPassword(
   hash: string
 ): Promise<boolean> {
   try {
-    return await argon2.verify(hash, password);
+    return await bcrypt.compare(password, hash);
   } catch {
     return false;
   }
 }
 
 export async function hashPassword(password: string): Promise<string> {
-  return argon2.hash(password);
+  return bcrypt.hash(password, 12);
 }
 
 export async function authenticateUser(email: string, password: string) {
