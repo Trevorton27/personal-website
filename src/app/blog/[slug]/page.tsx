@@ -10,6 +10,7 @@ import {
   getReadingTime,
   stripHtml,
 } from '@/lib/blog';
+import { contentToHtml } from '@/lib/blog-utils';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -198,7 +199,7 @@ export default async function BlogPostPage({
               prose-blockquote:border-l-accent prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:not-italic
               prose-img:rounded-xl
               prose-li:text-gray-700 dark:prose-li:text-gray-300"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: contentToHtml(post.content) }}
           />
 
           {/* Footer */}

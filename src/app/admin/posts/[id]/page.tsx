@@ -23,6 +23,12 @@ interface Post {
   tags: Tag[];
 }
 
+function toLocalDatetimeString(date: Date): string {
+  const offset = date.getTimezoneOffset();
+  const local = new Date(date.getTime() - offset * 60000);
+  return local.toISOString().slice(0, 16);
+}
+
 export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [postId, setPostId] = useState<string>('');
@@ -76,7 +82,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         content: data.content,
         coverImage: data.coverImage || '',
         status: data.status,
-        publishedAt: data.publishedAt ? new Date(data.publishedAt).toISOString().slice(0, 16) : '',
+        publishedAt: data.publishedAt ? toLocalDatetimeString(new Date(data.publishedAt)) : '',
         tagIds: data.tags.map((t: Tag) => t.id),
       });
     } catch (err) {
@@ -104,10 +110,17 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
     setError('');
 
     try {
+      const payload = {
+        ...formData,
+        publishedAt: formData.publishedAt
+          ? new Date(formData.publishedAt).toISOString()
+          : '',
+      };
+
       const response = await fetch(`/api/admin/posts/${postId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {

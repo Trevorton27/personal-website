@@ -65,10 +65,18 @@ export default function NewPostPage() {
     setError('');
 
     try {
+      // Convert local datetime to ISO string so the server stores the correct UTC time
+      const payload = {
+        ...formData,
+        publishedAt: formData.publishedAt
+          ? new Date(formData.publishedAt).toISOString()
+          : '',
+      };
+
       const response = await fetch('/api/admin/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
