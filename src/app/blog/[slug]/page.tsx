@@ -13,6 +13,9 @@ import {
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import type { Metadata } from 'next';
 
+export const dynamicParams = true;
+export const revalidate = 60;
+
 // Generate static paths for all posts
 export async function generateStaticParams() {
   try {

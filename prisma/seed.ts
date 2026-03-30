@@ -7,14 +7,14 @@ async function main() {
   console.log('🌱 Seeding database...');
 
   // Create admin user
-  const adminHash = await bcrypt.hash('admin123', 12);
+  const adminHash = await bcrypt.hash('catBear9', 12);
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@trevor.dev' },
+    where: { email: 'trevor@trevormearns.com' },
     update: {},
     create: {
-      email: 'admin@trevor.dev',
+      email: 'trevor@trevormearns.com',
       passwordHash: adminHash,
-      name: 'Trevor Admin',
+      name: 'Trevor Mearns',
       role: 'ADMIN',
     },
   });
@@ -180,8 +180,8 @@ Created using generative algorithms written in JavaScript, then refined by hand.
   console.log('🎉 Database seeded successfully!');
   console.log('');
   console.log('📧 Admin credentials:');
-  console.log('   Email: admin@trevor.dev');
-  console.log('   Password: admin123');
+  console.log('   Email: trevor@trevormearns.com');
+  console.log('   Password: catBear9');
   console.log('');
   console.log('🔒 Change the password after first login!');
 }
