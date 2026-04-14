@@ -14,27 +14,40 @@ export async function POST(request: NextRequest) {
     }
     const body = await request.json();
 
-    const { title, slug, excerpt, content, coverImage, status, publishedAt, tagIds } = body;
+    const { title, excerpt, content, coverImage, status, publishedAt, tagIds } = body;
+    let { slug } = body;
 
-    // Validate required fields
-    if (!title || !slug || !content) {
+    // Validate required fields (drafts only need a title)
+    if (!title) {
       return NextResponse.json(
-        { error: 'Title, slug, and content are required' },
+        { error: 'Title is required' },
         { status: 400 }
       );
     }
 
-    // Check if slug already exists
-    const existingPost = await prisma.blogPost.findUnique({
-      where: { slug },
-    });
-
-    if (existingPost) {
+    if (status !== 'DRAFT' && (!slug || !content)) {
       return NextResponse.json(
-        { error: 'A post with this slug already exists' },
+        { error: 'Slug and content are required for non-draft posts' },
         { status: 400 }
       );
     }
+
+    // Auto-generate slug from title if not provided
+    if (!slug) {
+      slug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+    }
+
+    // Ensure slug uniqueness by appending a suffix if needed
+    let finalSlug = slug;
+    let suffix = 0;
+    while (await prisma.blogPost.findUnique({ where: { slug: finalSlug } })) {
+      suffix++;
+      finalSlug = `${slug}-${suffix}`;
+    }
+    slug = finalSlug;
 
     // Prepare published date
     let publishedAtDate = null;

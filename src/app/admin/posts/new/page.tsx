@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Save, Trash2 } from 'lucide-react';
+import { ArrowLeft, Save, FileText, Trash2 } from 'lucide-react';
 
 const DRAFT_STORAGE_KEY = 'blog-draft-new-post';
 const AUTOSAVE_DELAY_MS = 1000;
@@ -53,6 +53,7 @@ export default function NewPostPage() {
   const router = useRouter();
   const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState(false);
+  const [savingDraft, setSavingDraft] = useState(false);
   const [error, setError] = useState('');
   const [draftRestored, setDraftRestored] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
@@ -161,6 +162,45 @@ export default function NewPostPage() {
     }
   };
 
+  const saveDraftToDb = async () => {
+    if (!formData.title) {
+      setError('A title is required to save a draft');
+      return;
+    }
+
+    setSavingDraft(true);
+    setError('');
+
+    try {
+      const payload = {
+        ...formData,
+        status: 'DRAFT',
+        publishedAt: '',
+        content: formData.content || '',
+      };
+
+      const response = await fetch('/api/admin/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to save draft');
+      }
+
+      const post = await response.json();
+      localStorage.removeItem(DRAFT_STORAGE_KEY);
+      router.push(`/admin/posts/${post.id}`);
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save draft');
+    } finally {
+      setSavingDraft(false);
+    }
+  };
+
   const toggleTag = (tagId: string) => {
     setFormData(prev => ({
       ...prev,
@@ -253,7 +293,6 @@ export default function NewPostPage() {
                 rows={15}
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                required
                 placeholder="Write your post content here using Markdown..."
               />
             </div>
@@ -332,11 +371,20 @@ export default function NewPostPage() {
         <div className="flex items-center gap-4">
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || savingDraft}
             className="btn btn-primary inline-flex items-center gap-2"
           >
             <Save className="w-4 h-4" />
             {loading ? 'Creating...' : 'Create Post'}
+          </button>
+          <button
+            type="button"
+            onClick={saveDraftToDb}
+            disabled={loading || savingDraft}
+            className="btn btn-secondary inline-flex items-center gap-2"
+          >
+            <FileText className="w-4 h-4" />
+            {savingDraft ? 'Saving...' : 'Save Draft'}
           </button>
           <Link href="/admin/posts" className="btn btn-secondary">
             Cancel
