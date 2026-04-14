@@ -1,9 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Trash2 } from 'lucide-react';
+
+const DRAFT_STORAGE_KEY = 'blog-draft-new-post';
+const AUTOSAVE_DELAY_MS = 1000;
 
 interface Tag {
   id: string;
@@ -11,22 +14,85 @@ interface Tag {
   slug: string;
 }
 
+type FormData = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  status: 'DRAFT' | 'PUBLISHED' | 'SCHEDULED';
+  publishedAt: string;
+  tagIds: string[];
+};
+
+const emptyFormData: FormData = {
+  title: '',
+  slug: '',
+  excerpt: '',
+  content: '',
+  coverImage: '',
+  status: 'DRAFT',
+  publishedAt: '',
+  tagIds: [],
+};
+
+function loadDraft(): FormData | null {
+  try {
+    const saved = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (!saved) return null;
+    const parsed = JSON.parse(saved);
+    // Ensure it has at least a title or content to be worth restoring
+    if (parsed.title || parsed.content) return parsed;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export default function NewPostPage() {
   const router = useRouter();
   const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [draftRestored, setDraftRestored] = useState(false);
+  const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    excerpt: '',
-    content: '',
-    coverImage: '',
-    status: 'DRAFT' as 'DRAFT' | 'PUBLISHED' | 'SCHEDULED',
-    publishedAt: '',
-    tagIds: [] as string[],
-  });
+  const [formData, setFormData] = useState<FormData>(emptyFormData);
+
+  // Restore draft from localStorage on mount
+  useEffect(() => {
+    const saved = loadDraft();
+    if (saved) {
+      setFormData(saved);
+      setDraftRestored(true);
+    }
+  }, []);
+
+  // Auto-save draft to localStorage (debounced)
+  const saveDraft = useCallback((data: FormData) => {
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(() => {
+      if (data.title || data.content) {
+        localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(data));
+        setLastSaved(new Date());
+      }
+    }, AUTOSAVE_DELAY_MS);
+  }, []);
+
+  useEffect(() => {
+    saveDraft(formData);
+    return () => {
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    };
+  }, [formData, saveDraft]);
+
+  const discardDraft = () => {
+    localStorage.removeItem(DRAFT_STORAGE_KEY);
+    setFormData(emptyFormData);
+    setDraftRestored(false);
+    setLastSaved(null);
+  };
 
   useEffect(() => {
     fetchTags();
@@ -85,6 +151,7 @@ export default function NewPostPage() {
       }
 
       const post = await response.json();
+      localStorage.removeItem(DRAFT_STORAGE_KEY);
       router.push('/admin/posts');
       router.refresh();
     } catch (err) {
@@ -115,6 +182,22 @@ export default function NewPostPage() {
         </Link>
         <h1 className="text-3xl font-bold">Create New Post</h1>
       </div>
+
+      {draftRestored && (
+        <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg flex items-center justify-between">
+          <span className="text-blue-700 dark:text-blue-400 text-sm">
+            Draft restored from a previous session.
+          </span>
+          <button
+            type="button"
+            onClick={discardDraft}
+            className="inline-flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            Discard
+          </button>
+        </div>
+      )}
 
       {error && (
         <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400">
@@ -246,7 +329,7 @@ export default function NewPostPage() {
           )}
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
           <button
             type="submit"
             disabled={loading}
@@ -258,6 +341,11 @@ export default function NewPostPage() {
           <Link href="/admin/posts" className="btn btn-secondary">
             Cancel
           </Link>
+          {lastSaved && (
+            <span className="text-xs text-gray-400 dark:text-gray-500 ml-auto">
+              Draft auto-saved at {lastSaved.toLocaleTimeString()}
+            </span>
+          )}
         </div>
       </form>
     </div>
