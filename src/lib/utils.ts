@@ -1,9 +1,4 @@
-import { type ClassValue, clsx } from 'clsx';
 import slugify from 'slugify';
-
-export function cn(...inputs: ClassValue[]) {
-  return clsx(inputs);
-}
 
 export function generateSlug(text: string): string {
   return slugify(text, {
@@ -19,17 +14,6 @@ export function formatDate(date: Date | string): string {
     month: 'long',
     day: 'numeric',
   });
-}
-
-export function getReadingTime(text: string): number {
-  const wordsPerMinute = 200;
-  const words = text.trim().split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
-}
-
-export function truncate(text: string, length: number): string {
-  if (text.length <= length) return text;
-  return text.slice(0, length).trim() + '...';
 }
 
 export function getClientIp(request: Request): string {

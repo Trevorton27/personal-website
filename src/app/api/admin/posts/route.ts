@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
         title,
         slug,
         excerpt: excerpt || '',
-        content,
+        content: content || '',
         coverImage: coverImage || null,
         status,
         publishedAt: publishedAtDate,

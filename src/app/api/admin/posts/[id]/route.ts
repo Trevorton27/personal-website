@@ -61,10 +61,10 @@ export async function PUT(
     const body = await request.json();
     const { title, slug, excerpt, content, coverImage, status, publishedAt, tagIds } = body;
 
-    // Validate required fields
-    if (!title || !slug || !content) {
+    // Validate required fields (drafts only need title + slug)
+    if (!title || !slug || (status !== 'DRAFT' && !content)) {
       return NextResponse.json(
-        { error: 'Title, slug, and content are required' },
+        { error: 'Title, slug, and content are required for non-draft posts' },
         { status: 400 }
       );
     }
@@ -97,7 +97,7 @@ export async function PUT(
         title,
         slug,
         excerpt: excerpt || '',
-        content,
+        content: content || '',
         coverImage: coverImage || null,
         status,
         publishedAt: publishedAtDate,
