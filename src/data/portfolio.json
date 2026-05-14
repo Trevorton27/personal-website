@@ -1,92 +1,108 @@
 [
   {
-    "slug": "voice-app",
-    "title": "Voice-App — Voice-Driven LLM Interaction Layer",
-    "description": "Real-time voice interface for conversational AI using ElevenLabs TTS and continuous speech recognition.",
+    "slug": "ai-support-engineer",
+    "title": "AI Support Engineer — AI-Powered Customer Support Copilot",
+    "description": "An AI-powered support copilot that layers on top of a customer support CRM. Support agents can analyze tickets, surface similar resolved cases, generate multi-tone reply drafts, and ask free-form questions — all powered by OpenAI with async job execution and live status updates.",
     "highlights": [
-      "Real-time voice interface for conversational AI using ElevenLabs TTS and continuous speech recognition.",
-      "Demonstrates event-driven audio streaming, multilingual prompts, and AI-assisted UX design and TTS/STT/TTV."
+      "Ticket analysis extracts signals, hypotheses, and clarifying questions via GPT-4o-mini.",
+      "Vector search with pgvector (HNSW indexing) surfaces similar resolved cases in real time.",
+      "Multi-tone draft generation (Professional, Friendly, Concise, Surfer), RAG knowledge base pipeline, PII redaction, and full audit trail."
     ],
-    "category": "Voice Apps",
-    "githubUrl": "https://github.com/Trevorton27/voice-app",
-    "demoUrl": "https://voice-app-orpin.vercel.app",
+    "category": "AI/Automation",
+    "githubUrl": "https://github.com/Trevorton27/ai-support-engineer-integration",
+    "demoUrl": "https://ai-support-engineer-integration.vercel.app",
     "techStack": [
+      "Next.js 15",
       "TypeScript",
-      "JavaScript",
-      "CSS",
-      "@elevenlabs/elevenlabs-js",
-      "@elevenlabs/react",
-      "@google-cloud/storage"
+      "PostgreSQL",
+      "pgvector",
+      "OpenAI",
+      "Clerk",
+      "Tailwind CSS",
+      "Prisma",
+      "Vitest",
+      "Playwright"
     ],
     "featured": true,
-    "image": "/portfolio/voice-app.svg",
-    "lastUpdated": "2025-10-21T08:45:32Z"
+    "image": "/portfolio/ai-support-engineer-1.png",
+    "lastUpdated": "2026-05-13T00:00:00Z"
+  },
+  {
+    "slug": "jlpt-app",
+    "title": "KoeJLPT — Voice-First JLPT Preparation App",
+    "description": "A voice-first Japanese Language Proficiency Test preparation app. Level-based vocabulary study, real-time WebRTC AI voice conversations exclusively in Japanese, and automatic pronunciation grading via Google Cloud Speech-to-Text.",
+    "highlights": [
+      "Real-time WebRTC voice conversations with AI partner Fumi — all in Japanese — powered by ElevenLabs.",
+      "Three pronunciation practice modes with automatic grading via Google Cloud Speech-to-Text.",
+      "Level-based vocabulary study (N5–N1) with audio playback, save functionality, and persistent study streak tracking."
+    ],
+    "category": "AI/Education",
+    "githubUrl": "https://github.com/Trevorton27/jlpt-app",
+    "demoUrl": null,
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "Prisma",
+      "Clerk",
+      "ElevenLabs",
+      "Google Cloud Speech-to-Text"
+    ],
+    "featured": true,
+    "image": "/portfolio/koe-jlpt-1.png",
+    "lastUpdated": "2026-05-13T00:00:00Z"
   },
   {
     "slug": "aict-main",
     "title": "AI Coding Tutor — Interactive AI-Powered Coding Challenge System",
-    "description": "Adaptive coding tutor that uses Claude API to provide guided debugging, explanations, and contextual assistance.",
+    "description": "An intelligent, web-based educational platform that teaches web development fundamentals through hands-on coding challenges. Students write real code in a browser-based Monaco editor, get instant automated feedback, and receive personalized guidance from an AI tutor powered by Claude 3.5.",
     "highlights": [
-      "Adaptive coding tutor that uses Claude API to provide guided debugging, explanations, and contextual assistance.",
-      "Features modular challenge workflows, scoring, and a chat interface driven by code-aware reasoning."
+      "240 progressive coding challenges across HTML, CSS, JavaScript, and Full Stack — with 160 enhanced variants featuring three-tier hints and multiple solutions.",
+      "AI-powered adaptive tutor (Claude 3.5 Haiku & Sonnet) provides contextual help, explanations, and personalized guidance based on student code.",
+      "Monaco Editor (VS Code engine) with live preview, solution locking after 3 attempts, and AI-generated themed challenge variants."
     ],
-    "category": "AI/Automation",
+    "category": "AI/Education",
     "githubUrl": "https://github.com/Trevorton27/aict-main",
     "demoUrl": "https://aict-main-web.vercel.app",
     "techStack": [
+      "Next.js 15",
+      "React 19",
       "TypeScript",
-      "HTML",
-      "JavaScript",
-      "Shell",
-      "Python",
-      "CSS"
-    ],
-    "featured": true,
-    "image": "/portfolio/aict-main.svg",
-    "lastUpdated": "2025-11-30T01:07:12Z"
-  },
-  {
-    "slug": "tokuWebDev",
-    "title": "TokuWebDev LMS — Full-Stack LMS with AI Roadmaps",
-    "description": "Full-stack LMS that uses Claude and HuggingFace models to generate personalized learning roadmaps and tasks.",
-    "highlights": [
-      "Full-stack LMS that uses Claude and HuggingFace models to generate personalized learning roadmaps and tasks.",
-      "Includes course management, progress tracking, and AI-assisted review in a modular scalable architecture."
-    ],
-    "category": "AI LMS",
-    "githubUrl": "https://github.com/Trevorton27/tokuWebDev",
-    "demoUrl": "https://toku-web-dev-lms.vercel.app",
-    "techStack": [
-      "TypeScript",
-      "JavaScript",
-      "Shell",
-      "CSS",
-      "@clerk/nextjs",
+      "Tailwind CSS",
+      "Claude 3.5",
+      "Monaco Editor",
+      "PostgreSQL",
       "Prisma"
     ],
     "featured": true,
-    "image": "/portfolio/signal-works-lms.svg",
-    "lastUpdated": "2025-12-10T02:41:26Z"
+    "image": "/portfolio/aict-main-1.png",
+    "lastUpdated": "2026-05-13T00:00:00Z"
   },
   {
     "slug": "ai-flashcard-app",
-    "title": "AI Flashcard App — Adaptive AI Study & Memory Reinforcement",
-    "description": "AI-powered flashcard system that generates study content dynamically and reinforces retention with spaced repetition.",
+    "title": "AI Flashcard App — Adaptive AI-Powered Vocabulary Study",
+    "description": "A modern web app for learning Japanese and English vocabulary using AI-powered flashcards. Upload content in any format — TXT, CSV, JSON, PDF, Word, or images — and GPT-4o handles translation, hiragana generation, and smart categorization automatically.",
     "highlights": [
-      "AI-powered flashcard system that generates study content dynamically and reinforces retention with spaced repetition.",
-      "Supports multilingual learning and showcases AI-driven personalization and modern full-stack design."
+      "Accepts TXT, CSV, JSON, PDF, Word docs, and images as input — GPT-4o translates and categorizes vocabulary automatically.",
+      "Automatic hiragana/furigana generation for kanji, duplicate detection, and ambiguity resolution.",
+      "Interactive carousel and grid flashcard modes with swipe gestures and dark/light/system theme support."
     ],
     "category": "AI/Education",
     "githubUrl": "https://github.com/Trevorton27/ai-flashcard-app",
-    "demoUrl": "https://ai-flashcard-app-ten.vercel.app",
+    "demoUrl": "https://ai-flashcard-app-ruddy.vercel.app",
     "techStack": [
-      "Next.js",
+      "Next.js 14",
       "TypeScript",
       "Tailwind CSS",
-      "AI/ML"
+      "PostgreSQL",
+      "Prisma",
+      "OpenAI",
+      "Clerk"
     ],
     "featured": true,
-    "image": "/portfolio/ai-flashcard-app.svg",
-    "lastUpdated": "2026-02-13T03:45:46Z"
+    "image": "/portfolio/ai-flashcard-app-1.png",
+    "lastUpdated": "2026-05-13T00:00:00Z"
   }
 ]
