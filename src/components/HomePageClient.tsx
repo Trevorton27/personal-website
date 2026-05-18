@@ -489,22 +489,46 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
                     : "bg-white shadow-soft hover:shadow-soft-lg"
                 }`}
               >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
-                    priority={i === 0}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
-                  {project.featured && (
-                    <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">
-                      Featured
-                    </span>
-                  )}
-                </div>
+                {project.demoUrl ? (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="relative h-48 overflow-hidden block"
+                  >
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover"
+                      priority={i === 0}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
+                    {project.featured && (
+                      <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">
+                        Featured
+                      </span>
+                    )}
+                  </a>
+                ) : (
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover"
+                      priority={i === 0}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
+                    {project.featured && (
+                      <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                )}
 
                 <div className="p-6">
                   <div className="flex items-center justify-between gap-2 mb-4">

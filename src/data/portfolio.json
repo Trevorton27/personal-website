@@ -10,7 +10,7 @@
     ],
     "category": "AI/Automation",
     "githubUrl": "https://github.com/Trevorton27/ai-support-engineer-integration",
-    "demoUrl": "https://ai-support-engineer-integration.vercel.app",
+    "demoUrl": "https://smart-ticket-system.vercel.app/",
     "techStack": [
       "Next.js 15",
       "TypeScript",
@@ -38,7 +38,7 @@
     ],
     "category": "AI/Education",
     "githubUrl": "https://github.com/Trevorton27/jlpt-app",
-    "demoUrl": null,
+    "demoUrl": "https://jlpt-app-seven.vercel.app/",
     "techStack": [
       "Next.js 16",
       "React 19",
@@ -91,7 +91,7 @@
     ],
     "category": "AI/Education",
     "githubUrl": "https://github.com/Trevorton27/ai-flashcard-app",
-    "demoUrl": "https://ai-flashcard-app-ruddy.vercel.app",
+    "demoUrl": "https://ai-flashcard-app-ten.vercel.app/",
     "techStack": [
       "Next.js 14",
       "TypeScript",
