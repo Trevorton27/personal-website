@@ -104,5 +104,60 @@
     "featured": true,
     "image": "/portfolio/ai-flashcard-app-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z"
+  },
+  {
+    "slug": "signal-ops-ai-v1",
+    "title": "Signal Ops AI — Multi-Agent Support Ticket Investigation",
+    "description": "A multi-agent AI system for automated support ticket investigation. When a ticket arrives, a LangGraph-orchestrated pipeline of 8 specialized agents runs in the background to classify the issue, analyze logs, retrieve runbooks, correlate incidents and deployments, generate root-cause hypotheses, draft customer replies, and write internal escalation notes — all in under 30 seconds.",
+    "highlights": [
+      "9-node LangGraph agent pipeline: intake → context → parallel analysis → hypotheses → drafting → escalation.",
+      "Real-time browser UI polls every 2 seconds to display each agent step as it completes.",
+      "Vector RAG with pgvector (HNSW) and OpenAI embeddings enables semantic knowledge base search."
+    ],
+    "category": "AI/Automation",
+    "githubUrl": "https://github.com/Trevorton27/signal-ops-ai-v1",
+    "demoUrl": "https://signal-ops-ai-v1.vercel.app/",
+    "techStack": [
+      "Next.js 15",
+      "TypeScript",
+      "LangGraph.js",
+      "OpenAI GPT-4o",
+      "PostgreSQL",
+      "pgvector",
+      "Prisma",
+      "Inngest",
+      "Clerk",
+      "Tailwind CSS",
+      "shadcn/ui"
+    ],
+    "featured": true,
+    "image": "/portfolio/signal-ops-ai-v1-1.png",
+    "lastUpdated": "2026-06-16T00:00:00Z"
+  },
+  {
+    "slug": "udemy-course-compressor-5000",
+    "title": "The Udemy Course Compress-a-macator 5000",
+    "description": "A TypeScript/Node.js tool that compresses Udemy courses into AI-generated study plans. Requires an active Udemy login and purchased access to the course being scraped — Playwright uses your existing session to extract transcripts, then Claude ranks each lesson as build / watch / skim / skip and reorders them into an optimal path.",
+    "highlights": [
+      "Playwright drives a persistent Chromium session to extract transcripts from all course lectures.",
+      "Claude AI (Haiku + Sonnet) classifies each lesson as build/watch/skim/skip and generates an optimized study plan.",
+      "Dual interface: React/Vite web UI at localhost:5173 and a CLI — both backed by an Express API."
+    ],
+    "category": "AI/Productivity",
+    "githubUrl": "https://github.com/Trevorton27/the-udemy-course-compress-a-macator-5000",
+    "demoUrl": null,
+    "techStack": [
+      "Node.js",
+      "TypeScript",
+      "Express",
+      "Playwright",
+      "React",
+      "Vite",
+      "Claude AI",
+      "Anthropic API"
+    ],
+    "featured": false,
+    "image": "/portfolio/udemy-compressor-1.png",
+    "lastUpdated": "2026-06-16T00:00:00Z"
   }
 ]
