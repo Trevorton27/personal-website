@@ -1,5 +1,34 @@
 [
   {
+    "slug": "signal-ops-ai-v1",
+    "title": "Signal Ops AI — Multi-Agent Support Ticket Investigation",
+    "description": "A multi-agent AI system for automated support ticket investigation. When a ticket arrives, a LangGraph-orchestrated pipeline of 8 specialized agents runs in the background to classify the issue, analyze logs, retrieve runbooks, correlate incidents and deployments, generate root-cause hypotheses, draft customer replies, and write internal escalation notes — all in under 30 seconds.",
+    "highlights": [
+      "9-node LangGraph agent pipeline: intake → context → parallel analysis → hypotheses → drafting → escalation.",
+      "Real-time browser UI polls every 2 seconds to display each agent step as it completes.",
+      "Vector RAG with pgvector (HNSW) and OpenAI embeddings enables semantic knowledge base search."
+    ],
+    "category": "AI/Automation",
+    "githubUrl": "https://github.com/Trevorton27/signal-ops-ai-v1",
+    "demoUrl": "https://signal-ops-ai-v1.vercel.app/",
+    "techStack": [
+      "Next.js 15",
+      "TypeScript",
+      "LangGraph.js",
+      "OpenAI GPT-4o",
+      "PostgreSQL",
+      "pgvector",
+      "Prisma",
+      "Inngest",
+      "Clerk",
+      "Tailwind CSS",
+      "shadcn/ui"
+    ],
+    "featured": true,
+    "image": "/portfolio/signal-ops-ai-v1-1.png",
+    "lastUpdated": "2026-06-16T00:00:00Z"
+  },
+  {
     "slug": "ai-support-engineer",
     "title": "AI Support Engineer — AI-Powered Customer Support Copilot",
     "description": "An AI-powered support copilot that layers on top of a customer support CRM. Support agents can analyze tickets, surface similar resolved cases, generate multi-tone reply drafts, and ask free-form questions — all powered by OpenAI with async job execution and live status updates.",
@@ -104,35 +133,6 @@
     "featured": true,
     "image": "/portfolio/ai-flashcard-app-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z"
-  },
-  {
-    "slug": "signal-ops-ai-v1",
-    "title": "Signal Ops AI — Multi-Agent Support Ticket Investigation",
-    "description": "A multi-agent AI system for automated support ticket investigation. When a ticket arrives, a LangGraph-orchestrated pipeline of 8 specialized agents runs in the background to classify the issue, analyze logs, retrieve runbooks, correlate incidents and deployments, generate root-cause hypotheses, draft customer replies, and write internal escalation notes — all in under 30 seconds.",
-    "highlights": [
-      "9-node LangGraph agent pipeline: intake → context → parallel analysis → hypotheses → drafting → escalation.",
-      "Real-time browser UI polls every 2 seconds to display each agent step as it completes.",
-      "Vector RAG with pgvector (HNSW) and OpenAI embeddings enables semantic knowledge base search."
-    ],
-    "category": "AI/Automation",
-    "githubUrl": "https://github.com/Trevorton27/signal-ops-ai-v1",
-    "demoUrl": "https://signal-ops-ai-v1.vercel.app/",
-    "techStack": [
-      "Next.js 15",
-      "TypeScript",
-      "LangGraph.js",
-      "OpenAI GPT-4o",
-      "PostgreSQL",
-      "pgvector",
-      "Prisma",
-      "Inngest",
-      "Clerk",
-      "Tailwind CSS",
-      "shadcn/ui"
-    ],
-    "featured": true,
-    "image": "/portfolio/signal-ops-ai-v1-1.png",
-    "lastUpdated": "2026-06-16T00:00:00Z"
   },
   {
     "slug": "udemy-course-compressor-5000",
