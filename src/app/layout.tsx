@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { LanguageProvider } from '@/components/LanguageProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -53,9 +54,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
         <Analytics />
       </body>

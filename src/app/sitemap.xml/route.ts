@@ -18,6 +18,8 @@ export async function GET() {
     { url: '/blog', priority: 0.9 },
     { url: '/portfolio', priority: 0.9 },
     { url: '/contact', priority: 0.8 },
+    { url: '/services', priority: 0.9 },
+    { url: '/start', priority: 0.7 },
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

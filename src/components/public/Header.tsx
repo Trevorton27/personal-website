@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useTheme } from '../ThemeProvider';
+import { LanguageToggle } from '../LanguageToggle';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -15,6 +16,7 @@ export function Header() {
     { href: '/#work', label: 'Work' },
     { href: '/#portfolio', label: 'Portfolio' },
     { href: '/#writing', label: 'Writing' },
+    { href: '/services', label: 'Services' },
     { href: '/resume', label: 'Resume' },
     { href: 'https://github.com/trevormearns', label: 'GitHub', external: true },
     { href: 'https://linkedin.com/in/trevormearns', label: 'LinkedIn', external: true },
@@ -69,7 +71,10 @@ export function Header() {
             ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {/* Language Toggle */}
+            <LanguageToggle />
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}

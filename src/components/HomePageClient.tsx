@@ -4,6 +4,7 @@ import Image from "next/image";
 import headshot from "@/images/trevorMearnsHeadShot.png";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import { WritingSection } from "@/components/WritingSection";
 import type { WritingSectionPost } from "@/components/WritingSection";
 import type { PortfolioProject } from "@/lib/portfolio";
@@ -70,6 +71,12 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
               </a>
             ))}
             <a
+              href="/services"
+              className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
+            >
+              Services
+            </a>
+            <a
               href="/resume"
               className={`transition-colors duration-200 ${isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"}`}
             >
@@ -93,7 +100,8 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
             </a>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
             <button
               onClick={() => setIsDark(!isDark)}
               className={`p-2 rounded-lg transition-colors duration-200 ${
@@ -170,6 +178,17 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
                   {item}
                 </a>
               ))}
+              <a
+                href="/services"
+                className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                  isDark
+                    ? "text-slate-400 hover:text-white hover:bg-white/5"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Services
+              </a>
               <a
                 href="/resume"
                 className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
