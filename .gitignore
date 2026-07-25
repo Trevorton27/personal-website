@@ -36,3 +36,6 @@ next-env.d.ts
 
 # prisma
 prisma/migrations
+
+#former wp site zip with blog posts
+u429642529_wp871.trevormearns-com.20260219055412.sql.gz

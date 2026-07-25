@@ -12,7 +12,6 @@ const navItems = [
   { href: '/services', key: 'common.services' },
   { href: '/portfolio', key: 'common.portfolio' },
   { href: '/#about', key: 'common.about' },
-  { href: '/blog', key: 'common.blog' },
   { href: '/#contact', key: 'common.contact' },
 ];
 
@@ -114,13 +113,6 @@ export function Header() {
               )}
             </button>
 
-            <Link
-              href="/services#work-with-me"
-              className="hidden md:inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            >
-              {t('common.bookConsultation')}
-            </Link>
-
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -187,14 +179,6 @@ export function Header() {
                 LinkedIn
               </a>
 
-              {/* Mobile CTA */}
-              <Link
-                href="/services#work-with-me"
-                className="block mt-3 rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-white shadow-accent"
-                onClick={closeMobile}
-              >
-                {t('common.bookConsultation')}
-              </Link>
             </div>
           </div>
         )}

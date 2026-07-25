@@ -6,16 +6,13 @@ import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Github, Linkedin } from "lucide-react";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/components/LanguageProvider";
-import { WritingSection } from "@/components/WritingSection";
-import type { WritingSectionPost } from "@/components/WritingSection";
 import type { PortfolioProject } from "@/lib/portfolio";
 
 type HomePageClientProps = {
   projects: PortfolioProject[];
-  recentPosts?: WritingSectionPost[];
 };
 
-export function HomePageClient({ projects, recentPosts = [] }: HomePageClientProps) {
+export function HomePageClient({ projects }: HomePageClientProps) {
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
@@ -47,7 +44,6 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
     { href: "/services", key: "common.services" },
     { href: "/portfolio", key: "common.portfolio" },
     { href: "#about", key: "common.about" },
-    { href: "/blog", key: "common.blog" },
     { href: "#contact", key: "common.contact" },
   ];
 
@@ -133,12 +129,6 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
                 </svg>
               )}
             </button>
-            <a
-              href="/services#work-with-me"
-              className="hidden md:inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            >
-              {t('common.bookConsultation')}
-            </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
@@ -197,13 +187,6 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
                 LinkedIn
               </a>
 
-              <a
-                href="/services#work-with-me"
-                className="block mt-3 rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-white shadow-accent"
-                onClick={closeMobile}
-              >
-                {t('common.bookConsultation')}
-              </a>
             </div>
           </div>
         )}
@@ -439,9 +422,6 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
         </div>
       </section>
 
-      {/* Blog */}
-      <WritingSection isDark={isDark} posts={recentPosts} t={t} />
-
       {/* Contact */}
       <section id="contact" className={isDark ? "bg-slate-900/50" : "bg-slate-50/50"}>
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
@@ -479,9 +459,6 @@ export function HomePageClient({ projects, recentPosts = [] }: HomePageClientPro
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} Trevor Mearns</p>
             <div className="flex flex-wrap items-center gap-6">
-              <a href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
-                {t('home.footerBlog')}
-              </a>
               <a href="/portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerProjects')}
               </a>

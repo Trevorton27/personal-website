@@ -9,7 +9,6 @@ import { SocialProof } from './SocialProof';
 import { ServicePackages } from './ServicePackages';
 import { Timeline } from './Timeline';
 import { CaseStudies } from './CaseStudies';
-import { WorkWithMe } from './WorkWithMe';
 
 export function ServicesPageClient() {
   const { theme } = useTheme();
@@ -25,7 +24,6 @@ export function ServicesPageClient() {
         <ServicePackages />
         <Timeline />
         <CaseStudies />
-        <WorkWithMe />
       </main>
       <Footer />
     </div>
