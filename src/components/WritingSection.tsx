@@ -13,7 +13,15 @@ export interface WritingSectionPost {
   publishedAt: string | null;
 }
 
-export function WritingSection({ isDark, posts }: { isDark: boolean; posts: WritingSectionPost[] }) {
+interface WritingSectionProps {
+  isDark: boolean;
+  posts: WritingSectionPost[];
+  t?: (key: string) => string;
+}
+
+export function WritingSection({ isDark, posts, t }: WritingSectionProps) {
+  const label = (key: string, fallback: string) => t ? t(key) : fallback;
+
   if (!posts || posts.length === 0) {
     return (
       <section id="writing" className="mx-auto max-w-5xl px-6 py-24 md:py-32">
@@ -21,14 +29,14 @@ export function WritingSection({ isDark, posts }: { isDark: boolean; posts: Writ
           <h2
             className={`text-sm font-medium tracking-wide uppercase ${isDark ? 'text-slate-500' : 'text-slate-500'}`}
           >
-            Writing
+            {label('home.writingTitle', 'Writing')}
           </h2>
           <a href="/blog" className="text-sm text-accent hover:underline">
-            All posts →
+            {label('home.allPosts', 'All posts')} →
           </a>
         </div>
         <p className={isDark ? 'text-slate-500' : 'text-slate-500'}>
-          No posts yet. Check back soon!
+          {label('home.noPosts', 'No posts yet. Check back soon!')}
         </p>
       </section>
     );
@@ -40,10 +48,10 @@ export function WritingSection({ isDark, posts }: { isDark: boolean; posts: Writ
         <h2
           className={`text-sm font-medium tracking-wide uppercase ${isDark ? 'text-slate-500' : 'text-slate-500'}`}
         >
-          Writing
+          {label('home.writingTitle', 'Writing')}
         </h2>
         <a href="/blog" className="text-sm text-accent hover:underline">
-          All posts →
+          {label('home.allPosts', 'All posts')} →
         </a>
       </div>
 
@@ -77,7 +85,7 @@ export function WritingSection({ isDark, posts }: { isDark: boolean; posts: Writ
                 <span
                   className={`text-sm ${isDark ? 'text-slate-500' : 'text-slate-500'}`}
                 >
-                  {readingTime} min read
+                  {readingTime} {label('home.minRead', 'min read')}
                 </span>
               </div>
               <h3

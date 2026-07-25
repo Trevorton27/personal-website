@@ -1,87 +1,107 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from '../ThemeProvider';
+import { useLanguage } from '../LanguageProvider';
 import { LanguageToggle } from '../LanguageToggle';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+
+const navItems = [
+  { href: '/services', key: 'common.services' },
+  { href: '/portfolio', key: 'common.portfolio' },
+  { href: '/#about', key: 'common.about' },
+  { href: '/blog', key: 'common.blog' },
+  { href: '/#contact', key: 'common.contact' },
+];
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isDark = theme === 'dark';
 
-  const navItems = [
-    { href: '/#about', label: 'About' },
-    { href: '/#work', label: 'Work' },
-    { href: '/#portfolio', label: 'Portfolio' },
-    { href: '/#writing', label: 'Writing' },
-    { href: '/services', label: 'Services' },
-    { href: '/resume', label: 'Resume' },
-    { href: 'https://github.com/trevormearns', label: 'GitHub', external: true },
-    { href: 'https://linkedin.com/in/trevormearns', label: 'LinkedIn', external: true },
-  ];
+  const closeMobile = useCallback(() => setMobileMenuOpen(false), []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMobile();
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [mobileMenuOpen, closeMobile]);
+
+  const isActive = (href: string) => {
+    if (href.startsWith('/#')) return pathname === '/';
+    return pathname === href || pathname.startsWith(href + '/');
+  };
+
+  const linkClass = (href: string) => {
+    const active = isActive(href);
+    if (active) {
+      return `transition-colors duration-200 text-accent font-medium`;
+    }
+    return `transition-colors duration-200 ${
+      isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'
+    }`;
+  };
+
+  const mobileLinkClass = (href: string) => {
+    const active = isActive(href);
+    if (active) {
+      return `block py-3 px-4 rounded-lg text-sm transition-colors duration-200 text-accent font-medium ${
+        isDark ? 'bg-white/5' : 'bg-slate-50'
+      }`;
+    }
+    return `block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+      isDark
+        ? 'text-slate-400 hover:text-white hover:bg-white/5'
+        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+    }`;
+  };
 
   return (
     <header className={`sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300 ${
-      isDark ? "bg-black/80" : "bg-white/80"
+      isDark ? 'bg-black/80' : 'bg-white/80'
     }`}>
-      <nav className="mx-auto max-w-5xl px-6">
+      <nav className="mx-auto max-w-6xl px-6" aria-label="Main navigation">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 font-medium">
+          {/* Left: Logo */}
+          <Link href="/" className="flex items-center gap-3 font-medium flex-shrink-0">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-black">
               <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
             </span>
-            <span>Trevor Mearns</span>
+            <span className="hidden sm:inline">Trevor Mearns</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 text-sm">
+          {/* Center: Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8 text-sm">
             {navItems.map((item) => (
-              item.external ? (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-colors duration-200 ${
-                    isDark
-                      ? "text-slate-400 hover:text-white"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`transition-colors duration-200 ${
-                    isDark
-                      ? "text-slate-400 hover:text-white"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              )
+              <Link
+                key={item.href}
+                href={item.href}
+                className={linkClass(item.href)}
+              >
+                {t(item.key)}
+              </Link>
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Language Toggle */}
+          {/* Right: Controls */}
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             <LanguageToggle />
 
-            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-lg transition-colors duration-200 ${
-                isDark ? "hover:bg-white/10 text-slate-400" : "hover:bg-slate-100 text-slate-600"
+              className={`p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                isDark ? 'hover:bg-white/10 text-slate-400' : 'hover:bg-slate-100 text-slate-600'
               }`}
-              aria-label="Toggle theme"
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? (
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -94,21 +114,21 @@ export function Header() {
               )}
             </button>
 
-            {/* CTA Button */}
             <Link
-              href="/#contact"
-              className="hidden sm:inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg"
+              href="/services#work-with-me"
+              className="hidden md:inline-flex rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover shadow-accent hover:shadow-accent-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
             >
-              Get in touch
+              {t('common.bookConsultation')}
             </Link>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
-                isDark ? "hover:bg-white/10 text-slate-400" : "hover:bg-slate-100 text-slate-600"
+              className={`lg:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                isDark ? 'hover:bg-white/10 text-slate-400' : 'hover:bg-slate-100 text-slate-600'
               }`}
-              aria-label="Toggle menu"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? (
                 <X className="w-5 h-5" />
@@ -121,45 +141,59 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className={`md:hidden py-4 border-t ${isDark ? "border-slate-800" : "border-slate-200"}`}>
+          <div className={`lg:hidden py-4 border-t ${isDark ? 'border-slate-800' : 'border-slate-200'}`}>
             <div className="space-y-1">
               {navItems.map((item) => (
-                item.external ? (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
-                      isDark
-                        ? "text-slate-400 hover:text-white hover:bg-white/5"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
-                      isDark
-                        ? "text-slate-400 hover:text-white hover:bg-white/5"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                )
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={mobileLinkClass(item.href)}
+                  onClick={closeMobile}
+                >
+                  {t(item.key)}
+                </Link>
               ))}
-              <Link
-                href="/#contact"
-                className="block mt-3 rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-white shadow-accent"
-                onClick={() => setMobileMenuOpen(false)}
+
+              {/* Divider */}
+              <div className={`my-3 border-t ${isDark ? 'border-slate-800' : 'border-slate-200'}`} />
+
+              {/* Social links in mobile menu */}
+              <a
+                href="https://github.com/trevormearns"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                  isDark
+                    ? 'text-slate-400 hover:text-white hover:bg-white/5'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+                onClick={closeMobile}
               >
-                Get in touch
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/trevormearns"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-3 py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
+                  isDark
+                    ? 'text-slate-400 hover:text-white hover:bg-white/5'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+                onClick={closeMobile}
+              >
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
+              </a>
+
+              {/* Mobile CTA */}
+              <Link
+                href="/services#work-with-me"
+                className="block mt-3 rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-white shadow-accent"
+                onClick={closeMobile}
+              >
+                {t('common.bookConsultation')}
               </Link>
             </div>
           </div>
