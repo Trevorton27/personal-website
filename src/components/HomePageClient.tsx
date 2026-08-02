@@ -7,12 +7,15 @@ import { Menu, X, Github, Linkedin } from "lucide-react";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { PortfolioProject } from "@/lib/portfolio";
+import { WritingSection } from "@/components/WritingSection";
+import type { WritingSectionPost } from "@/components/WritingSection";
 
 type HomePageClientProps = {
   projects: PortfolioProject[];
+  latestPosts?: WritingSectionPost[];
 };
 
-export function HomePageClient({ projects }: HomePageClientProps) {
+export function HomePageClient({ projects, latestPosts = [] }: HomePageClientProps) {
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
@@ -43,6 +46,7 @@ export function HomePageClient({ projects }: HomePageClientProps) {
   const navItems = [
     { href: "/services", key: "common.services" },
     { href: "/portfolio", key: "common.portfolio" },
+    { href: "/blog", key: "common.blog" },
     { href: "#about", key: "common.about" },
     { href: "#contact", key: "common.contact" },
   ];
@@ -422,6 +426,9 @@ export function HomePageClient({ projects }: HomePageClientProps) {
         </div>
       </section>
 
+      {/* Writing / Blog Preview */}
+      <WritingSection isDark={isDark} posts={latestPosts} t={t} />
+
       {/* Contact */}
       <section id="contact" className={isDark ? "bg-slate-900/50" : "bg-slate-50/50"}>
         <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
@@ -461,6 +468,9 @@ export function HomePageClient({ projects }: HomePageClientProps) {
             <div className="flex flex-wrap items-center gap-6">
               <a href="/portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerProjects')}
+              </a>
+              <a href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
+                {t('home.footerBlog')}
               </a>
               <a href="/privacy" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerPrivacy')}

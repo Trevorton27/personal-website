@@ -3,9 +3,9 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
 const prisma = new PrismaClient();
-const AUTHOR_ID = 'cmjecn2ao0000i8cog6nehp36'; // Trevor Admin
 
 interface ExportedPost {
+  title?: string;
   slug: string;
   published_date: string;
   content: string;
@@ -59,13 +59,20 @@ async function main() {
   const posts: ExportedPost[] = JSON.parse(raw);
   console.log(`Found ${posts.length} posts.\n`);
 
+  const admin = await prisma.user.findFirst({ where: { role: 'ADMIN' } });
+  if (!admin) {
+    console.error('No admin user found. Run seed first.');
+    process.exit(1);
+  }
+  const authorId = admin.id;
+
   let imported = 0;
   let skipped = 0;
 
   for (let i = 0; i < posts.length; i++) {
     const post = posts[i];
     const slug = post.slug || generateSlug(post.content, i);
-    const title = extractTitle(post);
+    const title = post.title || extractTitle(post);
     const content = post.content;
     const excerpt = post.excerpt ? stripHtml(post.excerpt) : '';
     const status = mapStatus(post.status);
@@ -92,7 +99,7 @@ async function main() {
         excerpt,
         status,
         publishedAt: status === 'PUBLISHED' ? publishedAt : null,
-        authorId: AUTHOR_ID,
+        authorId,
       },
     });
 
