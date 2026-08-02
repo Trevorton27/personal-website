@@ -45,7 +45,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
 
   const navItems = [
     { href: "/services", key: "common.services" },
-    { href: "/portfolio", key: "common.portfolio" },
+    { href: "#portfolio", key: "common.portfolio" },
     { href: "/blog", key: "common.blog" },
     { href: "#about", key: "common.about" },
     { href: "#contact", key: "common.contact" },
