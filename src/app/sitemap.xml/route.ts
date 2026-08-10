@@ -3,15 +3,21 @@ import prisma from '@/lib/prisma';
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
-  const [posts, portfolioItems] = await Promise.all([
-    prisma.blogPost.findMany({
-      where: { status: 'PUBLISHED' },
-      select: { slug: true, updatedAt: true },
-    }),
-    prisma.portfolioItem.findMany({
-      select: { slug: true, updatedAt: true },
-    }),
-  ]);
+  let posts: { slug: string; updatedAt: Date }[] = [];
+  let portfolioItems: { slug: string; updatedAt: Date }[] = [];
+  try {
+    [posts, portfolioItems] = await Promise.all([
+      prisma.blogPost.findMany({
+        where: { status: 'PUBLISHED' },
+        select: { slug: true, updatedAt: true },
+      }),
+      prisma.portfolioItem.findMany({
+        select: { slug: true, updatedAt: true },
+      }),
+    ]);
+  } catch {
+    // Database may be unavailable during build
+  }
 
   const staticPages = [
     { url: '', priority: 1.0 },

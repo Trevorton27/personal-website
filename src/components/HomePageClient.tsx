@@ -8,6 +8,7 @@ import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { PortfolioProject } from "@/lib/portfolio";
 import { WritingSection } from "@/components/WritingSection";
+import { Testimonials } from "@/components/Testimonials";
 import type { WritingSectionPost } from "@/components/WritingSection";
 
 type HomePageClientProps = {
@@ -52,6 +53,12 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
   ];
 
   const jobs = [
+    {
+      title: t('jobs.job0Title'),
+      company: t('jobs.job0Company'),
+      period: t('jobs.job0Period'),
+      points: [t('jobs.job0Point1'), t('jobs.job0Point2'), t('jobs.job0Point3'), t('jobs.job0Point4')],
+    },
     {
       title: t('jobs.job1Title'),
       company: t('jobs.job1Company'),
@@ -304,7 +311,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
           {jobs.map((job, i) => (
             <article
               key={i}
-              className={`pb-12 ${i < 3 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}
+              className={`pb-12 ${i < jobs.length - 1 ? `border-b ${isDark ? "border-slate-800" : "border-slate-200"}` : ""}`}
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
                 <h3 className={`text-lg font-semibold ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -326,6 +333,9 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
           ))}
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials isDark={isDark} />
 
       {/* Portfolio */}
       <section id="portfolio" className={isDark ? "bg-slate-900/50" : "bg-slate-50/50"}>

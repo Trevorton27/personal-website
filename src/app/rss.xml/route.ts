@@ -5,12 +5,17 @@ export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const siteName = process.env.NEXT_PUBLIC_SITE_NAME || "Trevor's Portfolio";
 
-  const posts = await prisma.blogPost.findMany({
-    where: { status: 'PUBLISHED' },
-    orderBy: { publishedAt: 'desc' },
-    take: 20,
-    include: { author: true },
-  });
+  let posts: { slug: string; title: string; excerpt: string | null; publishedAt: Date | null; author: { email: string; name: string | null } }[] = [];
+  try {
+    posts = await prisma.blogPost.findMany({
+      where: { status: 'PUBLISHED' },
+      orderBy: { publishedAt: 'desc' },
+      take: 20,
+      include: { author: true },
+    });
+  } catch {
+    // Database may be unavailable during build
+  }
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
