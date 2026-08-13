@@ -174,7 +174,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
               <div className={`my-3 border-t ${isDark ? "border-slate-800" : "border-slate-200"}`} />
 
               <a
-                href="https://github.com/trevormearns"
+                href="https://github.com/Trevorton27"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-3 py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
@@ -186,7 +186,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/trevormearns"
+                href="https://www.linkedin.com/in/trevor-mearns/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-3 py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
@@ -486,7 +486,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                 {t('home.footerPrivacy')}
               </a>
               <a
-                href="https://github.com/trevormearns"
+                href="https://github.com/Trevorton27"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-1.5 transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}
@@ -496,7 +496,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                 <span className="sr-only sm:not-sr-only">GitHub</span>
               </a>
               <a
-                href="https://linkedin.com/in/trevormearns"
+                href="https://www.linkedin.com/in/trevor-mearns/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-1.5 transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}

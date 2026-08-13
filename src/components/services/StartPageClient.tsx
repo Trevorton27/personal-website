@@ -14,7 +14,7 @@ export function StartPageClient() {
   const actions = [
     { href: '/services', label: t('start.viewServices'), icon: Briefcase },
     { href: 'mailto:trevor@trevormearns.com', label: t('start.emailMe'), icon: Mail, external: true },
-    { href: 'https://linkedin.com/in/trevormearns', label: t('start.linkedin'), icon: Linkedin, external: true },
+    { href: 'https://www.linkedin.com/in/trevor-mearns/', label: t('start.linkedin'), icon: Linkedin, external: true },
     { href: '/portfolio', label: t('start.portfolio'), icon: FolderOpen },
   ];
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useTheme } from '../ThemeProvider';
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, FileText } from 'lucide-react';
 
 export function Footer() {
   const { theme } = useTheme();
@@ -18,10 +18,17 @@ export function Footer() {
           <p>&copy; {currentYear} Trevor Mearns</p>
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Blog</Link>
-            <Link href="/portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Projects</Link>
+            <Link href="/#portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Projects</Link>
             <Link href="/privacy" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>Privacy</Link>
+            <Link
+              href="/resume"
+              className={`inline-flex items-center gap-1.5 transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}
+            >
+              <FileText className="w-4 h-4" />
+              <span className="sr-only sm:not-sr-only">Resume</span>
+            </Link>
             <a
-              href="https://github.com/trevormearns"
+              href="https://github.com/Trevorton27"
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-1.5 transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}
@@ -31,7 +38,7 @@ export function Footer() {
               <span className="sr-only sm:not-sr-only">GitHub</span>
             </a>
             <a
-              href="https://linkedin.com/in/trevormearns"
+              href="https://www.linkedin.com/in/trevor-mearns/"
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-1.5 transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}

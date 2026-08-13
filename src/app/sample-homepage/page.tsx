@@ -218,7 +218,7 @@ export default function SampleHomepage() {
 
                 <div className="mt-6 flex gap-3">
                   <a
-                    href="https://github.com/"
+                    href="https://github.com/Trevorton27"
                     className={`flex-1 rounded-xl px-4 py-3 text-center text-sm font-medium transition-all duration-200 ${
                       isDark
                         ? "bg-white/5 hover:bg-white/10 border border-white/10"
@@ -437,7 +437,7 @@ export default function SampleHomepage() {
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href="https://github.com/"
+                  href="https://github.com/Trevorton27"
                   target="_blank"
                   rel="noreferrer"
                   className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${

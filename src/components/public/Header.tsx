@@ -152,7 +152,7 @@ export function Header() {
 
               {/* Social links in mobile menu */}
               <a
-                href="https://github.com/trevormearns"
+                href="https://github.com/Trevorton27"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-3 py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
@@ -166,7 +166,7 @@ export function Header() {
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/trevormearns"
+                href="https://www.linkedin.com/in/trevor-mearns/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-3 py-3 px-4 rounded-lg text-sm transition-colors duration-200 ${
