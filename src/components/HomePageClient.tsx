@@ -476,7 +476,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} Trevor Mearns</p>
             <div className="flex flex-wrap items-center gap-6">
-              <a href="/portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
+              <a href="/#portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerProjects')}
               </a>
               <a href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
