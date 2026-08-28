@@ -8,6 +8,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/portfolio',
+        destination: '/#portfolio',
+        permanent: true,
+      },
+    ];
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
