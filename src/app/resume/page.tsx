@@ -15,7 +15,7 @@ export default function ResumePage() {
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Resume</h1>
           <a
-            href="/resume.pdf"
+            href="/Trevor Mearns Resume .pdf"
             download="Trevor Mearns Resume.pdf"
             className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
           >

@@ -14,6 +14,7 @@ const navItems = [
   { href: '/blog', key: 'common.blog' },
   { href: '/#about', key: 'common.about' },
   { href: '/#contact', key: 'common.contact' },
+  { href: '/resume', key: 'common.resume' },
 ];
 
 export function Header() {

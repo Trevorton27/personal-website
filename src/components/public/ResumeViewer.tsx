@@ -13,7 +13,7 @@ export function ResumeViewer() {
       }`}
     >
       <iframe
-        src="/resume.pdf"
+        src="/Trevor Mearns Resume .pdf"
         className="w-full"
         style={{ height: '80vh' }}
         title="Trevor Mearns Resume"
