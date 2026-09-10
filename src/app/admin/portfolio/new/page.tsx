@@ -136,7 +136,7 @@ export default function NewPortfolioPage() {
           <ArrowLeft className="w-4 h-4" />
           Back to Portfolio
         </Link>
-        <h1 className="text-3xl font-bold">Create New Portfolio Item</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create New Portfolio Item</h1>
       </div>
 
       {error && (
@@ -147,7 +147,7 @@ export default function NewPortfolioPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Project Details</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Project Details</h2>
 
           <div className="space-y-4">
             <div>
@@ -202,7 +202,7 @@ export default function NewPortfolioPage() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Tech Stack</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Tech Stack</h2>
 
           <div className="space-y-2">
             {formData.techStack.map((tech, index) => (
@@ -238,7 +238,7 @@ export default function NewPortfolioPage() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Project Images</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Project Images</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
             Add image URLs for your project gallery. First image will be used as the thumbnail.
           </p>
@@ -297,7 +297,7 @@ export default function NewPortfolioPage() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Links</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Links</h2>
 
           <div className="space-y-4">
             <div>
@@ -345,7 +345,7 @@ export default function NewPortfolioPage() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Display Options</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Display Options</h2>
 
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -356,7 +356,7 @@ export default function NewPortfolioPage() {
                 onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                 className="w-4 h-4 rounded border-gray-300 text-lightning-glow focus:ring-lightning-glow"
               />
-              <label htmlFor="featured" className="text-sm font-medium">
+              <label htmlFor="featured" className="text-sm font-medium text-gray-900 dark:text-white">
                 Featured (show on homepage)
               </label>
             </div>

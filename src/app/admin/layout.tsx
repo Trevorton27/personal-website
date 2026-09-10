@@ -13,11 +13,15 @@ import {
   LogOut,
   Menu,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -51,8 +55,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-storm-950">
+        <div className="text-lg text-gray-900 dark:text-white">Loading...</div>
       </div>
     );
   }
@@ -67,39 +71,46 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-storm-950">
+    <div className="min-h-screen bg-gray-50 dark:bg-storm-950 text-gray-900 dark:text-white">
       {/* Top Bar */}
       <header className="bg-white dark:bg-storm-900 border-b border-gray-200 dark:border-storm-700 sticky top-0 z-40">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-storm-800 rounded-lg"
+              className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-storm-800 rounded-lg text-gray-700 dark:text-gray-300"
             >
               {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <Link href="/" className="text-xl font-bold hover:text-lightning-glow transition-colors">
+            <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white hover:text-lightning-glow transition-colors">
               {process.env.NEXT_PUBLIC_SITE_NAME || "Trevor's Portfolio"}
             </Link>
           </div>
 
           <div className="flex items-center gap-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-storm-800 rounded-lg text-gray-700 dark:text-gray-300 transition-colors"
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
             <Link
               href="/"
               target="_blank"
-              className="text-sm text-gray-600 dark:text-gray-400 hover:text-lightning-glow"
+              className="text-sm text-gray-700 dark:text-gray-300 hover:text-lightning-glow"
             >
               View Site
             </Link>
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-gray-600 dark:text-gray-400">{user?.email}</span>
+              <span className="text-gray-700 dark:text-gray-300">{user?.email}</span>
               <span className="px-2 py-1 bg-lightning-glow/10 text-lightning-glow rounded text-xs">
                 {user?.role}
               </span>
             </div>
             <button
               onClick={handleLogout}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-storm-800 rounded-lg text-gray-600 dark:text-gray-400 hover:text-red-600"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-storm-800 rounded-lg text-gray-700 dark:text-gray-300 hover:text-red-600"
               title="Logout"
             >
               <LogOut className="w-5 h-5" />

@@ -27,6 +27,15 @@ const config: Config = {
           DEFAULT: "rgb(var(--surface) / <alpha-value>)",
           subtle: "rgb(var(--bg-subtle) / <alpha-value>)",
         },
+        // Admin theme colors
+        "lightning-glow": "#d48a27",
+        storm: {
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+        },
       },
       fontFamily: {
         sans: [

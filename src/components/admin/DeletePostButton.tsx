@@ -41,7 +41,7 @@ export function DeletePostButton({ postId, postTitle }: { postId: string; postTi
         <button
           onClick={() => setConfirming(false)}
           disabled={deleting}
-          className="px-2 py-1 text-xs font-medium bg-gray-200 dark:bg-storm-700 rounded hover:bg-gray-300 dark:hover:bg-storm-600"
+          className="px-2 py-1 text-xs font-medium bg-gray-200 dark:bg-storm-700 text-gray-900 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-storm-600"
         >
           Cancel
         </button>
@@ -52,7 +52,7 @@ export function DeletePostButton({ postId, postTitle }: { postId: string; postTi
   return (
     <button
       onClick={() => setConfirming(true)}
-      className="p-2 rounded text-gray-600 dark:text-gray-400 hover:text-gray-400 dark:hover:text-gray-300"
+      className="p-2 rounded text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400"
       title={`Delete "${postTitle}"`}
     >
       <Trash2 className="w-4 h-4" />

@@ -220,7 +220,7 @@ export default function NewPostPage() {
           <ArrowLeft className="w-4 h-4" />
           Back to Posts
         </Link>
-        <h1 className="text-3xl font-bold">Create New Post</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create New Post</h1>
       </div>
 
       {draftRestored && (
@@ -247,7 +247,7 @@ export default function NewPostPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Post Details</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Post Details</h2>
 
           <div className="space-y-4">
             <div>
@@ -311,7 +311,7 @@ export default function NewPostPage() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Publishing</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Publishing</h2>
 
           <div className="space-y-4">
             <div>
@@ -344,7 +344,7 @@ export default function NewPostPage() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Tags</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Tags</h2>
 
           {tags.length > 0 ? (
             <div className="flex flex-wrap gap-2">
@@ -356,7 +356,7 @@ export default function NewPostPage() {
                   className={`px-3 py-1 rounded-lg border transition-colors ${
                     formData.tagIds.includes(tag.id)
                       ? 'bg-lightning-glow text-white border-lightning-glow'
-                      : 'bg-gray-100 dark:bg-storm-700 border-gray-300 dark:border-storm-600'
+                      : 'bg-gray-100 dark:bg-storm-700 border-gray-300 dark:border-storm-600 text-gray-900 dark:text-gray-200'
                   }`}
                 >
                   {tag.name}

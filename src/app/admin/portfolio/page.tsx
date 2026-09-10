@@ -12,8 +12,8 @@ export default async function AdminPortfolioPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Portfolio</h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Portfolio</h1>
+          <p className="text-gray-700 dark:text-gray-300">
             Manage your portfolio projects
           </p>
         </div>
@@ -40,7 +40,7 @@ export default async function AdminPortfolioPage() {
               )}
             </div>
 
-            <h3 className="font-bold mb-2">{item.title}</h3>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               {item.category}
             </p>
@@ -49,7 +49,7 @@ export default async function AdminPortfolioPage() {
               {item.techStack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
-                  className="text-xs px-2 py-1 bg-gray-100 dark:bg-storm-700 rounded"
+                  className="text-xs px-2 py-1 bg-gray-200 dark:bg-storm-700 text-gray-800 dark:text-gray-200 rounded"
                 >
                   {tech}
                 </span>
@@ -60,14 +60,14 @@ export default async function AdminPortfolioPage() {
               <Link
                 href={`/portfolio/${item.slug}`}
                 target="_blank"
-                className="p-2 hover:bg-gray-100 dark:hover:bg-storm-700 rounded"
+                className="p-2 hover:bg-gray-100 dark:hover:bg-storm-700 rounded text-gray-700 dark:text-gray-300"
                 title="View"
               >
                 <Eye className="w-4 h-4" />
               </Link>
               <Link
                 href={`/admin/portfolio/${item.id}`}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-storm-700 rounded"
+                className="p-2 hover:bg-gray-100 dark:hover:bg-storm-700 rounded text-gray-700 dark:text-gray-300"
                 title="Edit"
               >
                 <Edit className="w-4 h-4" />

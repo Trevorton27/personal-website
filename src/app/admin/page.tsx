@@ -33,8 +33,8 @@ export default async function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
+        <p className="text-gray-700 dark:text-gray-300">
           Welcome back! Here's an overview of your site. But please remember that you do not understand Wudan.
         </p>
       </div>
@@ -48,7 +48,7 @@ export default async function AdminDashboard() {
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                   {stat.label}
                 </p>
-                <p className="text-3xl font-bold">{stat.value}</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
               </div>
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
             </div>
@@ -58,7 +58,7 @@ export default async function AdminDashboard() {
 
       {/* Recent Posts */}
       <div className="card">
-        <h2 className="text-xl font-bold mb-4">Recent Posts</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Recent Posts</h2>
         <div className="space-y-4">
           {recentPosts.map((post) => (
             <div
@@ -66,7 +66,7 @@ export default async function AdminDashboard() {
               className="flex items-center justify-between py-3 border-b border-gray-200 dark:border-storm-700 last:border-0"
             >
               <div>
-                <h3 className="font-medium">{post.title}</h3>
+                <h3 className="font-medium text-gray-900 dark:text-white">{post.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   By {post.author.name} • {post.status}
                 </p>

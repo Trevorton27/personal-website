@@ -45,8 +45,8 @@ export default async function AdminPostsPage({
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Blog Posts</h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Blog Posts</h1>
+          <p className="text-gray-700 dark:text-gray-300">
             Manage your blog content
           </p>
         </div>
@@ -71,7 +71,7 @@ export default async function AdminPostsPage({
               className={`px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
                 isActive
                   ? 'border-accent text-accent'
-                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
               }`}
             >
               {s.label}
@@ -79,7 +79,7 @@ export default async function AdminPostsPage({
                 className={`ml-2 text-xs px-1.5 py-0.5 rounded-full ${
                   isActive
                     ? 'bg-accent/10 text-accent'
-                    : 'bg-gray-100 dark:bg-storm-700 text-gray-500 dark:text-gray-400'
+                    : 'bg-gray-200 dark:bg-storm-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
                 {count}
@@ -92,24 +92,24 @@ export default async function AdminPostsPage({
       <div className="card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-storm-800 border-b border-gray-200 dark:border-storm-700">
+            <thead className="bg-gray-100 dark:bg-storm-800 border-b border-gray-200 dark:border-storm-700">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                   Title
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                   Author
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                   Tags
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
@@ -125,8 +125,8 @@ export default async function AdminPostsPage({
                 posts.map((post) => (
                   <tr key={post.id} className="hover:bg-gray-50 dark:hover:bg-storm-800/50">
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-medium">{post.title}</div>
-                      <div className="text-sm text-gray-500">/{post.slug}</div>
+                      <div className="font-medium text-gray-900 dark:text-white">{post.title}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">/{post.slug}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
@@ -141,10 +141,10 @@ export default async function AdminPostsPage({
                         {post.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                       {post.author.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                       {formatDate(post.createdAt)}
                     </td>
                     <td className="px-6 py-4">
@@ -152,7 +152,7 @@ export default async function AdminPostsPage({
                         {post.tags.slice(0, 2).map((tag) => (
                           <span
                             key={tag.id}
-                            className="text-xs px-2 py-1 bg-gray-100 dark:bg-storm-700 rounded"
+                            className="text-xs px-2 py-1 bg-gray-200 dark:bg-storm-700 text-gray-800 dark:text-gray-200 rounded"
                           >
                             {tag.name}
                           </span>
@@ -164,14 +164,14 @@ export default async function AdminPostsPage({
                         <Link
                           href={`/blog/${post.slug}`}
                           target="_blank"
-                          className="p-2 rounded text-gray-600 dark:text-gray-400 hover:text-gray-400 dark:hover:text-gray-300"
+                          className="p-2 rounded text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                           title="View post"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
                         <Link
                           href={`/admin/posts/${post.id}`}
-                          className="p-2 rounded text-gray-600 dark:text-gray-400 hover:text-gray-400 dark:hover:text-gray-300"
+                          className="p-2 rounded text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                           title="Edit"
                         >
                           <Edit className="w-4 h-4" />

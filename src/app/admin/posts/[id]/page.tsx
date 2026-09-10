@@ -170,7 +170,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg text-gray-900 dark:text-white">Loading...</div>
       </div>
     );
   }
@@ -178,7 +178,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   if (!post) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-bold mb-4">Post not found</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Post not found</h1>
         <Link href="/admin/posts" className="btn btn-primary">
           Back to Posts
         </Link>
@@ -196,7 +196,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
           <ArrowLeft className="w-4 h-4" />
           Back to Posts
         </Link>
-        <h1 className="text-3xl font-bold">Edit Post</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Post</h1>
       </div>
 
       {error && (
@@ -207,7 +207,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Post Details</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Post Details</h2>
 
           <div className="space-y-4">
             <div>
@@ -272,7 +272,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Publishing</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Publishing</h2>
 
           <div className="space-y-4">
             <div>
@@ -305,7 +305,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-bold mb-4">Tags</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Tags</h2>
 
           {tags.length > 0 ? (
             <div className="flex flex-wrap gap-2">
@@ -317,7 +317,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                   className={`px-3 py-1 rounded-lg border transition-colors ${
                     formData.tagIds.includes(tag.id)
                       ? 'bg-lightning-glow text-white border-lightning-glow'
-                      : 'bg-gray-100 dark:bg-storm-700 border-gray-300 dark:border-storm-600'
+                      : 'bg-gray-100 dark:bg-storm-700 border-gray-300 dark:border-storm-600 text-gray-900 dark:text-gray-200'
                   }`}
                 >
                   {tag.name}

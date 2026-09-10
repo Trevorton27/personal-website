@@ -121,6 +121,34 @@
   }
 }
 
+@layer components {
+  /* Admin card */
+  .card {
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--border));
+  }
+
+  /* Base button */
+  .btn {
+    @apply font-medium rounded-xl px-5 py-2.5 transition-all duration-200 inline-flex items-center justify-center;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply font-medium rounded-xl px-5 py-2.5 transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: rgb(var(--bg-subtle));
+    border: 1px solid rgb(var(--border));
+    color: rgb(var(--text));
+  }
+
+  .btn-secondary:hover {
+    background-color: rgb(var(--border));
+  }
+}
+
 @layer utilities {
   /* Subtle divider */
   .divider {
@@ -194,15 +222,20 @@
     --tw-ring-color: rgb(var(--accent-primary));
     background-color: rgb(var(--surface));
     border: 1px solid rgb(var(--border));
+    color: rgb(var(--text));
   }
 
   .input:focus {
     border-color: rgb(var(--accent-primary));
   }
 
+  .input::placeholder {
+    color: rgb(var(--text-muted));
+  }
+
   .label {
     @apply block text-sm font-medium mb-2;
-    color: rgb(var(--text-secondary));
+    color: rgb(var(--text));
   }
 
   /* Section spacing */
