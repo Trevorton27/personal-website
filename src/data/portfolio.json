@@ -1,32 +1,20 @@
 [
   {
-    "slug": "signal-ops-ai-v1",
-    "title": "Signal Ops AI — Multi-Agent Support Ticket Investigation",
-    "description": "A multi-agent AI system for automated support ticket investigation. When a ticket arrives, a LangGraph-orchestrated pipeline of 8 specialized agents runs in the background to classify the issue, analyze logs, retrieve runbooks, correlate incidents and deployments, generate root-cause hypotheses, draft customer replies, and write internal escalation notes — all in under 30 seconds.",
+    "slug": "support-buddy-x9000",
+    "title": "The Support Buddy X9000 — Agentic Support Engineering Platform",
+    "description": "An agentic support engineering platform that investigates tickets, gathers evidence, identifies root causes, and—with human approval—hands validated issues to an autonomous coding workflow for reproduction, testing, fixes, and pull requests.",
     "highlights": [
-      "9-node LangGraph agent pipeline: intake → context → parallel analysis → hypotheses → drafting → escalation.",
-      "Real-time browser UI polls every 2 seconds to display each agent step as it completes.",
-      "Vector RAG with pgvector (HNSW) and OpenAI embeddings enables semantic knowledge base search."
+      "9-node LangGraph investigation pipeline with parallel evidence gathering, RAG knowledge search, and root-cause ranking.",
+      "Devin AI integration for autonomous bug reproduction, code fixes, and pull-request generation—gated by human-in-the-loop approval.",
+      "Inngest-driven async orchestration with GitHub issue sync, incident clustering, and full agent execution audit trail."
     ],
     "category": "AI/Automation",
-    "githubUrl": "https://github.com/Trevorton27/signal-ops-ai-v1",
-    "demoUrl": "https://signal-ops-ai-v1.vercel.app/",
-    "techStack": [
-      "Next.js 15",
-      "TypeScript",
-      "LangGraph.js",
-      "OpenAI GPT-4o",
-      "PostgreSQL",
-      "pgvector",
-      "Prisma",
-      "Inngest",
-      "Clerk",
-      "Tailwind CSS",
-      "shadcn/ui"
-    ],
+    "githubUrl": "https://github.com/Trevorton27/The-Support-Buddy-X9000",
+    "demoUrl": "https://the-support-buddy-x9000.vercel.app/",
+    "techStack": ["Next.js 15", "TypeScript", "LangGraph", "PostgreSQL", "pgvector", "Inngest", "Devin"],
     "featured": true,
-    "image": "/portfolio/signal-ops-ai-v1-1.png",
-    "lastUpdated": "2026-06-16T00:00:00Z"
+    "image": "/portfolio/support-buddy-x9000.png",
+    "lastUpdated": "2026-09-16T00:00:00Z"
   },
   {
     "slug": "ai-support-engineer",
@@ -52,9 +40,26 @@
       "Vitest",
       "Playwright"
     ],
-    "featured": true,
+    "featured": false,
     "image": "/portfolio/ai-support-engineer-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z"
+  },
+  {
+    "slug": "inside-the-llm",
+    "title": "Inside the LLM — Interactive LLM Inference Visualization",
+    "description": "An interactive visualization that walks users through the major stages of LLM inference—from tokenization and embeddings through attention, transformer processing, sampling, generation, context windows, and RAG—with real GPT tokenization and honest labeling of simulated vs. real computation.",
+    "highlights": [
+      "11-stage pipeline covering tokenization, embeddings, positional encoding, attention, transformer layers, prediction, sampling, generation, context windows, and RAG.",
+      "D3-powered interactive visualizations including attention heatmaps and embedding scatterplots, with beginner and technical explanation modes.",
+      "Runs entirely in the browser with no API calls; provider pattern enables real model backends without UI changes."
+    ],
+    "category": "AI/Education",
+    "githubUrl": "https://github.com/Trevorton27/Inside-The-LLM",
+    "demoUrl": "https://inside-the-llm-nine.vercel.app/",
+    "techStack": ["Next.js 14", "TypeScript", "D3", "Tailwind CSS", "Vitest", "Playwright"],
+    "featured": true,
+    "image": "/portfolio/inside-the-llm-1.png",
+    "lastUpdated": "2026-09-16T00:00:00Z"
   },
   {
     "slug": "jlpt-app",
@@ -105,33 +110,8 @@
       "PostgreSQL",
       "Prisma"
     ],
-    "featured": true,
+    "featured": false,
     "image": "/portfolio/aict-main-1.png",
-    "lastUpdated": "2026-05-13T00:00:00Z"
-  },
-  {
-    "slug": "ai-flashcard-app",
-    "title": "AI Flashcard App — Adaptive AI-Powered Vocabulary Study",
-    "description": "A modern web app for learning Japanese and English vocabulary using AI-powered flashcards. Upload content in any format — TXT, CSV, JSON, PDF, Word, or images — and GPT-4o handles translation, hiragana generation, and smart categorization automatically.",
-    "highlights": [
-      "Accepts TXT, CSV, JSON, PDF, Word docs, and images as input — GPT-4o translates and categorizes vocabulary automatically.",
-      "Automatic hiragana/furigana generation for kanji, duplicate detection, and ambiguity resolution.",
-      "Interactive carousel and grid flashcard modes with swipe gestures and dark/light/system theme support."
-    ],
-    "category": "AI/Education",
-    "githubUrl": "https://github.com/Trevorton27/ai-flashcard-app",
-    "demoUrl": "https://ai-flashcard-app-ten.vercel.app/",
-    "techStack": [
-      "Next.js 14",
-      "TypeScript",
-      "Tailwind CSS",
-      "PostgreSQL",
-      "Prisma",
-      "OpenAI",
-      "Clerk"
-    ],
-    "featured": true,
-    "image": "/portfolio/ai-flashcard-app-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z"
   },
   {
