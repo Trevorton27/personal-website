@@ -6,6 +6,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Github, Linkedin } from "lucide-react";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/components/LanguageProvider";
+import Link from "next/link";
 import type { PortfolioProject } from "@/lib/portfolio";
 import { WritingSection } from "@/components/WritingSection";
 import { Testimonials } from "@/components/Testimonials";
@@ -354,23 +355,13 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                   isDark ? "bg-slate-800/50 hover:bg-slate-800" : "bg-white shadow-soft hover:shadow-soft-lg"
                 }`}
               >
-                {project.demoUrl ? (
-                  <a href={project.demoUrl} target="_blank" rel="noreferrer" className="relative h-48 overflow-hidden block">
-                    <Image src={project.image} alt={`${project.title} screenshot`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" priority={i === 0} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
-                    {project.featured && (
-                      <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">{t('home.featured')}</span>
-                    )}
-                  </a>
-                ) : (
-                  <div className="relative h-48 overflow-hidden">
-                    <Image src={project.image} alt={`${project.title} screenshot`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" priority={i === 0} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
-                    {project.featured && (
-                      <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">{t('home.featured')}</span>
-                    )}
-                  </div>
-                )}
+                <Link href={`/portfolio/${project.slug}`} className="relative h-48 overflow-hidden block">
+                  <Image src={project.image} alt={`${project.title} screenshot`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" priority={i === 0} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
+                  {project.featured && (
+                    <span className="absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded bg-accent text-white">{t('home.featured')}</span>
+                  )}
+                </Link>
 
                 <div className="p-6">
                   <div className="flex items-center justify-between gap-2 mb-4">
@@ -383,7 +374,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                   </div>
 
                   <h3 className={`font-semibold text-lg mb-2 group-hover:text-accent transition-colors ${isDark ? "text-slate-100" : "text-slate-900"}`}>
-                    {project.title}
+                    <Link href={`/portfolio/${project.slug}`}>{project.title}</Link>
                   </h3>
                   <p className={`text-sm leading-relaxed mb-3 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     {project.description}
@@ -408,7 +399,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                     ))}
                   </div>
 
-                  <div className={`flex gap-4 pt-4 border-t ${isDark ? "border-slate-800" : "border-slate-100"}`}>
+                  <div className={`flex flex-wrap gap-4 pt-4 border-t ${isDark ? "border-slate-800" : "border-slate-100"}`}>
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -428,6 +419,12 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
                         {t('home.liveDemo')}
                       </a>
                     )}
+                    <Link
+                      href={`/portfolio/${project.slug}`}
+                      className="text-sm font-medium inline-flex items-center gap-1 text-accent hover:text-accent-hover ml-auto"
+                    >
+                      {t('home.viewDetails')} →
+                    </Link>
                   </div>
                 </div>
               </article>

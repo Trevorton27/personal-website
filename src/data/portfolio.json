@@ -14,7 +14,35 @@
     "techStack": ["Next.js 15", "TypeScript", "LangGraph", "PostgreSQL", "pgvector", "Inngest", "Devin"],
     "featured": true,
     "image": "/portfolio/support-buddy-x9000.png",
-    "lastUpdated": "2026-09-16T00:00:00Z"
+    "lastUpdated": "2026-09-16T00:00:00Z",
+    "details": {
+      "extendedDescription": "The Support Buddy X9000 is a fully agentic support engineering platform designed to transform how support teams handle incoming tickets. Rather than relying on manual triage and investigation, the platform uses a 9-node LangGraph pipeline to autonomously investigate each ticket — gathering evidence from logs, documentation, and past incidents in parallel.\n\nOnce the investigation is complete and a root cause has been identified and ranked, the system presents its findings to a human reviewer. With approval, it hands the validated issue off to Devin AI, which autonomously reproduces the bug, writes a fix, runs tests, and opens a pull request.\n\nThe entire workflow is orchestrated through Inngest for reliable async execution, with full audit trails, GitHub issue synchronization, and incident clustering to catch recurring patterns before they escalate.",
+      "features": [
+        {
+          "title": "9-Node Investigation Pipeline",
+          "description": "A LangGraph-powered pipeline that parallelizes evidence gathering across logs, documentation, and historical incidents, then ranks potential root causes by confidence score.",
+          "screenshot": "/portfolio/support-buddy-x9000-pipeline.png"
+        },
+        {
+          "title": "Human-in-the-Loop Approval",
+          "description": "Every autonomous action is gated by human approval. The system presents investigation findings with evidence before requesting permission to proceed with automated fixes."
+        },
+        {
+          "title": "Devin AI Coding Integration",
+          "description": "Validated issues are handed to Devin AI, which autonomously reproduces bugs, writes fixes, runs the test suite, and opens pull requests — all without manual intervention.",
+          "screenshot": "/portfolio/support-buddy-x9000-features.png"
+        },
+        {
+          "title": "Inngest Async Orchestration",
+          "description": "Inngest handles all background job execution with built-in retries, rate limiting, and observability, ensuring the pipeline remains reliable at scale."
+        }
+      ],
+      "screenshots": [
+        { "src": "/portfolio/support-buddy-x9000-hero.png", "alt": "Support Buddy X9000 landing page", "caption": "The main dashboard showing active investigations and ticket queue" },
+        { "src": "/portfolio/support-buddy-x9000-pipeline.png", "alt": "Investigation pipeline view", "caption": "The 9-node LangGraph investigation pipeline processing a ticket" },
+        { "src": "/portfolio/support-buddy-x9000-features.png", "alt": "Feature overview and results", "caption": "Investigation results with root cause ranking and Devin integration" }
+      ]
+    }
   },
   {
     "slug": "ai-support-engineer",
@@ -42,7 +70,35 @@
     ],
     "featured": false,
     "image": "/portfolio/ai-support-engineer-1.png",
-    "lastUpdated": "2026-05-13T00:00:00Z"
+    "lastUpdated": "2026-05-13T00:00:00Z",
+    "details": {
+      "extendedDescription": "The AI Support Engineer is a copilot built to augment — not replace — customer support agents. It integrates directly with an existing CRM workflow, adding AI-powered analysis, similarity search, and draft generation without changing how agents interact with tickets.\n\nWhen a new ticket arrives, the system uses GPT-4o-mini to extract key signals, form hypotheses about the root cause, and suggest clarifying questions. Simultaneously, pgvector-powered similarity search surfaces past resolved cases that match the current issue, giving agents instant context.\n\nAgents can generate reply drafts in multiple tones — Professional, Friendly, Concise, or Surfer — and the system includes PII redaction, a RAG-powered knowledge base for internal documentation, and a complete audit trail of every AI action taken.",
+      "features": [
+        {
+          "title": "Intelligent Ticket Analysis",
+          "description": "GPT-4o-mini extracts signals, hypotheses, and clarifying questions from ticket content, giving agents an instant head start on understanding the issue.",
+          "screenshot": "/portfolio/ai-support-engineer-dashboard.png"
+        },
+        {
+          "title": "Vector Similarity Search",
+          "description": "pgvector with HNSW indexing surfaces similar resolved cases in real time, so agents can reference past solutions without manual searching."
+        },
+        {
+          "title": "Multi-Tone Draft Generation",
+          "description": "Generate reply drafts in four distinct tones — Professional, Friendly, Concise, and Surfer — tailored to the ticket context and customer relationship.",
+          "screenshot": "/portfolio/ai-support-engineer-features.png"
+        },
+        {
+          "title": "PII Redaction & Audit Trail",
+          "description": "All AI-generated content passes through PII redaction before being surfaced to agents, and every action is logged with a complete audit trail."
+        }
+      ],
+      "screenshots": [
+        { "src": "/portfolio/ai-support-engineer-hero.png", "alt": "AI Support Engineer landing page", "caption": "The CRM integration landing page with feature overview" },
+        { "src": "/portfolio/ai-support-engineer-dashboard.png", "alt": "Ticket analysis dashboard", "caption": "Ticket analysis showing extracted signals and similar resolved cases" },
+        { "src": "/portfolio/ai-support-engineer-features.png", "alt": "Draft generation and features", "caption": "Multi-tone draft generation with PII redaction controls" }
+      ]
+    }
   },
   {
     "slug": "inside-the-llm",
@@ -59,7 +115,35 @@
     "techStack": ["Next.js 14", "TypeScript", "D3", "Tailwind CSS", "Vitest", "Playwright"],
     "featured": true,
     "image": "/portfolio/inside-the-llm-1.png",
-    "lastUpdated": "2026-09-16T00:00:00Z"
+    "lastUpdated": "2026-09-16T00:00:00Z",
+    "details": {
+      "extendedDescription": "Inside the LLM is an educational tool designed to demystify how large language models actually work. Instead of treating inference as a black box, it breaks the process into 11 interactive stages that users can explore at their own pace.\n\nStarting with tokenization (using the real GPT tokenizer), users can see how text becomes tokens, how those tokens are embedded into high-dimensional vectors, and how positional encoding gives the model a sense of order. The attention mechanism is visualized with interactive D3 heatmaps that show which tokens attend to which.\n\nThe project is honest about what is simulated and what is real computation. It runs entirely in the browser with zero API calls, but the architecture uses a provider pattern that would allow swapping in real model backends without any UI changes. Both beginner and technical explanation modes are available for each stage.",
+      "features": [
+        {
+          "title": "11-Stage Inference Pipeline",
+          "description": "From tokenization to RAG, each stage of LLM inference is presented as an interactive, explorable step with visual explanations.",
+          "screenshot": "/portfolio/inside-the-llm-pipeline.png"
+        },
+        {
+          "title": "D3 Interactive Visualizations",
+          "description": "Attention heatmaps and embedding scatterplots built with D3.js let users interactively explore how the model processes information.",
+          "screenshot": "/portfolio/inside-the-llm-visualization.png"
+        },
+        {
+          "title": "Beginner & Technical Modes",
+          "description": "Every stage offers two explanation levels — beginner-friendly overviews and detailed technical breakdowns — so the tool serves both curious newcomers and ML practitioners."
+        },
+        {
+          "title": "Fully Client-Side",
+          "description": "The entire application runs in the browser with no API calls. Real GPT tokenization is performed locally, and the provider pattern allows plugging in real model backends."
+        }
+      ],
+      "screenshots": [
+        { "src": "/portfolio/inside-the-llm-hero.png", "alt": "Inside the LLM landing page", "caption": "The landing page introducing the 11-stage inference visualization" },
+        { "src": "/portfolio/inside-the-llm-pipeline.png", "alt": "Pipeline stage view", "caption": "Walking through the transformer pipeline stages interactively" },
+        { "src": "/portfolio/inside-the-llm-visualization.png", "alt": "D3 visualization of attention", "caption": "Interactive D3 attention heatmap showing token relationships" }
+      ]
+    }
   },
   {
     "slug": "jlpt-app",
@@ -86,7 +170,35 @@
     ],
     "featured": true,
     "image": "/portfolio/koe-jlpt-1.png",
-    "lastUpdated": "2026-05-13T00:00:00Z"
+    "lastUpdated": "2026-05-13T00:00:00Z",
+    "details": {
+      "extendedDescription": "KoeJLPT takes a voice-first approach to Japanese language study. Most JLPT prep apps focus on reading and multiple choice — KoeJLPT prioritizes speaking and listening, the skills that matter most for real communication.\n\nThe centerpiece is Fumi, an AI conversation partner powered by ElevenLabs WebRTC. Fumi speaks exclusively in Japanese at a pace appropriate to the learner's JLPT level, creating an immersive practice environment. Pronunciation is automatically graded using Google Cloud Speech-to-Text, with three distinct practice modes for different skill focuses.\n\nLevel-based vocabulary study covers all JLPT levels from N5 (beginner) through N1 (advanced), with native audio playback, save functionality for building personal study lists, and a persistent streak system to encourage daily practice.",
+      "features": [
+        {
+          "title": "AI Voice Conversations",
+          "description": "Real-time WebRTC voice conversations with AI partner Fumi, powered by ElevenLabs. Conversations happen exclusively in Japanese at a pace matched to the learner's level.",
+          "screenshot": "/portfolio/jlpt-app-study.png"
+        },
+        {
+          "title": "Pronunciation Grading",
+          "description": "Three practice modes with automatic pronunciation scoring via Google Cloud Speech-to-Text. Learners get immediate feedback on accuracy and areas for improvement."
+        },
+        {
+          "title": "Level-Based Vocabulary",
+          "description": "Complete vocabulary coverage from N5 to N1, with native audio playback, personal save lists, and spaced repetition to reinforce retention.",
+          "screenshot": "/portfolio/jlpt-app-features.png"
+        },
+        {
+          "title": "Study Streak Tracking",
+          "description": "Persistent daily streak tracking encourages consistent study habits, with visual progress indicators and streak recovery mechanics."
+        }
+      ],
+      "screenshots": [
+        { "src": "/portfolio/jlpt-app-hero.png", "alt": "KoeJLPT landing page", "caption": "The KoeJLPT landing page with level selection" },
+        { "src": "/portfolio/jlpt-app-study.png", "alt": "Voice study interface", "caption": "The voice conversation interface with AI partner Fumi" },
+        { "src": "/portfolio/jlpt-app-features.png", "alt": "Vocabulary study features", "caption": "Level-based vocabulary study with audio playback and progress tracking" }
+      ]
+    }
   },
   {
     "slug": "aict-main",
@@ -112,7 +224,35 @@
     ],
     "featured": false,
     "image": "/portfolio/aict-main-1.png",
-    "lastUpdated": "2026-05-13T00:00:00Z"
+    "lastUpdated": "2026-05-13T00:00:00Z",
+    "details": {
+      "extendedDescription": "The AI Coding Tutor is built on the belief that the best way to learn programming is by writing real code with intelligent guidance. Students work through 240 progressive challenges spanning HTML, CSS, JavaScript, and full-stack development, writing code directly in a browser-based Monaco editor — the same engine that powers VS Code.\n\nWhat makes this platform different is the AI tutor powered by Claude 3.5. Rather than just checking answers against a solution key, the AI analyzes the student's actual code to provide contextual help, explanations, and personalized guidance. It adapts to where the student is struggling and offers targeted assistance.\n\n160 of the challenges include enhanced variants with three-tier hints (nudge, guide, and full walkthrough) and multiple valid solutions. After three unsuccessful attempts, the solution is unlocked so students can learn from it and move forward. The AI can also generate themed challenge variants for additional practice.",
+      "features": [
+        {
+          "title": "240 Progressive Challenges",
+          "description": "Challenges span HTML, CSS, JavaScript, and full-stack development, organized in a progressive difficulty curve that builds skills incrementally.",
+          "screenshot": "/portfolio/aict-main-challenges.png"
+        },
+        {
+          "title": "AI-Powered Tutor",
+          "description": "Claude 3.5 (Haiku & Sonnet) analyzes student code in real time to provide contextual explanations, hints, and personalized guidance based on actual mistakes."
+        },
+        {
+          "title": "Monaco Editor with Live Preview",
+          "description": "Students write code in the same editor engine as VS Code, with syntax highlighting, auto-completion, and a live preview pane showing results immediately.",
+          "screenshot": "/portfolio/aict-main-editor.png"
+        },
+        {
+          "title": "Three-Tier Hint System",
+          "description": "Enhanced challenges offer nudge, guide, and full walkthrough hints. Solutions unlock after three attempts to prevent frustration while encouraging genuine effort."
+        }
+      ],
+      "screenshots": [
+        { "src": "/portfolio/aict-main-hero.png", "alt": "AI Coding Tutor landing page", "caption": "The platform landing page with course overview" },
+        { "src": "/portfolio/aict-main-challenges.png", "alt": "Challenge selection view", "caption": "The challenge browser showing progressive difficulty tracks" },
+        { "src": "/portfolio/aict-main-editor.png", "alt": "Monaco editor with live preview", "caption": "The coding interface with Monaco editor, live preview, and AI tutor panel" }
+      ]
+    }
   },
   {
     "slug": "udemy-course-compressor-5000",
@@ -138,6 +278,30 @@
     ],
     "featured": false,
     "image": "/portfolio/udemy-compressor-1.png",
-    "lastUpdated": "2026-06-16T00:00:00Z"
+    "lastUpdated": "2026-06-16T00:00:00Z",
+    "details": {
+      "extendedDescription": "The Udemy Course Compress-a-macator 5000 solves a common problem for online learners: not every lecture in a course is equally valuable. Some lessons are essential hands-on exercises, others are quick overviews, and some can be safely skipped entirely.\n\nThe tool uses Playwright to drive a persistent Chromium session (using your existing Udemy login) to extract transcripts from every lecture in a course. These transcripts are then analyzed by Claude AI, which classifies each lesson into one of four categories: build (code along), watch (important concepts), skim (review quickly), or skip (redundant content).\n\nThe result is a compressed, reordered study plan that prioritizes the most valuable content. Both a React/Vite web interface and a CLI are available, backed by an Express API server.",
+      "features": [
+        {
+          "title": "Automated Transcript Extraction",
+          "description": "Playwright drives a persistent Chromium browser session using your existing Udemy credentials to extract transcripts from every lecture in a course."
+        },
+        {
+          "title": "AI-Powered Lesson Classification",
+          "description": "Claude AI (Haiku for initial classification, Sonnet for study plan generation) categorizes each lesson as build, watch, skim, or skip based on content analysis."
+        },
+        {
+          "title": "Optimized Study Plan",
+          "description": "Lessons are reordered into an optimal learning path that prioritizes hands-on building and essential concepts while deprioritizing redundant content."
+        },
+        {
+          "title": "Dual Interface",
+          "description": "Both a React/Vite web UI and a command-line interface are provided, giving users flexibility in how they interact with the tool."
+        }
+      ],
+      "screenshots": [
+        { "src": "/portfolio/udemy-compressor-1.png", "alt": "Udemy Compress-a-macator interface", "caption": "The web interface showing a compressed course study plan" }
+      ]
+    }
   }
 ]

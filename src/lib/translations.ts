@@ -171,6 +171,10 @@ export const translations = {
       footerBlog: 'Blog',
       footerProjects: 'Projects',
       footerPrivacy: 'Privacy',
+      viewDetails: 'View Details',
+      backToPortfolio: 'Back to Portfolio',
+      keyFeatures: 'Key Features',
+      screenshots: 'Screenshots',
     },
     jobs: {
       job0Title: 'Founder',
@@ -386,6 +390,10 @@ export const translations = {
       footerBlog: 'ブログ',
       footerProjects: 'プロジェクト',
       footerPrivacy: 'プライバシー',
+      viewDetails: '詳細を見る',
+      backToPortfolio: 'ポートフォリオに戻る',
+      keyFeatures: '主な機能',
+      screenshots: 'スクリーンショット',
     },
     jobs: {
       job0Title: '創業者',

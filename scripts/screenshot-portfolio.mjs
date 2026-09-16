@@ -1,40 +1,65 @@
 import { chromium } from 'playwright';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputDir = path.join(__dirname, '..', 'screenshots');
+const outputDir = path.join(__dirname, '..', 'public', 'portfolio');
 
-// Each app: up to 2 shots — [landing, secondary route or scrolled view]
+if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
 const apps = [
   {
-    label: 'AI Coding Tutor (AICT)',
+    label: 'Support Buddy X9000',
+    slug: 'support-buddy-x9000',
+    baseUrl: 'https://the-support-buddy-x9000.vercel.app',
     shots: [
-      { url: 'http://localhost:3000', file: 'aict-main-1.png', scrollY: 0 },
-      { url: 'http://localhost:3000/challenges', file: 'aict-main-2.png', scrollY: 0, fallbackScroll: 700 },
+      { suffix: 'hero', scrollY: 0 },
+      { suffix: 'pipeline', scrollY: 800 },
+      { suffix: 'features', scrollY: 1600 },
     ],
   },
   {
     label: 'AI Support Engineer',
+    slug: 'ai-support-engineer',
+    baseUrl: 'https://smart-ticket-system.vercel.app',
     shots: [
-      { url: 'http://localhost:3001', file: 'ai-support-engineer-1.png', scrollY: 0 },
-      { url: 'http://localhost:3001/tickets', file: 'ai-support-engineer-2.png', scrollY: 0, fallbackScroll: 600 },
+      { suffix: 'hero', scrollY: 0 },
+      { suffix: 'dashboard', scrollY: 700 },
+      { suffix: 'features', scrollY: 1400 },
+    ],
+  },
+  {
+    label: 'Inside the LLM',
+    slug: 'inside-the-llm',
+    baseUrl: 'https://inside-the-llm-nine.vercel.app',
+    shots: [
+      { suffix: 'hero', scrollY: 0 },
+      { suffix: 'pipeline', scrollY: 800 },
+      { suffix: 'visualization', scrollY: 1600 },
     ],
   },
   {
     label: 'KoeJLPT',
+    slug: 'jlpt-app',
+    baseUrl: 'https://jlpt-app-seven.vercel.app',
     shots: [
-      { url: 'http://localhost:3003', file: 'jlpt-app-1.png', scrollY: 0 },
-      { url: 'http://localhost:3003', file: 'jlpt-app-2.png', scrollY: 700 },
+      { suffix: 'hero', scrollY: 0 },
+      { suffix: 'study', scrollY: 700 },
+      { suffix: 'features', scrollY: 1400 },
     ],
   },
   {
-    label: 'AI Flashcard App',
+    label: 'AI Coding Tutor',
+    slug: 'aict-main',
+    baseUrl: 'https://aict-main-web.vercel.app',
     shots: [
-      { url: 'http://localhost:3004', file: 'ai-flashcard-app-1.png', scrollY: 0 },
-      { url: 'http://localhost:3004/flashcards', file: 'ai-flashcard-app-2.png', scrollY: 0, fallbackScroll: 400 },
+      { suffix: 'hero', scrollY: 0 },
+      { suffix: 'challenges', scrollY: 700 },
+      { suffix: 'editor', scrollY: 1400 },
     ],
   },
+  // Udemy Compress-a-macator has no live demo — skip
 ];
 
 const browser = await chromium.launch();
@@ -44,34 +69,21 @@ for (const app of apps) {
   for (const shot of app.shots) {
     const page = await browser.newPage();
     await page.setViewportSize({ width: 1280, height: 800 });
+    const file = `${app.slug}-${shot.suffix}.png`;
     try {
-      const resp = await page.goto(shot.url, { waitUntil: 'networkidle', timeout: 20000 });
-      await page.waitForTimeout(1500);
+      await page.goto(app.baseUrl, { waitUntil: 'networkidle', timeout: 30000 });
+      await page.waitForTimeout(2000);
 
-      // If navigated page looks like an error or redirect back to root, fall back to scrolling
-      const finalUrl = page.url();
-      const isErrorPage = await page.evaluate(() =>
-        document.body.innerText.includes('NOT_FOUND') ||
-        document.body.innerText.includes('404') ||
-        document.body.innerText.includes('Invalid host')
-      );
-
-      if (isErrorPage && shot.fallbackScroll !== undefined) {
-        console.log(`  ⚠ Route not available, falling back to scrolled home view`);
-        await page.goto(shot.url.replace(/\/[^/]+$/, ''), { waitUntil: 'networkidle', timeout: 15000 });
-        await page.waitForTimeout(1500);
-        await page.evaluate(y => window.scrollTo(0, y), shot.fallbackScroll);
-        await page.waitForTimeout(500);
-      } else if (shot.scrollY) {
-        await page.evaluate(y => window.scrollTo(0, y), shot.scrollY);
-        await page.waitForTimeout(500);
+      if (shot.scrollY > 0) {
+        await page.evaluate((y) => window.scrollTo(0, y), shot.scrollY);
+        await page.waitForTimeout(800);
       }
 
-      const outPath = path.join(outputDir, shot.file);
+      const outPath = path.join(outputDir, file);
       await page.screenshot({ path: outPath, fullPage: false });
-      console.log(`  ✓ ${shot.file}`);
+      console.log(`  ✓ ${file}`);
     } catch (err) {
-      console.error(`  ✗ ${shot.file}: ${err.message}`);
+      console.error(`  ✗ ${file}: ${err.message}`);
     }
     await page.close();
   }
