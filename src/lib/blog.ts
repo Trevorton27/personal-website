@@ -93,6 +93,16 @@ export async function getAllPostSlugs(): Promise<string[]> {
   return posts.map((p) => p.slug);
 }
 
+export async function getPostById(id: string): Promise<BlogPost | null> {
+  return prisma.blogPost.findUnique({
+    where: { id },
+    include: {
+      author: { select: { name: true } },
+      tags: { select: { id: true, name: true, slug: true } },
+    },
+  });
+}
+
 export async function getLatestPosts(count: number = 3): Promise<BlogPost[]> {
   return prisma.blogPost.findMany({
     where: {

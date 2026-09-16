@@ -162,7 +162,7 @@ export default async function AdminPostsPage({
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                       <div className="flex items-center justify-end gap-2">
                         <Link
-                          href={`/blog/${post.slug}`}
+                          href={`/blog/preview/${post.id}`}
                           target="_blank"
                           className="p-2 rounded text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                           title="View post"

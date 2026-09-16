@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Save, Trash2 } from 'lucide-react';
+import { ArrowLeft, Save, Trash2, ExternalLink } from 'lucide-react';
 
 interface Tag {
   id: string;
@@ -196,7 +196,18 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
           <ArrowLeft className="w-4 h-4" />
           Back to Posts
         </Link>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Post</h1>
+        <div className="flex items-center gap-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Post</h1>
+          <a
+            href={`/blog/preview/${postId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-secondary inline-flex items-center gap-2 text-sm"
+          >
+            <ExternalLink className="w-4 h-4" />
+            Preview
+          </a>
+        </div>
       </div>
 
       {error && (
