@@ -125,12 +125,13 @@ export function PortfolioDetailArticle({ project }: { project: PortfolioProject 
                   {feature.description}
                 </p>
                 {feature.screenshot && (
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
+                  <div className="overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
                     <Image
                       src={feature.screenshot}
                       alt={feature.title}
-                      fill
-                      className="object-cover"
+                      width={768}
+                      height={432}
+                      className="w-full h-auto"
                       sizes="(max-width: 768px) 100vw, 768px"
                     />
                   </div>

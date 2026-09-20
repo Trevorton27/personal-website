@@ -61,9 +61,9 @@
     "title": "AI Support Engineer — AI-Powered Customer Support Copilot",
     "description": "An AI-powered support copilot that layers on top of a customer support CRM. Support agents can analyze tickets, surface similar resolved cases, generate multi-tone reply drafts, and ask free-form questions — all powered by OpenAI with async job execution and live status updates.",
     "highlights": [
-      "Ticket analysis extracts signals, hypotheses, and clarifying questions via GPT-4o-mini.",
+      "AI Copilot sidebar with one-click ticket analysis, next-step suggestions, and a free-form question box — all powered by OpenAI.",
       "Vector search with pgvector (HNSW indexing) surfaces similar resolved cases in real time.",
-      "Multi-tone draft generation (Professional, Friendly, Concise, Surfer), RAG knowledge base pipeline, PII redaction, and full audit trail."
+      "Multi-tone draft generation (Professional, Friendly, Concise, Yoda, and more) with save, copy, and mark-as-sent actions."
     ],
     "category": "AI/Automation",
     "githubUrl": "https://github.com/Trevorton27/ai-support-engineer-integration",
@@ -95,18 +95,28 @@
       "extendedDescription": "The AI Support Engineer is a copilot built to augment — not replace — customer support agents. It integrates directly with an existing CRM workflow, adding AI-powered analysis, similarity search, and draft generation without changing how agents interact with tickets.\n\nWhen a new ticket arrives, the system uses GPT-4o-mini to extract key signals, form hypotheses about the root cause, and suggest clarifying questions. Simultaneously, pgvector-powered similarity search surfaces past resolved cases that match the current issue, giving agents instant context.\n\nAgents can generate reply drafts in multiple tones — Professional, Friendly, Concise, or Surfer — and the system includes PII redaction, a RAG-powered knowledge base for internal documentation, and a complete audit trail of every AI action taken.",
       "features": [
         {
-          "title": "Intelligent Ticket Analysis",
-          "description": "GPT-4o-mini extracts signals, hypotheses, and clarifying questions from ticket content, giving agents an instant head start on understanding the issue.",
-          "screenshot": "/portfolio/ai-support-engineer-dashboard.png"
+          "title": "Ticket Queue & Triage",
+          "description": "A sortable ticket queue displays all open issues with customer name, product area, priority level, and status at a glance — giving agents instant visibility into what needs attention.",
+          "screenshot": "/portfolio/ai-support-engineer-ticket-queue.png"
+        },
+        {
+          "title": "Ticket Interface with AI Copilot",
+          "description": "Each ticket opens a full conversation view alongside the AI Copilot sidebar. Agents see the full customer thread, ticket metadata, and AI-powered actions — Analyze Ticket, Suggest Next Steps, and Run Demo — without leaving the page.",
+          "screenshot": "/portfolio/ai-support-engineer-ticket-interface.png"
+        },
+        {
+          "title": "AI Copilot Panel",
+          "description": "The AI Copilot provides one-click ticket analysis, next-step suggestions, status management, multi-tone draft generation, a free-form question box, and automatic similar case retrieval — all powered by OpenAI.",
+          "screenshot": "/portfolio/ai-support-engineer-copilot.png"
+        },
+        {
+          "title": "Multi-Tone Reply Generation",
+          "description": "Generate customer reply drafts in multiple tones — Professional, Friendly, Concise, Yoda, and more. Drafts can be saved, copied, or marked as sent directly from the copilot panel.",
+          "screenshot": "/portfolio/ai-support-engineer-reply-generation.png"
         },
         {
           "title": "Vector Similarity Search",
           "description": "pgvector with HNSW indexing surfaces similar resolved cases in real time, so agents can reference past solutions without manual searching."
-        },
-        {
-          "title": "Multi-Tone Draft Generation",
-          "description": "Generate reply drafts in four distinct tones — Professional, Friendly, Concise, and Surfer — tailored to the ticket context and customer relationship.",
-          "screenshot": "/portfolio/ai-support-engineer-features.png"
         },
         {
           "title": "PII Redaction & Audit Trail",
@@ -114,9 +124,11 @@
         }
       ],
       "screenshots": [
-        { "src": "/portfolio/ai-support-engineer-hero.png", "alt": "AI Support Engineer landing page", "caption": "The CRM integration landing page with feature overview" },
-        { "src": "/portfolio/ai-support-engineer-dashboard.png", "alt": "Ticket analysis dashboard", "caption": "Ticket analysis showing extracted signals and similar resolved cases" },
-        { "src": "/portfolio/ai-support-engineer-features.png", "alt": "Draft generation and features", "caption": "Multi-tone draft generation with PII redaction controls" }
+        { "src": "/portfolio/ai-support-engineer-hero.png", "alt": "AI Support Engineer landing page", "caption": "The landing page — AI-powered support engineer copilot" },
+        { "src": "/portfolio/ai-support-engineer-ticket-queue.png", "alt": "Ticket queue with priority and status columns", "caption": "The ticket queue showing all open issues with priority, status, and product area" },
+        { "src": "/portfolio/ai-support-engineer-ticket-interface.png", "alt": "Ticket detail view with AI Copilot sidebar", "caption": "Full ticket conversation with the AI Copilot sidebar for analysis and draft generation" },
+        { "src": "/portfolio/ai-support-engineer-copilot.png", "alt": "AI Copilot panel close-up", "caption": "The AI Copilot panel — ticket analysis, status controls, draft generation, and similar case search" },
+        { "src": "/portfolio/ai-support-engineer-reply-generation.png", "alt": "AI-generated customer reply in Yoda tone", "caption": "Multi-tone reply generation with save, copy, and mark-as-sent actions" }
       ]
     }
   },
@@ -149,13 +161,23 @@
       "features": [
         {
           "title": "11-Stage Inference Pipeline",
-          "description": "From tokenization to RAG, each stage of LLM inference is presented as an interactive, explorable step with visual explanations.",
-          "screenshot": "/portfolio/inside-the-llm-pipeline.png"
+          "description": "Users enter a query and walk through every stage from Raw Input to RAG. Each stage is labeled as real or simulated computation, with beginner-friendly explanations, common misconceptions, and a \"Go deeper\" toggle for technical detail.",
+          "screenshot": "/portfolio/inside-the-llm-raw-input.png"
         },
         {
-          "title": "D3 Interactive Visualizations",
-          "description": "Attention heatmaps and embedding scatterplots built with D3.js let users interactively explore how the model processes information.",
-          "screenshot": "/portfolio/inside-the-llm-visualization.png"
+          "title": "Embedding Scatterplot",
+          "description": "Tokens are converted into 64-dimensional embedding vectors and projected onto an interactive D3 scatterplot. Hover over any token chip or dot to see how semantically similar tokens cluster together in vector space.",
+          "screenshot": "/portfolio/inside-the-llm-embeddings.png"
+        },
+        {
+          "title": "Attention Heatmap",
+          "description": "An interactive attention weights heatmap visualizes how every token attends to every other token. Four attention heads — Local, Position, Content, and Global — can be toggled to show different relationship patterns the model learns.",
+          "screenshot": "/portfolio/inside-the-llm-attention.png"
+        },
+        {
+          "title": "Temperature & Sampling Controls",
+          "description": "Interactive sliders for Temperature, Top-K, and Top-P (nucleus) let users sample tokens and see how each parameter reshapes the probability distribution across the top 20 candidate tokens in real time.",
+          "screenshot": "/portfolio/inside-the-llm-sampling.png"
         },
         {
           "title": "Beginner & Technical Modes",
@@ -168,8 +190,10 @@
       ],
       "screenshots": [
         { "src": "/portfolio/inside-the-llm-hero.png", "alt": "Inside the LLM landing page", "caption": "The landing page introducing the 11-stage inference visualization" },
-        { "src": "/portfolio/inside-the-llm-pipeline.png", "alt": "Pipeline stage view", "caption": "Walking through the transformer pipeline stages interactively" },
-        { "src": "/portfolio/inside-the-llm-visualization.png", "alt": "D3 visualization of attention", "caption": "Interactive D3 attention heatmap showing token relationships" }
+        { "src": "/portfolio/inside-the-llm-raw-input.png", "alt": "Raw Input stage with query and pipeline sidebar", "caption": "Stage 1: Raw Input — the full 11-stage pipeline sidebar with beginner explanation and common misconception callout" },
+        { "src": "/portfolio/inside-the-llm-embeddings.png", "alt": "Embeddings scatterplot visualization", "caption": "Stage 3: Embeddings — tokens projected onto a D3 scatterplot showing semantic clustering" },
+        { "src": "/portfolio/inside-the-llm-attention.png", "alt": "Attention heatmap with multiple heads", "caption": "Stage 5: Attention — heatmap showing token-to-token attention weights across four heads" },
+        { "src": "/portfolio/inside-the-llm-sampling.png", "alt": "Temperature and sampling controls with token distribution", "caption": "Stage 8: Temperature & Sampling — interactive sliders reshape the top-20 token probability distribution" }
       ]
     }
   },
@@ -211,18 +235,24 @@
       "extendedDescription": "KoeJLPT takes a voice-first approach to Japanese language study. Most JLPT prep apps focus on reading and multiple choice — KoeJLPT prioritizes speaking and listening, the skills that matter most for real communication.\n\nThe centerpiece is Fumi, an AI conversation partner powered by ElevenLabs WebRTC. Fumi speaks exclusively in Japanese at a pace appropriate to the learner's JLPT level, creating an immersive practice environment. Pronunciation is automatically graded using Google Cloud Speech-to-Text, with three distinct practice modes for different skill focuses.\n\nLevel-based vocabulary study covers all JLPT levels from N5 (beginner) through N1 (advanced), with native audio playback, save functionality for building personal study lists, and a persistent streak system to encourage daily practice.",
       "features": [
         {
-          "title": "AI Voice Conversations",
-          "description": "Real-time WebRTC voice conversations with AI partner Fumi, powered by ElevenLabs. Conversations happen exclusively in Japanese at a pace matched to the learner's level.",
-          "screenshot": "/portfolio/jlpt-app-study.png"
-        },
-        {
-          "title": "Pronunciation Grading",
-          "description": "Three practice modes with automatic pronunciation scoring via Google Cloud Speech-to-Text. Learners get immediate feedback on accuracy and areas for improvement."
+          "title": "Study Dashboard",
+          "description": "A personalized dashboard with JLPT level selector (N5-N1), quick-launch cards for Vocabulary, Pronunciation, Conversation, and Difficult Words review, plus activity stats and recent sessions at a glance.",
+          "screenshot": "/portfolio/jlpt-app-dashboard.png"
         },
         {
           "title": "Level-Based Vocabulary",
-          "description": "Complete vocabulary coverage from N5 to N1, with native audio playback, personal save lists, and spaced repetition to reinforce retention.",
-          "screenshot": "/portfolio/jlpt-app-features.png"
+          "description": "Browse and save vocabulary by JLPT level, sourced from a dedicated JLPT vocabulary API. Each card shows kanji, hiragana reading, romaji, English meaning, and native audio playback via ElevenLabs Text-to-Speech — with a save button to build personal study lists.",
+          "screenshot": "/portfolio/jlpt-app-vocab.png"
+        },
+        {
+          "title": "Conversation Practice",
+          "description": "Topic-based conversation practice powered by ElevenLabs Conversational AI with real-time WebRTC streaming. Nine topics — Self Introduction, School Life, Hobbies, Travel, Work & Career, and more — each with Voice and Text modes, Japanese labels, and JLPT level filtering. Includes Topics, Free Talk, and Vocab-based conversation modes.",
+          "screenshot": "/portfolio/jlpt-app-conversation.png"
+        },
+        {
+          "title": "Pronunciation Practice",
+          "description": "Listen to native audio via ElevenLabs TTS, record your own pronunciation, and get automatic grading via Google Cloud Speech-to-Text — transcriptions are compared using character-level Levenshtein distance to produce a 0–100 accuracy score. Three practice modes — Words, Phrases, and Difficult — with progress tracking across 15-word sets per level.",
+          "screenshot": "/portfolio/jlpt-app-pronunciation.png"
         },
         {
           "title": "Study Streak Tracking",
@@ -231,8 +261,10 @@
       ],
       "screenshots": [
         { "src": "/portfolio/jlpt-app-hero.png", "alt": "KoeJLPT landing page", "caption": "The KoeJLPT landing page with level selection" },
-        { "src": "/portfolio/jlpt-app-study.png", "alt": "Voice study interface", "caption": "The voice conversation interface with AI partner Fumi" },
-        { "src": "/portfolio/jlpt-app-features.png", "alt": "Vocabulary study features", "caption": "Level-based vocabulary study with audio playback and progress tracking" }
+        { "src": "/portfolio/jlpt-app-dashboard.png", "alt": "KoeJLPT study dashboard", "caption": "The study dashboard with level selector, quick-launch cards, activity stats, and recent sessions" },
+        { "src": "/portfolio/jlpt-app-vocab.png", "alt": "Vocabulary browser with kanji cards", "caption": "N2 vocabulary browser — kanji, reading, meaning, audio playback, and save to study list" },
+        { "src": "/portfolio/jlpt-app-conversation.png", "alt": "Conversation topic selection", "caption": "Conversation practice with nine topics, Voice and Text modes, and JLPT level filtering" },
+        { "src": "/portfolio/jlpt-app-pronunciation.png", "alt": "Pronunciation practice with listen and record", "caption": "Pronunciation practice — listen to native audio, record, and self-assess across Words, Phrases, and Difficult modes" }
       ]
     }
   },
@@ -273,28 +305,36 @@
       "extendedDescription": "The AI Coding Tutor is built on the belief that the best way to learn programming is by writing real code with intelligent guidance. Students work through 240 progressive challenges spanning HTML, CSS, JavaScript, and full-stack development, writing code directly in a browser-based Monaco editor — the same engine that powers VS Code.\n\nWhat makes this platform different is the AI tutor powered by Claude 3.5. Rather than just checking answers against a solution key, the AI analyzes the student's actual code to provide contextual help, explanations, and personalized guidance. It adapts to where the student is struggling and offers targeted assistance.\n\n160 of the challenges include enhanced variants with three-tier hints (nudge, guide, and full walkthrough) and multiple valid solutions. After three unsuccessful attempts, the solution is unlocked so students can learn from it and move forward. The AI can also generate themed challenge variants for additional practice.",
       "features": [
         {
-          "title": "240 Progressive Challenges",
-          "description": "Challenges span HTML, CSS, JavaScript, and full-stack development, organized in a progressive difficulty curve that builds skills incrementally.",
-          "screenshot": "/portfolio/aict-main-challenges.png"
+          "title": "HTML + CSS Challenges",
+          "description": "Level 2 challenges cover HTML and CSS fundamentals — students edit index.html, script.js, and style.css in a multi-tab Monaco Editor with syntax highlighting, then run automated tests to verify their solutions. Each challenge includes a Description, Tests, Hints, Solutions, and Real World context tabs.",
+          "screenshot": "/portfolio/aict-main-html-css.png"
         },
         {
-          "title": "AI-Powered Tutor",
-          "description": "Claude 3.5 (Haiku & Sonnet) analyzes student code in real time to provide contextual explanations, hints, and personalized guidance based on actual mistakes."
+          "title": "JavaScript Challenges",
+          "description": "Level 3 JavaScript challenges present pure function problems — Sum Array, Factorial, Palindrome, FizzBuzz, and more. Students implement functions in the Monaco Editor and run JSDOM-sandboxed tests to validate their code without leaving the browser.",
+          "screenshot": "/portfolio/aict-main-javascript.png"
         },
         {
-          "title": "Monaco Editor with Live Preview",
-          "description": "Students write code in the same editor engine as VS Code, with syntax highlighting, auto-completion, and a live preview pane showing results immediately.",
-          "screenshot": "/portfolio/aict-main-editor.png"
+          "title": "AI Tutor & Three-Tier Hints",
+          "description": "Claude Haiku 4.5 powers the AI Tutor chat panel, analyzing the student's current code, test results, and editor state to provide Socratic guidance. Three progressive hint levels (nudge, guide, walkthrough) give increasing detail, and suggested questions like \"What am I doing wrong?\" or \"Show me a more direct hint\" keep students moving.",
+          "screenshot": "/portfolio/aict-main-hints-tutor.png"
         },
         {
-          "title": "Three-Tier Hint System",
-          "description": "Enhanced challenges offer nudge, guide, and full walkthrough hints. Solutions unlock after three attempts to prevent frustration while encouraging genuine effort."
+          "title": "Full Stack Challenges & Test Runner",
+          "description": "Level 4 covers full-stack patterns — Loading/Error visuals, Import/Export JSON, Input masking, Tabs views, Debounced saves, and more. Tests run in a JSDOM sandbox on the server, executing student code against DOM assertions and returning pass/fail results per test case.",
+          "screenshot": "/portfolio/aict-main-fullstack.png"
+        },
+        {
+          "title": "AI Challenge Variant Generation",
+          "description": "The \"Generate AI Variant of Challenge\" button uses Claude 3.5 Haiku to create themed skins of existing challenges — new narratives and descriptions while keeping tests deterministic and unchanged, providing unlimited practice on the same concepts."
         }
       ],
       "screenshots": [
         { "src": "/portfolio/aict-main-hero.png", "alt": "AI Coding Tutor landing page", "caption": "The platform landing page with course overview" },
-        { "src": "/portfolio/aict-main-challenges.png", "alt": "Challenge selection view", "caption": "The challenge browser showing progressive difficulty tracks" },
-        { "src": "/portfolio/aict-main-editor.png", "alt": "Monaco editor with live preview", "caption": "The coding interface with Monaco editor, live preview, and AI tutor panel" }
+        { "src": "/portfolio/aict-main-html-css.png", "alt": "HTML + CSS challenge in Monaco Editor", "caption": "Level 2: HTML + CSS — multi-tab editor with Description, Tests, Hints, Solutions, and Real World tabs" },
+        { "src": "/portfolio/aict-main-javascript.png", "alt": "JavaScript challenge with function stub", "caption": "Level 3: JavaScript — pure function challenges like Sum Array with JSDOM-sandboxed test execution" },
+        { "src": "/portfolio/aict-main-hints-tutor.png", "alt": "Three-tier hints and AI Tutor chat panel", "caption": "Progressive hints (Level 1–3) alongside the Claude-powered AI Tutor with suggested questions" },
+        { "src": "/portfolio/aict-main-fullstack.png", "alt": "Full Stack challenge with test assertions", "caption": "Level 4: Full Stack — DOM-based test assertions for challenges like Print View and Debounced Saves" }
       ]
     }
   },
