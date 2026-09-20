@@ -73,6 +73,30 @@ export function PortfolioDetailArticle({ project }: { project: PortfolioProject 
         </div>
       )}
 
+      {/* Problem statement */}
+      {details?.problemStatement && (
+        <div className="mb-10 rounded-xl border-l-4 border-accent bg-accent/5 px-6 py-5">
+          <p className="text-base font-medium leading-relaxed text-gray-800 dark:text-gray-200">
+            {details.problemStatement}
+          </p>
+        </div>
+      )}
+
+      {/* Impact tags */}
+      {details?.impactTags && details.impactTags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-10">
+          {details.impactTags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
       {/* Extended description */}
       {details?.extendedDescription && (
         <div

@@ -171,7 +171,7 @@ export const translations = {
       footerBlog: 'Blog',
       footerProjects: 'Projects',
       footerPrivacy: 'Privacy',
-      viewDetails: 'View Details',
+      viewDetails: 'Learn more',
       backToPortfolio: 'Back to Portfolio',
       keyFeatures: 'Key Features',
       screenshots: 'Screenshots',

@@ -5,6 +5,8 @@ export type PortfolioScreenshot = { src: string; alt: string; caption?: string }
 export type PortfolioFeature = { title: string; description: string; screenshot?: string };
 export type PortfolioDetails = {
   extendedDescription: string;
+  problemStatement?: string;
+  impactTags?: string[];
   features: PortfolioFeature[];
   screenshots: PortfolioScreenshot[];
 };

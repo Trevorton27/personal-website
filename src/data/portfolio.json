@@ -2,11 +2,11 @@
   {
     "slug": "support-buddy-x9000",
     "title": "The Support Buddy X9000 — Agentic Support Engineering Platform",
-    "description": "An agentic support engineering platform that investigates tickets, gathers evidence, identifies root causes, and—with human approval—hands validated issues to an autonomous coding workflow for reproduction, testing, fixes, and pull requests.",
+    "description": "An agentic support engineering platform built around a Mission Control work queue. A 10-agent LangGraph pipeline investigates tickets in parallel, ranks root causes with evidence, and—with human approval—hands validated issues to Devin AI for autonomous bug reproduction, fix authoring, and session tracking.",
     "highlights": [
-      "9-node LangGraph investigation pipeline with parallel evidence gathering, RAG knowledge search, and root-cause ranking.",
-      "Devin AI integration for autonomous bug reproduction, code fixes, and pull-request generation—gated by human-in-the-loop approval.",
-      "Inngest-driven async orchestration with GitHub issue sync, incident clustering, and full agent execution audit trail."
+      "10-agent LangGraph investigation pipeline with parallel evidence gathering, RAG knowledge search, and root-cause ranking.",
+      "Devin AI integration for autonomous bug reproduction, code fixes, and defect authoring—tracked in a dedicated session dashboard.",
+      "Mission Control work queue with shift briefing, responsibility overview, approval queue, and priority ticket triage."
     ],
     "category": "AI/Automation",
     "githubUrl": "https://github.com/Trevorton27/The-Support-Buddy-X9000",
@@ -16,31 +16,43 @@
     "image": "/portfolio/support-buddy-x9000.png",
     "lastUpdated": "2026-09-16T00:00:00Z",
     "details": {
-      "extendedDescription": "The Support Buddy X9000 is a fully agentic support engineering platform designed to transform how support teams handle incoming tickets. Rather than relying on manual triage and investigation, the platform uses a 9-node LangGraph pipeline to autonomously investigate each ticket — gathering evidence from logs, documentation, and past incidents in parallel.\n\nOnce the investigation is complete and a root cause has been identified and ranked, the system presents its findings to a human reviewer. With approval, it hands the validated issue off to Devin AI, which autonomously reproduces the bug, writes a fix, runs tests, and opens a pull request.\n\nThe entire workflow is orchestrated through Inngest for reliable async execution, with full audit trails, GitHub issue synchronization, and incident clustering to catch recurring patterns before they escalate.",
+      "problemStatement": "Support teams burn hours manually triaging tickets that follow the same patterns — this platform autonomously investigates, ranks root causes, and hands validated fixes to an AI coding agent, so engineers focus only on what needs human judgment.",
+      "impactTags": [
+        "Reduces triage time",
+        "Human-in-the-loop safe",
+        "Production-ready stack",
+        "AI agent orchestration",
+        "Autonomous bug reproduction"
+      ],
+      "extendedDescription": "The Support Buddy X9000 is a fully agentic support engineering platform built around a Mission Control dashboard — a prioritized work queue that gives support engineers a real-time view of active responsibilities, approval queues, and shift briefings.\n\nWhen a ticket is escalated for investigation, a pipeline of 10 specialized AI agents runs in parallel: classifying the ticket, pulling customer context, analyzing logs, searching the knowledge base, correlating incidents and deployments, ranking root cause hypotheses, drafting responses, and running guardrails checks. Each agent's inputs, outputs, and reasoning are visible in the investigation view.\n\nOnce a root cause is confirmed and approved, the issue is handed off to Devin AI, which autonomously reproduces the bug, authors fixes, and tracks each session — total tasks, active reproductions, finished fixes, and failed attempts — in a dedicated Devin AI dashboard.",
       "features": [
         {
-          "title": "9-Node Investigation Pipeline",
-          "description": "A LangGraph-powered pipeline that parallelizes evidence gathering across logs, documentation, and historical incidents, then ranks potential root causes by confidence score.",
-          "screenshot": "/portfolio/support-buddy-x9000-pipeline.png"
+          "title": "Mission Control Dashboard",
+          "description": "A prioritized work queue showing active responsibilities, shift briefing, responsibility overview (Needs Action, In Progress, Waiting Customer, Pending Approvals), and a live priority ticket queue with urgency classification.",
+          "screenshot": "/portfolio/support-buddy-x9000-mission-control.png"
         },
         {
-          "title": "Human-in-the-Loop Approval",
-          "description": "Every autonomous action is gated by human approval. The system presents investigation findings with evidence before requesting permission to proceed with automated fixes."
+          "title": "Live Investigation View",
+          "description": "Watch the 10-agent pipeline run in real time — Ticket Classification, Customer Context, Log Analysis, and Knowledge Retrieval execute in parallel while Root Cause Hypotheses build with confidence scores and supporting evidence.",
+          "screenshot": "/portfolio/support-buddy-x9000-investigation.png"
         },
         {
-          "title": "Devin AI Coding Integration",
-          "description": "Validated issues are handed to Devin AI, which autonomously reproduces bugs, writes fixes, runs the test suite, and opens pull requests — all without manual intervention.",
-          "screenshot": "/portfolio/support-buddy-x9000-features.png"
+          "title": "10-Agent Pipeline",
+          "description": "Each of the 10 specialized agents handles one aspect of the investigation: Ticket Classification → Customer Context → Log Analysis → Knowledge Retrieval → Incident Correlation → Deployment Correlation → Root Cause Analysis → Response Drafting → Guardrails Check → Escalation Note. The About Agents view documents every agent's inputs, outputs, and how it helps troubleshoot.",
+          "screenshot": "/portfolio/support-buddy-x9000-agents.png"
         },
         {
-          "title": "Inngest Async Orchestration",
-          "description": "Inngest handles all background job execution with built-in retries, rate limiting, and observability, ensuring the pipeline remains reliable at scale."
+          "title": "Devin AI Bug Reproduction",
+          "description": "Validated issues are handed to Devin AI, which autonomously reproduces bugs and authors fixes. A dedicated dashboard tracks every session — total tasks, active reproductions, finished fixes, failed attempts, and average poll count — giving engineers full visibility without manual follow-up.",
+          "screenshot": "/portfolio/support-buddy-x9000-devin.png"
         }
       ],
       "screenshots": [
-        { "src": "/portfolio/support-buddy-x9000-hero.png", "alt": "Support Buddy X9000 landing page", "caption": "The main dashboard showing active investigations and ticket queue" },
-        { "src": "/portfolio/support-buddy-x9000-pipeline.png", "alt": "Investigation pipeline view", "caption": "The 9-node LangGraph investigation pipeline processing a ticket" },
-        { "src": "/portfolio/support-buddy-x9000-features.png", "alt": "Feature overview and results", "caption": "Investigation results with root cause ranking and Devin integration" }
+        { "src": "/portfolio/support-buddy-x9000-hero.png", "alt": "Support Buddy X9000 landing page", "caption": "The landing page — AI-powered support mission control" },
+        { "src": "/portfolio/support-buddy-x9000-mission-control.png", "alt": "Mission Control dashboard", "caption": "Mission Control: prioritized work queue with shift briefing and responsibility overview" },
+        { "src": "/portfolio/support-buddy-x9000-investigation.png", "alt": "Live investigation view", "caption": "A live investigation — agent pipeline running in parallel alongside root cause hypotheses" },
+        { "src": "/portfolio/support-buddy-x9000-agents.png", "alt": "About the investigation agents", "caption": "The 10-agent pipeline flow with per-agent inputs, outputs, and troubleshooting logic" },
+        { "src": "/portfolio/support-buddy-x9000-devin.png", "alt": "Devin AI bug reproduction dashboard", "caption": "Devin AI session tracking — reproduction status, fixes submitted, and avg poll count" }
       ]
     }
   },
@@ -72,6 +84,14 @@
     "image": "/portfolio/ai-support-engineer-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z",
     "details": {
+      "problemStatement": "Support agents waste hours searching for similar resolved tickets and drafting replies from scratch — this copilot surfaces relevant cases instantly and generates ready-to-send drafts, without replacing the agent's judgment.",
+      "impactTags": [
+        "Reduces handle time",
+        "Augments agents, not replaces",
+        "PII-safe by design",
+        "Vector similarity search",
+        "Multi-tone AI drafts"
+      ],
       "extendedDescription": "The AI Support Engineer is a copilot built to augment — not replace — customer support agents. It integrates directly with an existing CRM workflow, adding AI-powered analysis, similarity search, and draft generation without changing how agents interact with tickets.\n\nWhen a new ticket arrives, the system uses GPT-4o-mini to extract key signals, form hypotheses about the root cause, and suggest clarifying questions. Simultaneously, pgvector-powered similarity search surfaces past resolved cases that match the current issue, giving agents instant context.\n\nAgents can generate reply drafts in multiple tones — Professional, Friendly, Concise, or Surfer — and the system includes PII redaction, a RAG-powered knowledge base for internal documentation, and a complete audit trail of every AI action taken.",
       "features": [
         {
@@ -117,6 +137,14 @@
     "image": "/portfolio/inside-the-llm-1.png",
     "lastUpdated": "2026-09-16T00:00:00Z",
     "details": {
+      "problemStatement": "LLMs are a black box to most people — including the engineers and executives making decisions about them. This tool turns the inference process into something you can see and interact with, stage by stage.",
+      "impactTags": [
+        "Technical education tool",
+        "Zero backend required",
+        "Real GPT tokenizer",
+        "D3 interactive viz",
+        "Beginner & expert modes"
+      ],
       "extendedDescription": "Inside the LLM is an educational tool designed to demystify how large language models actually work. Instead of treating inference as a black box, it breaks the process into 11 interactive stages that users can explore at their own pace.\n\nStarting with tokenization (using the real GPT tokenizer), users can see how text becomes tokens, how those tokens are embedded into high-dimensional vectors, and how positional encoding gives the model a sense of order. The attention mechanism is visualized with interactive D3 heatmaps that show which tokens attend to which.\n\nThe project is honest about what is simulated and what is real computation. It runs entirely in the browser with zero API calls, but the architecture uses a provider pattern that would allow swapping in real model backends without any UI changes. Both beginner and technical explanation modes are available for each stage.",
       "features": [
         {
@@ -172,6 +200,14 @@
     "image": "/portfolio/koe-jlpt-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z",
     "details": {
+      "problemStatement": "Most JLPT prep apps are glorified flashcard decks — KoeJLPT builds real speaking and listening fluency through AI voice conversations and automatic pronunciation grading, closing the gap between study and actual use.",
+      "impactTags": [
+        "Real-time voice AI",
+        "WebRTC-powered",
+        "Automatic pronunciation grading",
+        "N5–N1 coverage",
+        "Streak-based engagement"
+      ],
       "extendedDescription": "KoeJLPT takes a voice-first approach to Japanese language study. Most JLPT prep apps focus on reading and multiple choice — KoeJLPT prioritizes speaking and listening, the skills that matter most for real communication.\n\nThe centerpiece is Fumi, an AI conversation partner powered by ElevenLabs WebRTC. Fumi speaks exclusively in Japanese at a pace appropriate to the learner's JLPT level, creating an immersive practice environment. Pronunciation is automatically graded using Google Cloud Speech-to-Text, with three distinct practice modes for different skill focuses.\n\nLevel-based vocabulary study covers all JLPT levels from N5 (beginner) through N1 (advanced), with native audio playback, save functionality for building personal study lists, and a persistent streak system to encourage daily practice.",
       "features": [
         {
@@ -226,6 +262,14 @@
     "image": "/portfolio/aict-main-1.png",
     "lastUpdated": "2026-05-13T00:00:00Z",
     "details": {
+      "problemStatement": "Coding bootcamps and online courses teach concepts — but students only improve by writing actual code with immediate, intelligent feedback. This platform gives every learner a personal AI tutor that reads their code and meets them where they're stuck.",
+      "impactTags": [
+        "240 real coding challenges",
+        "Claude 3.5 AI tutor",
+        "VS Code-grade editor",
+        "Three-tier hint system",
+        "Prevents frustration loops"
+      ],
       "extendedDescription": "The AI Coding Tutor is built on the belief that the best way to learn programming is by writing real code with intelligent guidance. Students work through 240 progressive challenges spanning HTML, CSS, JavaScript, and full-stack development, writing code directly in a browser-based Monaco editor — the same engine that powers VS Code.\n\nWhat makes this platform different is the AI tutor powered by Claude 3.5. Rather than just checking answers against a solution key, the AI analyzes the student's actual code to provide contextual help, explanations, and personalized guidance. It adapts to where the student is struggling and offers targeted assistance.\n\n160 of the challenges include enhanced variants with three-tier hints (nudge, guide, and full walkthrough) and multiple valid solutions. After three unsuccessful attempts, the solution is unlocked so students can learn from it and move forward. The AI can also generate themed challenge variants for additional practice.",
       "features": [
         {
@@ -280,6 +324,14 @@
     "image": "/portfolio/udemy-compressor-1.png",
     "lastUpdated": "2026-06-16T00:00:00Z",
     "details": {
+      "problemStatement": "Online courses are padded — not every lecture is worth your time. This tool reads the whole course for you, classifies each lesson, and hands back an optimized path so you spend time building, not skimming.",
+      "impactTags": [
+        "Cuts wasted study time",
+        "AI-classified lessons",
+        "Playwright automation",
+        "CLI + Web UI",
+        "Works with any Udemy course"
+      ],
       "extendedDescription": "The Udemy Course Compress-a-macator 5000 solves a common problem for online learners: not every lecture in a course is equally valuable. Some lessons are essential hands-on exercises, others are quick overviews, and some can be safely skipped entirely.\n\nThe tool uses Playwright to drive a persistent Chromium session (using your existing Udemy login) to extract transcripts from every lecture in a course. These transcripts are then analyzed by Claude AI, which classifies each lesson into one of four categories: build (code along), watch (important concepts), skim (review quickly), or skip (redundant content).\n\nThe result is a compressed, reordered study plan that prioritizes the most valuable content. Both a React/Vite web interface and a CLI are available, backed by an Express API server.",
       "features": [
         {

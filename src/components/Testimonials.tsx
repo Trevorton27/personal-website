@@ -23,9 +23,9 @@ export function Testimonials({ isDark }: { isDark: boolean }) {
   return (
     <section className="mx-auto max-w-5xl px-6 pt-14 pb-24 md:pt-20 md:pb-32">
       <div className="mb-12">
-        <h2 className={`text-sm font-medium tracking-wide uppercase ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+        <h3 className={`text-2xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
           What People Say
-        </h2>
+        </h3>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
