@@ -28,6 +28,7 @@
     "gray-matter": "^4.0.3",
     "iron-session": "^8.0.3",
     "lucide-react": "^0.562.0",
+    "marked": "^18.0.14",
     "next": "15.5.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

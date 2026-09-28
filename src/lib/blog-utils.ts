@@ -23,9 +23,13 @@ export function getReadingTime(content: string): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
+import { marked } from 'marked';
+
 /**
- * Converts plain text content to HTML paragraphs.
+ * Converts content to HTML.
  * If content already contains HTML block elements, returns it as-is.
+ * If content contains markdown syntax, parses it with marked.
+ * Otherwise, wraps plain text in paragraph tags.
  */
 export function contentToHtml(content: string): string {
   // If content already has HTML block elements, return as-is
@@ -33,7 +37,12 @@ export function contentToHtml(content: string): string {
     return content;
   }
 
-  // Split on double newlines (paragraph breaks) and wrap each in <p> tags
+  // Check for common markdown syntax
+  if (/^#{1,6}\s|^\*\s|^-\s|^\d+\.\s|\*\*|__|\[.*\]\(.*\)|^>/m.test(content)) {
+    return marked.parse(content, { async: false }) as string;
+  }
+
+  // Plain text: split on double newlines and wrap in <p> tags
   return content
     .split(/\n{2,}/)
     .map((para) => para.trim())
