@@ -2,29 +2,29 @@
   {
     "slug": "support-buddy-x9000",
     "title": "The Support Buddy X9000 — Agentic Support Engineering Platform",
-    "description": "An agentic support engineering platform built around a Mission Control work queue. A 10-agent LangGraph pipeline investigates tickets in parallel, ranks root causes with evidence, and—with human approval—hands validated issues to Devin AI for autonomous bug reproduction, fix authoring, and session tracking.",
+    "description": "An agentic support engineering platform built around a Mission Control work queue. A 10-agent LangGraph pipeline investigates tickets in parallel and ranks root causes with evidence. JevOps, an AI decision-reliability layer, uses TypeSafe AI's Jev model to score every drafted reply. After human approval, Devin AI reproduces the bug and opens a fix PR, and Jev reviews that PR before anyone merges it.",
     "highlights": [
       "10-agent LangGraph investigation pipeline with parallel evidence gathering, RAG knowledge search, and root-cause ranking.",
-      "Devin AI integration for autonomous bug reproduction, code fixes, and defect authoring—tracked in a dedicated session dashboard.",
-      "Mission Control work queue with shift briefing, responsibility overview, approval queue, and priority ticket triage."
+      "JevOps integration: TypeSafe AI's Jev model scores drafted replies and Devin PRs (allow / retry / human_review / block), and reviewer decisions and merge outcomes are fed back for calibration.",
+      "Devin AI integration for autonomous bug reproduction and fix PRs, with a live two-way chat and a \"send back to Devin\" loop driven by Jev's review."
     ],
     "category": "AI/Automation",
     "githubUrl": "https://github.com/Trevorton27/The-Support-Buddy-X9000",
     "demoUrl": "https://the-support-buddy-x9000.vercel.app/",
-    "techStack": ["Next.js 15", "TypeScript", "LangGraph", "PostgreSQL", "pgvector", "Inngest", "Devin"],
+    "techStack": ["Next.js 15", "TypeScript", "LangGraph", "PostgreSQL", "pgvector", "Inngest", "Devin", "JevOps / Jev"],
     "featured": true,
     "image": "/portfolio/support-buddy-x9000.png",
-    "lastUpdated": "2026-09-16T00:00:00Z",
+    "lastUpdated": "2026-10-06T00:00:00Z",
     "details": {
-      "problemStatement": "Support teams burn hours manually triaging tickets that follow the same patterns — this platform autonomously investigates, ranks root causes, and hands validated fixes to an AI coding agent, so engineers focus only on what needs human judgment.",
+      "problemStatement": "Support teams burn hours manually triaging tickets that follow the same patterns. This platform investigates them on its own, ranks root causes, and hands validated fixes to an AI coding agent. A second AI judge checks each decision along the way, so engineers spend their time only on what needs human judgment.",
       "impactTags": [
         "Reduces triage time",
         "Human-in-the-loop safe",
-        "Production-ready stack",
+        "AI decision reliability (Jev)",
         "AI agent orchestration",
-        "Autonomous bug reproduction"
+        "Autonomous bug reproduction & fixes"
       ],
-      "extendedDescription": "The Support Buddy X9000 is a fully agentic support engineering platform built around a Mission Control dashboard — a prioritized work queue that gives support engineers a real-time view of active responsibilities, approval queues, and shift briefings.\n\nWhen a ticket is escalated for investigation, a pipeline of 10 specialized AI agents runs in parallel: classifying the ticket, pulling customer context, analyzing logs, searching the knowledge base, correlating incidents and deployments, ranking root cause hypotheses, drafting responses, and running guardrails checks. Each agent's inputs, outputs, and reasoning are visible in the investigation view.\n\nOnce a root cause is confirmed and approved, the issue is handed off to Devin AI, which autonomously reproduces the bug, authors fixes, and tracks each session — total tasks, active reproductions, finished fixes, and failed attempts — in a dedicated Devin AI dashboard.",
+      "extendedDescription": "The Support Buddy X9000 is a fully agentic support engineering platform built around a Mission Control dashboard. Mission Control is a prioritized work queue that gives support engineers a real-time view of active responsibilities, approval queues, and shift briefings.\n\nWhen a ticket is escalated for investigation, a pipeline of 10 specialized AI agents runs, with evidence-gathering agents working in parallel. The agents classify the ticket, pull customer context, analyze logs, search the knowledge base, correlate incidents and deployments, rank root-cause hypotheses, draft a response, and run guardrails checks. Each agent's inputs, outputs, and reasoning are visible in the investigation view.\n\nGuardrails run in three passes: deterministic PII and secret checks, an LLM policy check, and JevOps. JevOps is an AI decision-reliability layer that sends the drafted reply to TypeSafe AI's Jev model. It applies policy rules and returns a typed decision: allow, retry, human_review, or block. A block fails the guardrails check. The decision appears on the investigation page in a \"My Name Jev\" panel. When the reviewer approves or rejects the reply, that outcome is sent back to JevOps as ground truth. If JevOps is unavailable, the platform falls back to the local guardrails.\n\nOnce a root cause is confirmed and approved, Devin AI reproduces the bug and opens a fix PR. Engineers can watch and reply to Devin in a live chat on the task card. When a fix PR lands, Jev reviews it for merge readiness. It scores whether the fix addresses the root cause, whether the tests are credible, and how risky the merge is, and deterministic policy blocks untested changes to sensitive paths. With one click, failing judgments are sent back to Devin for another round, up to two. When the PR is merged or closed, that outcome is sent back to JevOps to calibrate it.",
       "features": [
         {
           "title": "Mission Control Dashboard",
@@ -42,9 +42,17 @@
           "screenshot": "/portfolio/support-buddy-x9000-agents.png"
         },
         {
-          "title": "Devin AI Bug Reproduction",
-          "description": "Validated issues are handed to Devin AI, which autonomously reproduces bugs and authors fixes. A dedicated dashboard tracks every session — total tasks, active reproductions, finished fixes, failed attempts, and average poll count — giving engineers full visibility without manual follow-up.",
+          "title": "JevOps Decision Reliability (Jev)",
+          "description": "Before a drafted reply reaches a reviewer, JevOps asks TypeSafe AI's Jev model whether sending it is appropriate. The investigation page shows the disposition, the matched policy rule, judgments with confidence, model latency, and a link to the JevOps dashboard. Clear error states cover timeouts, provider failures, and missing configuration. Reviewer approvals and rejections are recorded as ground truth, and a block from Jev fails the guardrails check."
+        },
+        {
+          "title": "Devin AI Reproduction, Fixes & Live Chat",
+          "description": "Validated issues are handed to Devin AI, which reproduces the bug and opens a fix PR linked back to the original ticket and GitHub issue. Each task card shows a live two-way chat with Devin, including whether it is starting up, working, or waiting for a reply. A dedicated dashboard tracks every session: total tasks, active reproductions, fixes submitted, and failed attempts.",
           "screenshot": "/portfolio/support-buddy-x9000-devin.png"
+        },
+        {
+          "title": "Jev Review of Devin Output",
+          "description": "When a Devin fix task opens a pull request, Jev scores it for merge readiness: does it fix the root cause, are the tests credible, how risky is the merge, and how should it be routed. Local policy can only make the result stricter, and untested changes to auth, billing, migrations, or infra are blocked. One click sends the failing judgments back to Devin for another round, and merge or close outcomes are fed back to JevOps."
         }
       ],
       "screenshots": [
