@@ -291,7 +291,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
               <select
                 className="input"
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as typeof formData.status })}
               >
                 <option value="DRAFT">Draft</option>
                 <option value="PUBLISHED">Published</option>

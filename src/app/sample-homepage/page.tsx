@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function SampleHomepage() {
   const [isDark, setIsDark] = useState(true);
@@ -28,14 +29,14 @@ export default function SampleHomepage() {
           : "border-black/5 bg-white/80"
       }`}>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="/" className="flex items-center gap-3 font-semibold tracking-tight">
+          <Link href="/" className="flex items-center gap-3 font-semibold tracking-tight">
             <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${isDark ? "bg-gradient-to-br from-[#d48a27] via-[#c97b22] to-[#8b5cf6] shadow-lg shadow-[#8b5cf6]/25" : "bg-gradient-to-br from-[#d48a27] via-[#c97b22] to-[#4B5563] shadow-lg shadow-[#4B5563]/25"}`}>
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
             </span>
             <span className="text-lg">Trevor Mearns</span>
-          </a>
+          </Link>
 
           <nav className={`hidden items-center gap-1 text-sm md:flex`}>
             {["About", "Skills", "Experience", "Portfolio", "Blog", "Contact"].map((item, i) => (
@@ -485,7 +486,7 @@ export default function SampleHomepage() {
                 Short, practical writeups on debugging, cloud support patterns, and building full-stack systems.
               </p>
             </div>
-            <a href="/blog" className="text-sm font-semibold text-[#d48a27] hover:underline">All posts →</a>
+            <Link href="/blog" className="text-sm font-semibold text-[#d48a27] hover:underline">All posts →</Link>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -591,7 +592,7 @@ export default function SampleHomepage() {
             <p>© {new Date().getFullYear()} Trevor Mearns</p>
             <div className="flex flex-wrap gap-6">
               <a href="/privacy" className="hover:text-[#d48a27] transition-colors">Privacy</a>
-              <a href="/blog" className="hover:text-[#d48a27] transition-colors">Blog</a>
+              <Link href="/blog" className="hover:text-[#d48a27] transition-colors">Blog</Link>
               <a href="/projects" className="hover:text-[#d48a27] transition-colors">Projects</a>
             </div>
           </div>

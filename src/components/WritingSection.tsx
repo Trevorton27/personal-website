@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   formatPostDateShort,
   getReadingTime,
@@ -31,9 +32,9 @@ export function WritingSection({ isDark, posts, t }: WritingSectionProps) {
           >
             {label('home.writingTitle', 'Writing')}
           </h2>
-          <a href="/blog" className="text-sm text-accent hover:underline">
+          <Link href="/blog" className="text-sm text-accent hover:underline">
             {label('home.allPosts', 'All posts')} →
-          </a>
+          </Link>
         </div>
         <p className={isDark ? 'text-slate-500' : 'text-slate-500'}>
           {label('home.noPosts', 'No posts yet. Check back soon!')}
@@ -50,9 +51,9 @@ export function WritingSection({ isDark, posts, t }: WritingSectionProps) {
         >
           {label('home.writingTitle', 'Writing')}
         </h2>
-        <a href="/blog" className="text-sm text-accent hover:underline">
+        <Link href="/blog" className="text-sm text-accent hover:underline">
           {label('home.allPosts', 'All posts')} →
-        </a>
+        </Link>
       </div>
 
       <div className="space-y-8">

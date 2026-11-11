@@ -97,14 +97,14 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
         }`}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 h-16" aria-label="Main navigation">
-          <a href="/" className="flex items-center gap-3 font-medium flex-shrink-0">
+          <Link href="/" className="flex items-center gap-3 font-medium flex-shrink-0">
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-black">
               <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
             </span>
             <span className="hidden sm:inline">Trevor Mearns</span>
-          </a>
+          </Link>
 
           <div className="hidden lg:flex items-center gap-8 text-sm">
             {navItems.map((item) => (
@@ -473,12 +473,12 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} Trevor Mearns</p>
             <div className="flex flex-wrap items-center gap-6">
-              <a href="/#portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
+              <Link href="/#portfolio" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerProjects')}
-              </a>
-              <a href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
+              </Link>
+              <Link href="/blog" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerBlog')}
-              </a>
+              </Link>
               <a href="/privacy" className={`transition-colors ${isDark ? "hover:text-slate-300" : "hover:text-slate-700"}`}>
                 {t('home.footerPrivacy')}
               </a>

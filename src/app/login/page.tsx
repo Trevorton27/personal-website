@@ -34,9 +34,9 @@ export default function LoginPage() {
       }
 
       router.push('/admin');
-    } catch (err: any) {
+    } catch (err) {
       setStatus('error');
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'Login failed');
     }
   };
 

@@ -13,13 +13,13 @@ export default function PrivacyPage() {
       <main className="mx-auto max-w-3xl px-6 py-12 prose dark:prose-invert">
         <h1>Privacy Policy</h1>
         <p><strong>Last updated: August 2026</strong></p>
-        <p>Welcome to my privacy policy—the page everyone definitely reads before clicking "Accept."</p>
+        <p>Welcome to my privacy policy—the page everyone definitely reads before clicking &quot;Accept.&quot;</p>
         <p>Fortunately, this one is relatively painless.</p>
 
         <h2>The Short Version</h2>
-        <p>I'm not particularly interested in your data.</p>
-        <p>This website exists to show you who I am, what I build, and what I work on. It is not an elaborate scheme to determine which brand of toothpaste you're thinking about buying.</p>
-        <p>I don't sell your personal information. I don't maintain a shadowy data brokerage operation. I don't have a secret underground analytics bunker.</p>
+        <p>I&apos;m not particularly interested in your data.</p>
+        <p>This website exists to show you who I am, what I build, and what I work on. It is not an elaborate scheme to determine which brand of toothpaste you&apos;re thinking about buying.</p>
+        <p>I don&apos;t sell your personal information. I don&apos;t maintain a shadowy data brokerage operation. I don&apos;t have a secret underground analytics bunker.</p>
 
         <h2>Information You Give Me</h2>
         <p>If you contact me through this website, you may voluntarily provide things such as:</p>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
           <li>Operate and maintain the website</li>
           <li>Respond to messages</li>
           <li>Diagnose technical problems</li>
-          <li>Improve the site's functionality and usability</li>
+          <li>Improve the site&apos;s functionality and usability</li>
           <li>Prevent abuse or security problems</li>
         </ul>
         <p>In other words: normal website things.</p>
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
 
         <h2>Data Security</h2>
         <p>Reasonable technical measures are used to protect information handled by this website.</p>
-        <p>No Internet-connected system, however, can guarantee absolute security. Anyone promising otherwise is either lying or has somehow invented an Internet I haven't heard about.</p>
+        <p>No Internet-connected system, however, can guarantee absolute security. Anyone promising otherwise is either lying or has somehow invented an Internet I haven&apos;t heard about.</p>
 
         <h2>Data Retention</h2>
         <p>I keep personal information only for as long as reasonably necessary for the purpose for which it was collected or where retention is otherwise required.</p>
@@ -77,12 +77,12 @@ export default function PrivacyPage() {
 
         <h2>Your Choices</h2>
         <p>Depending on where you live, you may have rights concerning your personal information, including requesting access, correction, or deletion.</p>
-        <p>If you have contacted me and would like your information deleted, contact me and I'll handle the request where applicable.</p>
+        <p>If you have contacted me and would like your information deleted, contact me and I&apos;ll handle the request where applicable.</p>
         <p>No ceremonial paperwork or carrier pigeon required.</p>
 
         <h2>Changes to This Policy</h2>
         <p>I may occasionally update this policy as the website changes.</p>
-        <p>If anything significant changes, I'll update this page and the date above.</p>
+        <p>If anything significant changes, I&apos;ll update this page and the date above.</p>
         <p>I will resist the temptation to send everyone a 6,000-word email announcing that paragraph 7.3(b) has been modified.</p>
 
         <h2>Contact</h2>
