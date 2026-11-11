@@ -1,0 +1,29 @@
+name: guardrails
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # needed to inspect every commit in the PR
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Add project setup steps here if the type check needs them,
+      # e.g. `npx prisma generate` for Prisma projects.
+
+      - run: npx prisma generate
+
+      - name: Lint, type check, tests and commit hygiene
+        run: node .claude/hooks/ci.mjs ${{ github.base_ref }}

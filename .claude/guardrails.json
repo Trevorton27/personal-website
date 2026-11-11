@@ -1,0 +1,50 @@
+{
+  "$comment": "Per-project settings for the engineering guardrail hooks. Edit this file, not the hook scripts. {files} / {file} are replaced with shell-quoted paths.",
+  "maxCommitLines": 400,
+  "sourcePaths": [
+    "src/"
+  ],
+  "testPaths": [
+    "__tests__/"
+  ],
+  "testFilePattern": "\\.(test|spec)\\.(ts|tsx|js|jsx|mjs)$",
+  "codeFilePattern": "\\.(ts|tsx|js|jsx|mjs)$",
+  "ignorePaths": [
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    "yarn.lock",
+    "docs/",
+    ".claude/",
+    "public/",
+    "prisma/migrations/"
+  ],
+  "protectedPaths": [
+    "data/",
+    "fixtures/golden/",
+    "evals/golden/"
+  ],
+  "commands": {
+    "lintFile": "npx --no-install next lint --file {file}",
+    "relatedTests": "npx --no-install vitest related --run --reporter=dot {files}",
+    "typecheck": "npx --no-install tsc --noEmit --pretty false",
+    "testFile": "npx vitest run {file}",
+    "allTests": "npm test",
+    "lint": "npm run lint",
+    "evals": []
+  },
+  "evalPaths": [
+    "agents/",
+    "prompts/",
+    "lib/rag",
+    "lib/retrieval",
+    "lib/embeddings",
+    "lib/reranker",
+    "lib/eval"
+  ],
+  "stopHook": {
+    "runTests": true,
+    "runTypecheck": true,
+    "requireTestChange": true
+  },
+  "$tailored": "2026-11-11"
+}
