@@ -9,6 +9,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import Link from "next/link";
 import type { PortfolioProject } from "@/lib/portfolio";
 import { WritingSection } from "@/components/WritingSection";
+import { CommunitySection } from "@/components/CommunitySection";
 import { Testimonials } from "@/components/Testimonials";
 import type { WritingSectionPost } from "@/components/WritingSection";
 
@@ -20,7 +21,7 @@ type HomePageClientProps = {
 export function HomePageClient({ projects, latestPosts = [] }: HomePageClientProps) {
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -48,6 +49,7 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
   const navItems = [
     { href: "/services", key: "common.services" },
     { href: "#portfolio", key: "common.portfolio" },
+    { href: "#community", key: "common.community" },
     { href: "/blog", key: "common.blog" },
     { href: "#about", key: "common.about" },
     { href: "#contact", key: "common.contact" },
@@ -432,6 +434,14 @@ export function HomePageClient({ projects, latestPosts = [] }: HomePageClientPro
           </div>
         </div>
       </section>
+
+      {/* Community */}
+      <CommunitySection isDark={isDark} language={language} t={t} />
+
+      {/* Divider */}
+      <div className="mx-auto max-w-5xl px-6">
+        <div className={`h-px ${isDark ? "bg-slate-800" : "bg-slate-200"}`} />
+      </div>
 
       {/* Writing / Blog Preview */}
       <WritingSection isDark={isDark} posts={latestPosts} t={t} />
